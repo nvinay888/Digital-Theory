@@ -92,21 +92,21 @@
         </button>
       </div>
     </div>
-    <div class="nav__mobile-panel" id="navMobilePanel">
-      <ul>
-        <li><details><summary>Services</summary><ul>
-          ${services.map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
-        </ul></details></li>
-        <li><details><summary>Industry</summary><ul>
-          ${industries.map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
-        </ul></details></li>
-        <li><a href="${base}case-studies.html">Our Work</a></li>
-        <li><a href="${base}about.html">About Us</a></li>
-        <li><a href="${base}careers.html">Careers</a></li>
-        <li><a href="${base}contact.html">Contact Us</a></li>
-      </ul>
-    </div>
-  </header>`;
+  </header>
+  <div class="nav__mobile-panel" id="navMobilePanel">
+    <ul>
+      <li><details><summary>Services</summary><ul>
+        ${services.map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
+      </ul></details></li>
+      <li><details><summary>Industry</summary><ul>
+        ${industries.map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+      </ul></details></li>
+      <li><a href="${base}case-studies.html">Our Work</a></li>
+      <li><a href="${base}about.html">About Us</a></li>
+      <li><a href="${base}careers.html">Careers</a></li>
+      <li><a href="${base}contact.html">Contact Us</a></li>
+    </ul>
+  </div>`;
 
   const footerHtml = `
   <footer class="footer">
@@ -148,7 +148,14 @@
 
   const navMount = document.getElementById('dt-nav');
   const footMount = document.getElementById('dt-footer');
-  if (navMount) navMount.outerHTML = navHtml;
+  if (navMount) {
+    // Split header + mobile panel so panel becomes a body-level sibling, not nested inside header (which has backdrop-filter and breaks position:fixed children)
+    const splitIdx = navHtml.indexOf('</header>') + '</header>'.length;
+    const headerStr = navHtml.slice(0, splitIdx);
+    const panelStr = navHtml.slice(splitIdx);
+    navMount.outerHTML = headerStr;
+    document.body.insertAdjacentHTML('afterbegin', panelStr);
+  }
   if (footMount) footMount.outerHTML = footerHtml;
 
   /* Mobile nav toggle */

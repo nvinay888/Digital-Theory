@@ -179,7 +179,7 @@ CASES = [
 
 def render_case_body(c, prev_next):
     metrics_html = ''.join(f'<div class="stat case__metric"><div class="stat__num">{v}<span class="unit">{u}</span></div><div class="stat__label">{l}</div></div>' for v,u,l in c["metrics"])
-    chips_html = ''.join(f'<span class="case__industry" style="margin-right:6px">{t}</span>' for t in c["tags"])
+    chips_html = '<div style="display:flex;flex-wrap:wrap;gap:8px">' + ''.join(f'<span class="case__industry">{t}</span>' for t in c["tags"]) + '</div>'
     challenges_html = ''.join(f'<li>{x}</li>' for x in c["challenges"])
     strategy_html = ''.join(f'<li>{x}</li>' for x in c["strategy"])
     prev_link = f'<a href="{prev_next[0]}.html">← Previous case</a>' if prev_next[0] else '<span></span>'
