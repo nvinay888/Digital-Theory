@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Digitaltheory</title>
+<meta name="description" content="Contact Digitaltheory — Bengaluru, Mumbai. Performance marketing, branding, web, app, CRM." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<script>window.DT_BASE = ''; window.DT_PAGE = 'contact';</script>
+</head>
+<body>
+<div class="page">
+<div id="dt-nav"></div>
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <span class="eyebrow">Come, say hello</span>
+    <h1>Tell us where you want to go.</h1>
+    <p class="lead page-hero__lead">We'll bring the strategy, the stack and the creative to get you there. Fill the form below or reach us directly — we usually reply within a business day.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <form class="form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks — we\'ll be in touch.';">
+        <div><label>Your name</label><input type="text" required placeholder="Jane Doe" /></div>
+        <div><label>Work email</label><input type="email" required placeholder="jane@brand.com" /></div>
+        <div><label>Company</label><input type="text" placeholder="Brand Co." /></div>
+        <div><label>What do you need help with?</label>
+          <select>
+            <option>Performance Marketing</option><option>Branding</option><option>Web Development</option>
+            <option>App Development</option><option>Business Consulting</option><option>Video Production</option>
+            <option>SEO</option><option>Digital Transformation</option><option>CRM &amp; Retention</option><option>Not sure yet</option>
+          </select>
+        </div>
+        <div><label>A bit about the project</label><textarea placeholder="Stage, goals, timelines, current numbers if you have them..."></textarea></div>
+        <button type="submit" class="btn btn--primary btn--lg" style="margin-top:8px">Send message <span class="btn__arrow">→</span></button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-info__row">
+          <div class="contact-info__label">Email</div>
+          <div class="contact-info__value"><a href="mailto:hello@digitaltheory.in">hello@digitaltheory.in</a></div>
+        </div>
+        <div class="contact-info__row">
+          <div class="contact-info__label">Careers</div>
+          <div class="contact-info__value"><a href="mailto:careers@digitaltheory.in">careers@digitaltheory.in</a></div>
+        </div>
+        <div class="contact-info__row">
+          <div class="contact-info__label">Bengaluru</div>
+          <div class="contact-info__value">Indiranagar, Bengaluru 560038</div>
+        </div>
+        <div class="contact-info__row">
+          <div class="contact-info__label">Mumbai</div>
+          <div class="contact-info__value">Bandra West, Mumbai 400050</div>
+        </div>
+        <div class="contact-info__row">
+          <div class="contact-info__label">Hours</div>
+          <div class="contact-info__value">Mon–Fri · 10:00–19:00 IST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="dt-footer"></div>
+</div>
+<script src="assets/shared.js"></script>
+</body>
+</html>
