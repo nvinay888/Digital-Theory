@@ -3,15 +3,33 @@
 import os, json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+SITE_URL = "https://digitaltheory.in"   # change to your production domain
 
-def page(title, desc, body, base="", active=""):
+def page(title, desc, body, base="", active="", path=""):
+    full_title = f"{title} — Digitaltheory"
+    canonical = f"{SITE_URL}/{path.lstrip('/')}" if path else SITE_URL + "/"
+    og_image = f"{SITE_URL}/assets/og-image.png"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{title} — Digitaltheory</title>
+<title>{full_title}</title>
 <meta name="description" content="{desc}" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="{canonical}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digitaltheory" />
+<meta property="og:title" content="{full_title}" />
+<meta property="og:description" content="{desc}" />
+<meta property="og:url" content="{canonical}" />
+<meta property="og:image" content="{og_image}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{full_title}" />
+<meta name="twitter:description" content="{desc}" />
+<meta name="twitter:image" content="{og_image}" />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="{base}assets/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -241,7 +259,7 @@ def build_cases_hub():
 
 {CTA_BAND.format(base='')}
 """
-    return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail.", body, base="", active="work")
+    return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail digital transformation. Real numbers from real engagements.", body, base="", active="work", path="case-studies.html")
 
 # ====================== SERVICES ======================
 SERVICES = [
@@ -439,7 +457,7 @@ def build_services_hub():
 
 {CTA_BAND.format(base='')}
 """
-    return page("Services", "All Digitaltheory services — performance marketing, branding, web, app, SEO, CRM, digital transformation.", body, base="", active="services")
+    return page("Services", "All Digitaltheory services — performance marketing, branding, web development, app development, business consulting, video production, SEO, digital transformation, and CRM & retention.", body, base="", active="services", path="services.html")
 
 # ====================== ABOUT ======================
 def build_about():
@@ -512,7 +530,7 @@ def build_about():
 
 {CTA_BAND.format(base='')}
 """
-    return page("About", "Digitaltheory is a data-first growth marketing company helping brands turn theory into durable growth.", body, base="", active="about")
+    return page("About", "Digitaltheory is a data-first growth marketing company helping brands turn theory into durable growth across performance, branding, web, app, and CRM.", body, base="", active="about", path="about.html")
 
 # ====================== CAREERS ======================
 def build_careers():
@@ -560,7 +578,7 @@ def build_careers():
 
 {CTA_BAND.format(base='')}
 """
-    return page("Careers", "Open roles at Digitaltheory — performance marketing, creative, engineering and CRM.", body, base="", active="careers")
+    return page("Careers", "Open roles at Digitaltheory across performance marketing, creative, engineering, data and CRM. Work on real brands with real budgets.", body, base="", active="careers", path="careers.html")
 
 # ====================== CONTACT ======================
 def build_contact():
@@ -616,7 +634,7 @@ def build_contact():
   </div>
 </section>
 """
-    return page("Contact", "Contact Digitaltheory — Bengaluru, Mumbai. Performance marketing, branding, web, app, CRM.", body, base="", active="contact")
+    return page("Contact", "Contact Digitaltheory — offices in Bengaluru and Mumbai. Performance marketing, branding, web, app, CRM and digital transformation.", body, base="", active="contact", path="contact.html")
 
 # ====================== WRITE ALL ======================
 def write(path, content):
@@ -632,20 +650,41 @@ for idx, c in enumerate(CASES):
     prev_slug = slugs[idx-1] if idx > 0 else None
     next_slug = slugs[idx+1] if idx < len(CASES)-1 else None
     body = render_case_body(c, (prev_slug, next_slug))
-    write(f"case-studies/{c['slug']}.html",
-          page(f"{c['brand']} case study", f"{c['brand']} — {c['industry']} case study by Digitaltheory.", body, base="../", active="work"))
+    path = f"case-studies/{c['slug']}.html"
+    write(path, page(f"{c['brand']} case study", f"{c['brand']} ({c['industry']}) — case study by Digitaltheory. {c['hero']}", body, base="../", active="work", path=path))
 
 write("case-studies.html", build_cases_hub())
 
 # Services
 for s in SERVICES:
     body = render_service_body(s)
-    write(f"services/{s['slug']}.html",
-          page(s["title"], f"{s['title']} services by Digitaltheory — {s['hero']}", body, base="../", active="services"))
+    path = f"services/{s['slug']}.html"
+    write(path, page(s["title"], f"{s['title']} services by Digitaltheory. {s['hero']}", body, base="../", active="services", path=path))
 
 write("services.html", build_services_hub())
 write("about.html", build_about())
 write("careers.html", build_careers())
 write("contact.html", build_contact())
 
-print("\nDone. Pages built.")
+# ====================== SITEMAP & ROBOTS ======================
+urls = ["", "services.html", "case-studies.html", "about.html", "careers.html", "contact.html"]
+urls += [f"services/{s['slug']}.html" for s in SERVICES]
+urls += [f"case-studies/{c['slug']}.html" for c in CASES]
+
+today = "2026-06-07"  # update on rebuild
+sitemap_entries = []
+for u in urls:
+    loc = f"{SITE_URL}/" if u == "" else f"{SITE_URL}/{u}"
+    priority = "1.0" if u == "" else ("0.8" if "services.html" in u or "case-studies.html" in u else "0.6")
+    sitemap_entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>{priority}</priority>\n  </url>")
+sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(sitemap_entries) + "\n</urlset>\n"
+write("sitemap.xml", sitemap)
+
+robots = f"""User-agent: *
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
+"""
+write("robots.txt", robots)
+
+print("\nDone. Pages + sitemap + robots built.")
