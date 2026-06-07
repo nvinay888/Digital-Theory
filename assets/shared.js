@@ -32,18 +32,44 @@
       ${brand}
       <nav>
         <ul class="nav__links">
-          <li>
+          <li class="has-mega">
             <button class="nav__item ${page==='services'?'is-active':''}" type="button">Services <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
-            <ul class="nav__dropdown">
-              ${services.map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
-              <li><a href="${base}services.html" style="color:var(--lime-400)">All services →</a></li>
-            </ul>
+            <div class="nav__mega">
+              <div class="nav__mega-inner">
+                <ul class="nav__mega-list">
+                  ${services.slice(0,5).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
+                </ul>
+                <ul class="nav__mega-list">
+                  ${services.slice(5).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
+                  <li><a href="${base}services.html" style="color:var(--lime-400)">All services →</a></li>
+                </ul>
+                <div class="nav__mega-quote">
+                  <div class="nav__mega-quote__mark">"</div>
+                  <p>We engaged with Digitaltheory for branding and performance marketing. They helped us scale our performance marketing with remarkable results.</p>
+                  <span class="nav__mega-quote__name">Sumit Singh</span>
+                  <span class="nav__mega-quote__role">VP Marketing, Codingal</span>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="has-mega">
             <button class="nav__item" type="button">Industry <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
-            <ul class="nav__dropdown">
-              ${industries.map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
-            </ul>
+            <div class="nav__mega">
+              <div class="nav__mega-inner">
+                <ul class="nav__mega-list">
+                  ${industries.slice(0,4).map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+                </ul>
+                <ul class="nav__mega-list">
+                  ${industries.slice(4).map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+                </ul>
+                <div class="nav__mega-quote">
+                  <div class="nav__mega-quote__mark">"</div>
+                  <p>We engaged with Digitaltheory for D2C business. They helped us improve our profits by 3x with NPD, operations, website maintenance and performance marketing.</p>
+                  <span class="nav__mega-quote__name">Abhijeet</span>
+                  <span class="nav__mega-quote__role">Marketing Head, Chumbak</span>
+                </div>
+              </div>
+            </div>
           </li>
           <li><a href="${base}case-studies.html" class="nav__item ${page==='work'?'is-active':''}">Our Work</a></li>
           <li><a href="${base}about.html" class="nav__item ${page==='about'?'is-active':''}">About Us</a></li>
