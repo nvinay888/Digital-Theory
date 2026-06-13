@@ -449,22 +449,71 @@ def render_service_body(s):
 """
 
 def render_business_consulting_body():
+    icon = lambda name: {
+      "growth":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
+      "entry":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>',
+      "economics":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>',
+      "portfolio":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>',
+      "omni":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+      "ma":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M8 21H3v-5"/><path d="M3 21l7-7"/></svg>',
+    }[name]
     pillars = [
-        ("01","Growth Strategy","Diagnose where growth is leaking — channel, pricing, portfolio or funnel — and build the operating plan to close it.",["Channel mix & expansion","Pricing & discount strategy","Funnel diagnostics","Quarterly operating cadence"]),
-        ("02","New Market Entry","Validate adjacent geographies and categories before you spend. Pilot first, scale on signal.",["Country &amp; city prioritisation","Category adjacency mapping","Pilot design &amp; budget","Localisation playbook"]),
-        ("03","Unit Economics &amp; P&amp;L","Rebuild contribution margin from the SKU up — CM1, CM2, CM3 — and tie every decision back to it.",["COGS &amp; supplier strategy","Cohort LTV modelling","Blended &amp; channel CAC","Working capital optimisation"]),
-        ("04","Portfolio &amp; NPD","Score your portfolio on margin, velocity and white-space — and ship the next launch with a plan, not a hope.",["Portfolio rationalisation","SKU prioritisation","NPD ideation &amp; gating","Launch plan &amp; tracking"]),
-        ("05","Omnichannel &amp; D2C","Solve the tension between marketplaces, retail and D2C. Each channel earns its margin or it goes.",["Marketplace vs D2C mix","Pricing parity &amp; MAP","D2C unit economics","Quick-commerce strategy"]),
-        ("06","M&amp;A &amp; Diligence","Commercial diligence, target scanning and post-deal integration — built on the same operating chassis we use day-to-day.",["Buy-side commercial DD","Target scanning","Synergy modelling","Post-deal integration"]),
+        ("01","Growth Strategy","Diagnose where growth is leaking — channel, pricing, portfolio or funnel — and build the operating plan to close it.","growth"),
+        ("02","New Market Entry","Validate adjacent geographies and categories before you spend. Pilot first, scale on signal.","entry"),
+        ("03","Unit Economics & P&amp;L","Rebuild contribution margin from the SKU up — CM1, CM2, CM3 — and tie every decision back to it.","economics"),
+        ("04","Portfolio & NPD","Score your portfolio on margin, velocity and white-space — and ship the next launch with a plan, not a hope.","portfolio"),
+        ("05","Omnichannel & D2C","Solve the tension between marketplaces, retail and D2C. Each channel earns its margin or it goes.","omni"),
+        ("06","M&amp;A & Diligence","Commercial diligence, target scanning and post-deal integration — built on the same operating chassis we use day-to-day.","ma"),
     ]
     pillars_html = "".join(
-        f'<a class="bc-pillar" href="../contact.html"><span class="bc-pillar__num">{n}</span><h3>{t}</h3><p>{d}</p><ul>'
-        + "".join(f"<li>{x}</li>" for x in items)
-        + '</ul></a>'
-        for n,t,d,items in pillars
+        f'<a class="svc-rich__card" href="../contact.html"><div class="svc-rich__cover"><div class="svc-rich__icon">{icon(ic)}</div></div><div class="svc-rich__body"><span class="svc-rich__num">{n}</span><h3 class="svc-rich__title">{t}</h3><p class="svc-rich__desc">{d}</p><span class="svc-rich__link">Explore service</span></div></a>'
+        for n,t,d,ic in pillars
     )
-    sectors = ["D2C &amp; E-commerce","Beauty &amp; Personal Care","Fashion &amp; Apparel","Food &amp; Beverages","Consumer Electronics","Consumer Health","Edtech","Retail Chains"]
-    sectors_html = "".join(f'<span class="bc-sector">{s}</span>' for s in sectors)
+
+    sectors = [
+        ("d2c","D2C & E-commerce","Where pricing, channel mix and creative compound or unravel.",
+         "We rebuild D2C unit economics from CM3 up — pricing strategy, marketplace vs website split, retention loops and creative testing — and tie every campaign back to LTV, not last-click.",
+         ["Pricing &amp; discount architecture","Marketplace vs D2C revenue mix","Quadcore campaign architecture","RFM retention &amp; loyalty design"],
+         "celio","Celio — 45% ROAS lift, 23% CM3, 17% brand search"),
+        ("bpc","Beauty & Personal Care","SKU velocity, COGS leakage and channel saturation — solved at the P&amp;L level.",
+         "200+ SKU portfolios live or die on contribution margin. We diagnose pricing, sourcing and channel mix; ship the right NPDs; restructure Amazon SB/SD; and drive compounding QoQ growth.",
+         ["Strategic supplier sourcing &amp; COGS","NPD ideation, gating &amp; launch","Marketplace SB/SD architecture","Full-funnel media mix to LTV"],
+         "nutriglow","Nutriglow — 57% ROAS, 40% COGS cut, 14% CM3 lift"),
+        ("fashion","Fashion & Apparel","Seasonality, inventory and brand work as one system — or none of them work.",
+         "Fashion runs on a tight clock. We pair pricing &amp; discount calendars with creative testing frameworks, retention loops and demand-led inventory planning so margin survives the season.",
+         ["Seasonal pricing &amp; markdown plans","Creative testing per drop","RFM clusters by category affinity","Demand-led inventory commitment"],
+         "celio","Celio — 17% brand search growth, 23% CM3"),
+        ("food","Food & Beverages","Hyperlocal acquisition, perishable inventory and repeat behaviour — all on one P&amp;L.",
+         "Food D2C is a retention game. We engineer acquisition by zone, build cohort-based CRM and tighten the cold-chain economics so every cohort pays back in clear weeks, not unclear quarters.",
+         ["Zone-by-zone acquisition strategy","Cohort LTV &amp; payback modelling","Subscription &amp; repeat-purchase design","Last-mile / cold-chain economics"],
+         None,None),
+        ("electronics","Consumer Electronics","High AOV, low repeat — every conversion has to pay for itself.",
+         "We optimise the funnel where it costs the most: consideration. Comparison content, finance/EMI flows, marketplace bestseller architecture and review velocity — together driving down blended CAC.",
+         ["Marketplace bestseller architecture","EMI / finance attach optimisation","Review velocity &amp; UGC programmes","Cross-sell &amp; bundle design"],
+         "pepperfry",None),
+        ("health","Consumer Health","Trust, claims and compliance — without slowing the growth flywheel.",
+         "We build acquisition that respects category constraints: claims-safe creative, founder-led content, doctor / KOL programs, and CRM journeys built around adherence and habit formation.",
+         ["Claims-safe creative framework","Founder &amp; KOL content engine","Adherence &amp; habit CRM journeys","Subscription &amp; refill economics"],
+         None,None),
+        ("edtech","Edtech","CAC, qualified-lead share and onboarding conversion — fixed in one engagement.",
+         "Edtech wins when the funnel is reengineered end-to-end: country prioritisation, landing-page CRO, sales follow-up cadence and student onboarding — all tied back to paid-customer LTV.",
+         ["International market entry","Landing-page CRO programme","Sales follow-up &amp; SQL design","Onboarding flow optimisation"],
+         "codingal","Codingal — 70% CAC reduction, 10x revenue"),
+        ("retail","Retail & Pharma Chains","Store-level inventory, returns and mix — digitised, modelled and managed.",
+         "Brick-and-mortar margin lives in the small decisions: SKU mix by store, returns prediction, fill-in / sell-out automation. We integrate ERP and ship the ML behind a digitised back-office.",
+         ["SKU mix by store, by season","Returns prediction &amp; reverse logistics","Fill-in / sell-out automation","ERP integration &amp; BI"],
+         "thulasi","Thulasi — 33% inventory cost reduction, 37% returns"),
+    ]
+    list_html = "".join(
+        f'<button class="bc-sector-tab {"is-active" if i==0 else ""}" data-sec="{slug}">{title}</button>'
+        for i,(slug,title,_,_,_,_,_) in enumerate(sectors)
+    )
+    def sector_panel(slug,title,sub,body,levers,case,case_label,active):
+        levers_html = "".join(f'<li>{x}</li>' for x in levers)
+        case_html = f'<a href="../case-studies/{case}.html" class="bc-sectors-panel__case">{case_label} →</a>' if case and case_label else ''
+        return f'<div class="bc-sector-panel {"is-active" if active else ""}" data-sec="{slug}"><div class="bc-sectors-panel__eyebrow">Sector · {title}</div><h3>{sub}</h3><p class="bc-sectors-panel__body">{body}</p><ul class="bc-sectors-panel__levers">{levers_html}</ul>{case_html}</div>'
+    panels_html = "".join(sector_panel(s,t,sub,body,levers,case,cl,i==0) for i,(s,t,sub,body,levers,case,cl) in enumerate(sectors))
+
     method = [
         ("01","Diagnose","Two weeks. We sit inside your data — P&amp;L, CRM, marketing platforms, inventory — and write back the three problems that actually matter."),
         ("02","Hypothesise","One week. A small set of bets, each tied to a target metric. No 40-page deck — a one-page memo and a working financial model."),
@@ -480,58 +529,71 @@ def render_business_consulting_body():
     principles_html = "".join(f'<div class="bc-principle"><h4>{t}</h4><p>{d}</p></div>' for t,d in principles)
 
     return f"""
-<section class="page-hero">
-  <div class="container page-hero__inner">
+<section class="bc-hero">
+  <div class="container bc-hero__inner">
     <a href="../services.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All services</a>
-    <span class="eyebrow" style="margin-top:24px;display:inline-flex">Service</span>
-    <h1>Business Consulting</h1>
-    <p class="lead page-hero__lead">Strategic counsel grounded in your P&amp;L. We solve for growth, margin and market entry — and stay long enough to ship the recommendations, not just write them.</p>
-    <div class="page-hero__cta">
-      <a href="../contact.html" class="btn btn--primary btn--lg">Talk to us <span class="btn__arrow">→</span></a>
-      <a href="../case-studies/nutriglow.html" class="btn btn--secondary btn--lg">See case study</a>
+    <span class="eyebrow" style="margin-top:24px;display:inline-flex">Business Consulting</span>
+    <h1>Solving for the new economics of consumer growth.</h1>
+    <p class="bc-hero__lead">Channels fragment. CAC compounds. Marketplaces, D2C and retail fight for the same shopper. We help consumer leadership teams find the wedge that still pays — and the operating discipline to run it.</p>
+    <div class="bc-hero__cta">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Book a discovery call <span class="btn__arrow">→</span></a>
+      <a href="#services" class="btn btn--secondary btn--lg">Explore consulting services</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<nav class="bc-anchors"><div class="container bc-anchors__inner">
+  <a href="#overview">Overview</a><a href="#services">Services</a><a href="#sectors">Sectors</a><a href="#approach">Approach</a><a href="#principles">Principles</a><a href="#cases">Case Studies</a>
+</div></nav>
+
+<section class="section" id="overview">
   <div class="container">
-    <div class="sec-head">
+    <div class="bc-overview">
       <div>
         <span class="eyebrow">The opportunity</span>
-        <h2 style="max-width:22ch">Consumer growth is harder, faster and more expensive than ever.</h2>
+        <h2>Consumer growth is harder, faster and more expensive than ever.</h2>
+        <div class="bc-overview__body">
+          <p>The old playbook — buy traffic, run discounts, hope retention shows up — is over. Acquisition costs are rising every quarter, marketplaces are commoditising D2C, and the brands compounding through it are the ones with sharp pricing, deep retention loops, and a real grip on contribution margin.</p>
+          <p>We work inside consumer businesses — D2C, beauty, fashion, food, electronics, edtech, health, retail — to engineer the operating model behind the growth: pricing, channel mix, portfolio, unit economics, market entry. Then we stay long enough to ship it.</p>
+        </div>
       </div>
-      <p class="lead">Channels fragment. Customer acquisition gets pricier each quarter. Retail and marketplaces fight D2C for the same shopper. We help leadership teams find the wedge that still compounds — and the discipline to run it.</p>
-    </div>
-    <div class="bc-stats">
-      <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands advised</div></div>
-      <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend modelled</div></div>
-      <div class="stat"><div class="stat__num">8</div><div class="stat__label">Consumer sub-sectors</div></div>
-      <div class="stat"><div class="stat__num">3<span class="unit">x</span></div><div class="stat__label">Avg profit improvement</div></div>
+      <div class="bc-overview__visual">
+        <h4>What we&rsquo;ve shipped</h4>
+        <div class="bc-overview__stats">
+          <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands advised</div></div>
+          <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend modelled</div></div>
+          <div class="stat"><div class="stat__num">8</div><div class="stat__label">Consumer sub-sectors</div></div>
+          <div class="stat"><div class="stat__num">3<span class="unit">x</span></div><div class="stat__label">Avg profit improvement</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+<section class="section" id="services" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
     <div class="sec-head">
       <div><span class="eyebrow">Our consulting services</span><h2 style="max-width:20ch">Six pillars, one operating model.</h2></div>
       <p class="lead">Each engagement is scoped to the lever that moves the business — not a fixed scope of deliverables. We pull from any combination of these six.</p>
     </div>
-    <div class="bc-pillars">{pillars_html}</div>
+    <div class="svc-rich">{pillars_html}</div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="sectors">
   <div class="container">
     <div class="sec-head">
-      <div><span class="eyebrow">Sectors we serve</span><h2 style="max-width:22ch">Deep operating reps across consumer.</h2></div>
-      <p class="lead">We&rsquo;ve run pricing, channel and NPD bets across most consumer verticals in India and SEA. Patterns travel; specifics don&rsquo;t. Both matter.</p>
+      <div><span class="eyebrow">Explore consumer sub-sectors</span><h2 style="max-width:24ch">Deep operating reps across the consumer stack.</h2></div>
+      <p class="lead">Pick a sub-sector to see the levers we pull, the playbooks we&rsquo;ve run, and the outcomes we&rsquo;ve already shipped.</p>
     </div>
-    <div class="bc-sectors">{sectors_html}</div>
+    <div class="bc-sectors-wrap" id="bcSectorsWrap">
+      <div class="bc-sectors-list" id="bcSectorsList">{list_html}</div>
+      <div class="bc-sectors-panel" id="bcSectorsPanel">{panels_html}</div>
+    </div>
   </div>
 </section>
 
-<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+<section class="section" id="approach" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
     <div class="sec-head">
       <div><span class="eyebrow">How we work</span><h2 style="max-width:20ch">Strategy to execution, in one engagement.</h2></div>
@@ -541,43 +603,38 @@ def render_business_consulting_body():
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="principles">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">What we believe</span><h2>Principles we don&rsquo;t flex on</h2></div>
-    </div>
+    <div class="sec-head"><div><span class="eyebrow">What we believe</span><h2>Principles we don&rsquo;t flex on</h2></div></div>
     <div class="bc-principles">{principles_html}</div>
   </div>
 </section>
 
-<section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)">
+<section class="section" id="cases" style="background:var(--surface-section);border-top:1px solid var(--line)">
   <div class="container">
-    <div class="solution__intro">
-      <div>
-        <span class="eyebrow">Featured outcome</span>
-        <h2 style="margin-top:12px;max-width:20ch">Nutriglow: pricing, sourcing and channel-mix turnaround.</h2>
-        <p class="lead" style="margin-top:16px">A 200+ SKU beauty brand was bleeding 17% profit YoY in a hyper-competitive market. We rebuilt the mix — 60/40 marketplace vs D2C — restructured Amazon ad architecture, optimised sourcing for a 40% COGS cut, and shipped a full-funnel media plan. Result: 35% QoQ revenue growth, 14% CM3 improvement, 57% ROAS lift.</p>
-        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-          <a href="../case-studies/nutriglow.html" class="btn btn--secondary">Read the case study <span class="btn__arrow">→</span></a>
-          <a href="../case-studies/celio.html" class="btn btn--ghost">Celio turnaround →</a>
-        </div>
-      </div>
-      <div>
-        <div class="case-detail__panel">
-          <h3>Engagement shapes</h3>
-          <ul>
-            <li><b>Diagnostic sprint</b> — 4-week audit of P&amp;L, channels and funnel, ending in a prioritised one-page plan.</li>
-            <li><b>Strategy &amp; turnaround</b> — 12-week engagement to rebuild pricing, mix and ops alongside your team.</li>
-            <li><b>Market-entry pilot</b> — 8 weeks from country prioritisation to live pilot campaigns and a go/no-go memo.</li>
-            <li><b>Retained advisory</b> — quarterly operating reviews and on-call senior counsel for your leadership team.</li>
-          </ul>
-        </div>
-      </div>
+    <div class="sec-head">
+      <div><span class="eyebrow">Featured outcomes</span><h2>Engagements that moved the P&amp;L</h2></div>
+      <p class="lead">When a tile isn&rsquo;t enough, the case study has the strategy, the experiments and the numbers behind the outcome.</p>
+    </div>
+    <div class="bc-cases">
+      <a class="case" href="../case-studies/nutriglow.html"><div class="case__head"><div class="case__brand">Nutriglow</div><span class="case__industry">Beauty &amp; Personal Care</span></div><p class="case__desc">200+ SKU beauty brand turned around from YoY decline to compounding growth via pricing, sourcing and channel mix.</p><div class="case__metrics"><div class="stat case__metric"><div class="stat__num">57<span class="unit">%</span></div><div class="stat__label">ROAS lift</div></div><div class="stat case__metric"><div class="stat__num">40<span class="unit">%</span></div><div class="stat__label">COGS cut</div></div><div class="stat case__metric"><div class="stat__num">14<span class="unit">%</span></div><div class="stat__label">CM3 lift</div></div></div><span class="case__link">Read case study →</span></a>
+      <a class="case" href="../case-studies/celio.html"><div class="case__head"><div class="case__brand">Celio</div><span class="case__industry">D2C Menswear</span></div><p class="case__desc">Heritage French menswear brand. Pricing strategy, creative testing and predictive inventory drove ROAS and CM3 lift in parallel.</p><div class="case__metrics"><div class="stat case__metric"><div class="stat__num">45<span class="unit">%</span></div><div class="stat__label">ROAS lift</div></div><div class="stat case__metric"><div class="stat__num">23<span class="unit">%</span></div><div class="stat__label">CM3 lift</div></div><div class="stat case__metric"><div class="stat__num">17<span class="unit">%</span></div><div class="stat__label">Brand search</div></div></div><span class="case__link">Read case study →</span></a>
     </div>
   </div>
 </section>
 
 {CTA_BAND.format(base='../')}
+
+<script>
+(function(){{
+  const tabs = document.querySelectorAll('#bcSectorsList .bc-sector-tab');
+  const panels = document.querySelectorAll('#bcSectorsPanel .bc-sector-panel');
+  tabs.forEach(b => b.addEventListener('click', () => {{
+    tabs.forEach(x => x.classList.toggle('is-active', x === b));
+    panels.forEach(p => p.classList.toggle('is-active', p.dataset.sec === b.dataset.sec));
+  }}));
+}})();
+</script>
 """
 
 def build_services_hub():

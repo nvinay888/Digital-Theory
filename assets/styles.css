@@ -302,6 +302,77 @@ p{margin:0}
 .deliverable{padding:var(--space-6);border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-card)}
 .deliverable h4{font-size:1.05rem;margin-bottom:var(--space-3)}
 .deliverable p{color:var(--fg-muted);font-size:14px;line-height:1.55}
+/* BUSINESS CONSULTING — Redseer-style structural blueprint, DT design system */
+/* Page hero with background imagery */
+.bc-hero{position:relative;min-height:520px;display:flex;align-items:flex-end;padding-block:clamp(4rem,8vw,7rem) clamp(3rem,5vw,5rem);overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
+.bc-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 50% at 80% 0%,rgba(140,198,63,.18),transparent 60%),radial-gradient(60% 60% at 20% 100%,rgba(140,198,63,.10),transparent 60%),linear-gradient(180deg,#000,#0A0B0D);pointer-events:none}
+.bc-hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.04) 1px,transparent 0);background-size:24px 24px;mask-image:radial-gradient(80% 60% at 50% 50%,#000,transparent 80%);-webkit-mask-image:radial-gradient(80% 60% at 50% 50%,#000,transparent 80%);pointer-events:none}
+.bc-hero__inner{position:relative;z-index:2;max-width:980px;width:100%}
+.bc-hero h1{font-size:clamp(2.6rem,3vw + 1.8rem,5.2rem);line-height:1;letter-spacing:-.03em;max-width:18ch;margin-top:var(--space-5)}
+.bc-hero__lead{font-size:var(--fs-lead);color:var(--fg-muted);margin-top:var(--space-5);max-width:62ch;line-height:1.55}
+.bc-hero__cta{margin-top:var(--space-7);display:flex;gap:var(--space-3);flex-wrap:wrap}
+/* Anchor jump nav */
+.bc-anchors{background:var(--ink-1000);border-bottom:1px solid var(--line);position:sticky;top:76px;z-index:30;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bc-anchors__inner{display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.bc-anchors__inner::-webkit-scrollbar{display:none}
+.bc-anchors a{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-muted);font-weight:500;border-right:1px solid var(--line);white-space:nowrap;transition:color var(--dur-fast) var(--ease-out)}
+.bc-anchors a:first-child{padding-left:0}
+.bc-anchors a:last-child{border-right:0}
+.bc-anchors a:hover{color:var(--lime-400)}
+.bc-anchors a::before{content:"#";color:var(--lime-400);opacity:.6;font-weight:500}
+/* Overview */
+.bc-overview{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+@media(max-width:880px){.bc-overview{grid-template-columns:1fr;gap:32px}}
+.bc-overview h2{max-width:18ch}
+.bc-overview__body{font-size:var(--fs-lead);line-height:1.6;color:var(--fg-muted);margin-top:var(--space-5)}
+.bc-overview__body p+p{margin-top:18px}
+.bc-overview__visual{padding:var(--space-7);background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-lg);position:relative}
+.bc-overview__visual h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);font-weight:500;margin-bottom:24px}
+.bc-overview__stats{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.bc-overview__stats .stat__num{font-size:clamp(1.6rem,1rem + 1.6vw,2.4rem)}
+/* Rich service cards — 6-card 3x2 grid */
+.svc-rich{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+@media(max-width:960px){.svc-rich{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.svc-rich{grid-template-columns:1fr}}
+.svc-rich__card{padding:0;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);display:flex;flex-direction:column;transition:all var(--dur-base) var(--ease-out);overflow:hidden;text-decoration:none}
+.svc-rich__card:hover{border-color:var(--lime-400);transform:translateY(-2px)}
+.svc-rich__cover{height:140px;position:relative;background:linear-gradient(135deg,var(--ink-700),var(--ink-800));display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);overflow:hidden}
+.svc-rich__cover::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 30%,rgba(140,198,63,.12),transparent 70%)}
+.svc-rich__icon{position:relative;z-index:1;width:60px;height:60px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;color:var(--lime-400)}
+.svc-rich__icon svg{width:28px;height:28px}
+.svc-rich__body{padding:var(--space-6);display:flex;flex-direction:column;gap:10px;flex:1}
+.svc-rich__num{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--lime-400);font-weight:500}
+.svc-rich__title{font-size:1.2rem;margin:0;line-height:1.25}
+.svc-rich__desc{color:var(--fg-muted);font-size:14.5px;line-height:1.55}
+.svc-rich__link{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-400);margin-top:auto;display:inline-flex;align-items:center;gap:6px;padding-top:12px}
+.svc-rich__link::after{content:"→";transition:transform var(--dur-fast) var(--ease-out)}
+.svc-rich__card:hover .svc-rich__link::after{transform:translateX(3px)}
+/* Subsector tabs with content panel */
+.bc-sectors-wrap{display:grid;grid-template-columns:.7fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface-card)}
+@media(max-width:880px){.bc-sectors-wrap{grid-template-columns:1fr}}
+.bc-sectors-list{display:flex;flex-direction:column;background:var(--ink-1000);border-right:1px solid var(--line)}
+@media(max-width:880px){.bc-sectors-list{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);scrollbar-width:none}.bc-sectors-list::-webkit-scrollbar{display:none}}
+.bc-sectors-list button{background:transparent;border:0;border-bottom:1px solid var(--line);padding:18px 24px;text-align:left;font-family:var(--font-display);font-weight:600;font-size:15.5px;color:var(--fg-muted);cursor:pointer;transition:all var(--dur-fast) var(--ease-out);position:relative;letter-spacing:-.005em;white-space:nowrap}
+@media(max-width:880px){.bc-sectors-list button{border-bottom:0;border-right:1px solid var(--line)}}
+.bc-sectors-list button:hover{color:var(--fg)}
+.bc-sectors-list button.is-active{color:var(--lime-400);background:rgba(140,198,63,.04)}
+.bc-sectors-list button.is-active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--lime-400)}
+@media(max-width:880px){.bc-sectors-list button.is-active::before{left:0;right:0;top:auto;bottom:0;width:auto;height:3px}}
+.bc-sectors-list button::after{content:"→";float:right;opacity:0;transition:opacity var(--dur-fast) var(--ease-out)}
+.bc-sectors-list button.is-active::after{opacity:.7}
+.bc-sectors-panel{padding:0;position:relative}
+.bc-sector-panel{display:none;padding:clamp(2rem,3vw,3rem)}
+.bc-sector-panel.is-active{display:block;animation:tileIn .4s var(--ease-out)}
+.bc-sectors-panel__eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);font-weight:500;margin-bottom:14px}
+.bc-sectors-panel h3{font-size:1.6rem;line-height:1.2;letter-spacing:-.015em;max-width:22ch}
+.bc-sectors-panel__body{color:var(--fg-muted);font-size:15.5px;line-height:1.6;margin-top:18px;max-width:54ch}
+.bc-sectors-panel__levers{margin-top:24px;display:grid;gap:10px}
+.bc-sectors-panel__levers li{padding-left:24px;position:relative;color:var(--fg);font-size:14.5px;line-height:1.5;list-style:none}
+.bc-sectors-panel__levers li::before{content:"→";position:absolute;left:0;color:var(--lime-400);font-weight:700}
+.bc-sectors-panel__case{margin-top:28px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-400);font-weight:500}
+/* Featured cases for BC */
+.bc-cases{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+@media(max-width:880px){.bc-cases{grid-template-columns:1fr}}
 /* BUSINESS CONSULTING — rich sections */
 .bc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-5);margin-top:var(--space-7);padding-top:var(--space-7);border-top:1px solid var(--line)}
 @media(max-width:880px){.bc-stats{grid-template-columns:1fr 1fr}}
