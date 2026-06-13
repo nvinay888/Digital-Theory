@@ -610,6 +610,23 @@ WORKS = [
 
 INDUSTRY_ORDER = ["All","D2C / E-commerce","Beauty & Personal Care","Edtech","Consumer Apps","Gaming","Retail & Pharma","Fintech"]
 
+# Public brand logos via Clearbit's free logo API (domain -> served logo).
+# onerror in the markup falls back to a styled text card if a domain isn't found.
+LOGO_BRANDS = [
+    ("Groww","groww.in"),
+    ("upGrad","upgrad.com"),
+    ("Pepperfry","pepperfry.com"),
+    ("Celio","celio.in"),
+    ("Codingal","codingal.com"),
+    ("Pocket52","pocket52.com"),
+    ("Chumbak","chumbak.com"),
+    ("Nutriglow","nutriglowcosmetics.com"),
+    ("Eurokids","eurokidsindia.com"),
+    ("Thulasi","thulasipharmacies.com"),
+    ("Meatton","meatton.com"),
+    ("Laundrokart","laundrokart.com"),
+]
+
 def build_our_work():
     counts = {ind: sum(1 for w in WORKS if w["industry"]==ind) for ind in INDUSTRY_ORDER[1:]}
     counts["All"] = len(WORKS)
@@ -633,26 +650,88 @@ def build_our_work():
           </div>
         </{tag_class}>'''
     tiles_html = "".join(tile(w) for w in WORKS)
+    logos_html = "".join(
+        f'<div class="logo-cell" title="{n}"><img src="https://www.google.com/s2/favicons?domain={d}&sz=128" alt="{n} logo" loading="lazy" onerror="this.parentElement.classList.add(\'logo-cell--fallback\');this.outerHTML=\'<span>{n}</span>\'" /><span class="logo-cell__name">{n}</span></div>'
+        for n,d in LOGO_BRANDS
+    )
 
     body = f"""
 <section class="page-hero">
   <div class="container page-hero__inner">
     <span class="eyebrow">Our Work</span>
-    <h1>Engagements that built brands and moved the P&amp;L.</h1>
-    <p class="lead page-hero__lead">A working portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — built around performance marketing, branding, web &amp; app, SEO and digital transformation. Filter by industry to see how we&rsquo;ve operated in your category.</p>
+    <h1>Built for outcomes. Run by operators. Trusted by 50+ brands.</h1>
+    <p class="lead page-hero__lead">A working portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — built around performance marketing, branding, web &amp; app, SEO and digital transformation.</p>
     <div class="page-hero__cta">
       <a href="contact.html" class="btn btn--primary btn--lg">Start your engagement <span class="btn__arrow">→</span></a>
     </div>
   </div>
 </section>
 
-<section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
+<div class="logo-strip">
+  <div class="container">
+    <p class="logo-strip__label">Trusted by category leaders</p>
+    <div class="logos-grid">{logos_html}</div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="manifesto">
+      <div>
+        <span class="eyebrow">Why we exist</span>
+        <h2 style="margin-top:14px;max-width:18ch">Most agencies sell activity. We sell the outcome.</h2>
+        <p class="lead" style="margin-top:20px;max-width:46ch">Performance marketing has become a commodity. Decks have replaced decisions, dashboards have replaced thinking, and brands are paying premium fees for output that doesn&rsquo;t move the P&amp;L. We started Digitaltheory to flip that — to be the team that thinks like an operator, ships like a startup, and gets measured by the only number that matters: yours.</p>
+      </div>
+      <ol class="manifesto__points">
+        <li>Strategy without execution is theatre. We do both, in the same engagement.</li>
+        <li>Channels are tools, not strategies. The brief is the business, not the platform.</li>
+        <li>Creative is the lever, not the deliverable. We test it like a hypothesis.</li>
+        <li>Retention is the business. Acquisition is the entrance fee.</li>
+        <li>Data is useless without a decision attached. Every dashboard ends with a call.</li>
+        <li>AI is a tool — we&rsquo;re the edge. Models scale us; they don&rsquo;t replace us.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="founder">
+      <div class="founder__photo">
+        <img src="assets/founder.jpg" alt="Aditya, Founder of Digitaltheory" loading="lazy" />
+        <div class="founder__name-tag">
+          <div class="n">Aditya</div>
+          <span class="r">Founder &amp; CEO</span>
+        </div>
+      </div>
+      <div class="founder__body">
+        <span class="eyebrow">The founder</span>
+        <h2 style="margin-top:14px">Built by an operator, for operators.</h2>
+        <p class="founder__intro">I work at the intersection of growth, strategy, operations, and product.</p>
+        <p class="founder__bio">Currently experienced in managing the Target Product Ads product for US-based brands while driving cross-functional initiatives across program management, product rollouts, process optimisation, business intelligence, and operational transformation.</p>
+        <p class="founder__bio" style="margin-bottom:8px">My work includes:</p>
+        <ul class="founder__list">
+          <li>Managing large-scale growth and media operations</li>
+          <li>Leading product and feature rollout initiatives</li>
+          <li>PRD documentation and market research</li>
+          <li>Building automation and category intelligence dashboards</li>
+          <li>Developing scalable SOP and operational frameworks</li>
+          <li>Driving data-led decision-making and root-cause analysis</li>
+          <li>Exploring GenAI capabilities to accelerate business insights and operational efficiency</li>
+        </ul>
+        <p class="founder__bio" style="margin-top:24px">I enjoy solving complex business problems by combining analytics, structured execution, operational thinking, and product-oriented problem solving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
   <div class="container">
     <div class="bc-stats" style="margin-top:0;padding-top:0;border-top:0">
       <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands shipped</div></div>
       <div class="stat"><div class="stat__num">7</div><div class="stat__label">Industries served</div></div>
       <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend managed</div></div>
-      <div class="stat"><div class="stat__num">9</div><div class="stat__label">Services delivered</div></div>
+      <div class="stat"><div class="stat__num">8</div><div class="stat__label">Services delivered</div></div>
     </div>
   </div>
 </section>
