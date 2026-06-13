@@ -154,16 +154,16 @@ p{margin:0}
 /* Light-cell row dividers */
 .compare-cell--param,.compare-cell--us{border-bottom:1px solid rgba(0,0,0,.06)}
 .compare-row:last-child .compare-cell--param,.compare-row:last-child .compare-cell--us{border-bottom:0}
-.compare-cell--us{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(180deg,#EDF6D6,#E2EFC1);color:#1A2010;box-shadow:20px 0 36px -4px rgba(0,0,0,.9),10px 0 18px -2px rgba(0,0,0,.6),inset 0 0 0 1px rgba(140,198,63,.2);clip-path:inset(0 -40px 0 0);position:relative;z-index:2;font-weight:500}
+.compare-cell--us{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(180deg,#EDF6D6,#E2EFC1);color:#1A2010;box-shadow:14px 0 30px -4px rgba(230,230,230,.22),5px 0 12px -1px rgba(230,230,230,.16),inset 0 0 0 1px rgba(140,198,63,.2);clip-path:inset(0 -50px 0 0);position:relative;z-index:2;font-weight:500}
 .compare-cell--us::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--lime-500);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 6.2l2.2 2.2L9.2 4' stroke='%23ffffff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:center;background-size:14px;box-shadow:0 4px 10px rgba(106,154,38,.35)}
-.compare-row--header .compare-cell--us-header{background:linear-gradient(180deg,#DFECBF,#D2E4A8);color:#3F5418;box-shadow:20px 0 36px -4px rgba(0,0,0,.9),10px 0 18px -2px rgba(0,0,0,.6);clip-path:inset(0 -40px 0 0);position:relative;z-index:2;font-weight:600}
-.compare-cell--other{color:var(--fg-strong);display:flex;align-items:flex-start;gap:12px;background:rgba(0,0,0,.55);box-shadow:inset 22px 0 32px -8px rgba(0,0,0,.85);position:relative;z-index:1;padding-left:42px}
+.compare-row--header .compare-cell--us-header{background:linear-gradient(180deg,#DFECBF,#D2E4A8);color:#3F5418;box-shadow:14px 0 30px -4px rgba(230,230,230,.22),5px 0 12px -1px rgba(230,230,230,.16);clip-path:inset(0 -50px 0 0);position:relative;z-index:2;font-weight:600}
+.compare-cell--other{color:var(--fg-strong);display:flex;align-items:flex-start;gap:12px;background:rgba(0,0,0,.55);box-shadow:inset 14px 0 24px -6px rgba(0,0,0,.55);position:relative;z-index:1;padding-left:42px}
 .compare-cell--other::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;border:1px solid var(--line-strong);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M4 4l4 4M8 4l-4 4' stroke='%23A7AEB0' stroke-width='1.6' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:center;background-size:12px}
 /* Other header keeps the recessed dark look */
-.compare-row--header .compare-cell:last-child{background:rgba(0,0,0,.55);box-shadow:inset 22px 0 32px -8px rgba(0,0,0,.85);position:relative;z-index:1;color:var(--fg-muted)}
+.compare-row--header .compare-cell:last-child{background:rgba(0,0,0,.55);box-shadow:inset 14px 0 24px -6px rgba(0,0,0,.55);position:relative;z-index:1;color:var(--fg-muted)}
 /* Row hover — strengthens the elevation on the light cells */
 .compare-row[data-row]:hover .compare-cell--param{background:#FFFFFF;color:var(--lime-600)}
-.compare-row[data-row]:hover .compare-cell--us{background:linear-gradient(180deg,#F2F9DD,#E8F2CB);box-shadow:24px 0 40px -4px rgba(0,0,0,.95),12px 0 20px -2px rgba(0,0,0,.7),inset 0 0 0 1px rgba(140,198,63,.35);clip-path:inset(0 -50px 0 0)}
+.compare-row[data-row]:hover .compare-cell--us{background:linear-gradient(180deg,#F2F9DD,#E8F2CB);box-shadow:18px 0 38px -4px rgba(230,230,230,.30),6px 0 14px -1px rgba(230,230,230,.20),inset 0 0 0 1px rgba(140,198,63,.35);clip-path:inset(0 -60px 0 0)}
 .compare-row[data-row]:hover .compare-cell--other{background:rgba(0,0,0,.55)}
 /* Torch / spotlight cursor effect */
 .compare-table::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(360px circle at var(--mx,-200px) var(--my,-200px),rgba(140,198,63,.16),rgba(140,198,63,.05) 30%,transparent 55%);mix-blend-mode:plus-lighter;opacity:0;transition:opacity .3s var(--ease-out)}
