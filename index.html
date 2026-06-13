@@ -82,6 +82,65 @@
   <div class="marquee__track" id="marqueeTrack"></div>
 </div>
 
+<section class="section compare" id="compare">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Why Digitaltheory</span>
+        <h2>Outcomes, <span class="accent">not output.</span></h2>
+      </div>
+      <p class="lead">We focus on the business results that matter, not the marketing activities that fill reports.</p>
+    </div>
+    <div class="compare-table" id="compareTable">
+      <div class="compare-row compare-row--header">
+        <div class="compare-cell compare-cell--header compare-cell--param">Parameter</div>
+        <div class="compare-cell compare-cell--header compare-cell--us-header">Digitaltheory</div>
+        <div class="compare-cell compare-cell--header">Other Agencies</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Pricing Model</div>
+        <div class="compare-cell compare-cell--us">Outcome-driven pricing tied to business results</div>
+        <div class="compare-cell compare-cell--other">Charges for time, retainers, or deliverables</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Accountability</div>
+        <div class="compare-cell compare-cell--us">Measured by business impact and outcomes</div>
+        <div class="compare-cell compare-cell--other">Measured by completed activities and deliverables</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Expertise</div>
+        <div class="compare-cell compare-cell--us">Specialised experts selected for your niche</div>
+        <div class="compare-cell compare-cell--other">Generalist teams serving multiple industries</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Strategy</div>
+        <div class="compare-cell compare-cell--us">Tailored to your market, customers, and funnel</div>
+        <div class="compare-cell compare-cell--other">Standardised playbooks applied across clients</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Technology Stack</div>
+        <div class="compare-cell compare-cell--us">Custom AI and automation systems built around your business</div>
+        <div class="compare-cell compare-cell--other">Off-the-shelf AI tools and disconnected software stacks</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Optimisation</div>
+        <div class="compare-cell compare-cell--us">Continuous identification and resolution of funnel bottlenecks</div>
+        <div class="compare-cell compare-cell--other">Periodic reviews and incremental optimisations</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Growth Approach</div>
+        <div class="compare-cell compare-cell--us">Systems engineered to improve revenue, conversion, and growth</div>
+        <div class="compare-cell compare-cell--other">Campaign execution focused on marketing outputs</div>
+      </div>
+      <div class="compare-row" data-row>
+        <div class="compare-cell compare-cell--param">Success Metrics</div>
+        <div class="compare-cell compare-cell--us">Revenue, pipeline, conversion, and growth outcomes</div>
+        <div class="compare-cell compare-cell--other">Clicks, impressions, reports, and marketing KPIs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="services">
   <div class="container">
     <div class="sec-head">
@@ -224,6 +283,29 @@ function renderResults(){
   RESULTS[active].forEach(c => { const cell = document.createElement('div'); cell.className='results__cell'; cell.innerHTML = `<div class="stat"><div class="stat__num">${c.v}<span class="unit">${c.u}</span></div><div class="stat__label">${c.l}</div><div class="results__client">${c.c}</div></div>`; gridEl.appendChild(cell); });
 }
 renderResults();
+
+/* Compare table: torch + scroll-in */
+const compareTable = document.getElementById('compareTable');
+if (compareTable) {
+  compareTable.addEventListener('pointermove', e => {
+    const r = compareTable.getBoundingClientRect();
+    compareTable.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    compareTable.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+  compareTable.addEventListener('pointerleave', () => {
+    compareTable.style.setProperty('--mx', '-200px');
+    compareTable.style.setProperty('--my', '-200px');
+  });
+}
+const compareSec = document.querySelector('.compare');
+if (compareSec && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { compareSec.classList.add('is-visible'); io.disconnect(); } });
+  }, { threshold: 0.12 });
+  io.observe(compareSec);
+} else if (compareSec) {
+  compareSec.classList.add('is-visible');
+}
 
 const CASES = [
   {slug:'celio',brand:'Celio',industry:'D2C Menswear',budget:'Yearly Budget ₹2 Cr',desc:'A heritage French menswear brand with strong omnichannel presence but underperforming D2C revenue. We rebuilt paid search, paid social and D2C ops — driving 45% ROAS lift.',metrics:[{v:'45',u:'%',l:'ROAS lift'},{v:'23',u:'%',l:'CM3 lift'},{v:'17',u:'%',l:'Brand search'}]},

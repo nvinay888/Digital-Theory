@@ -140,6 +140,46 @@ p{margin:0}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);margin-bottom:var(--space-8);flex-wrap:wrap}
 .sec-head h2{margin:var(--space-3) 0 0;max-width:20ch}
 .sec-head p{margin:0;max-width:42ch}
+/* COMPARE / Outcomes-not-output */
+.compare{position:relative}
+.compare-table{position:relative;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);overflow:hidden}
+.compare-row{display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;border-bottom:1px solid var(--line);opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+.compare-row:last-child{border-bottom:0}
+.compare-row--header{background:rgba(255,255,255,.03);border-bottom:1px solid var(--line-strong)}
+.compare-cell{padding:22px 26px;position:relative;z-index:2;transition:background .3s var(--ease-out);font-size:15px;line-height:1.5}
+.compare-cell--header{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);font-weight:500;padding-block:18px}
+.compare-cell--us-header{color:var(--lime-400)}
+.compare-cell--param{font-family:var(--font-display);font-weight:700;color:var(--fg-strong);background:rgba(255,255,255,.025);font-size:15px;letter-spacing:-.005em}
+.compare-cell--us{color:var(--fg);display:flex;align-items:flex-start;gap:12px}
+.compare-cell--us::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--lime-400);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 6.2l2.2 2.2L9.2 4' stroke='%230A0B0D' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:center;background-size:14px}
+.compare-cell--other{color:var(--fg-muted);display:flex;align-items:flex-start;gap:12px}
+.compare-cell--other::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;border:1px solid var(--line-strong);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M4 4l4 4M8 4l-4 4' stroke='%236E767A' stroke-width='1.6' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:center;background-size:12px}
+/* Row hover */
+.compare-row[data-row]:hover .compare-cell{background:rgba(140,198,63,.04)}
+.compare-row[data-row]:hover .compare-cell--param{background:rgba(140,198,63,.08);color:var(--lime-400)}
+/* Torch / spotlight cursor effect */
+.compare-table::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(360px circle at var(--mx,-200px) var(--my,-200px),rgba(140,198,63,.16),rgba(140,198,63,.05) 30%,transparent 55%);mix-blend-mode:plus-lighter;opacity:0;transition:opacity .3s var(--ease-out)}
+.compare-table:hover::after,.compare-table:focus-within::after{opacity:1}
+/* Scroll-in stagger */
+.compare.is-visible .compare-row{opacity:1;transform:none}
+.compare.is-visible .compare-row:nth-child(1){transition-delay:0ms}
+.compare.is-visible .compare-row:nth-child(2){transition-delay:60ms}
+.compare.is-visible .compare-row:nth-child(3){transition-delay:120ms}
+.compare.is-visible .compare-row:nth-child(4){transition-delay:180ms}
+.compare.is-visible .compare-row:nth-child(5){transition-delay:240ms}
+.compare.is-visible .compare-row:nth-child(6){transition-delay:300ms}
+.compare.is-visible .compare-row:nth-child(7){transition-delay:360ms}
+.compare.is-visible .compare-row:nth-child(8){transition-delay:420ms}
+.compare.is-visible .compare-row:nth-child(9){transition-delay:480ms}
+@media(max-width:760px){
+  .compare-row{grid-template-columns:1fr 1fr}
+  .compare-row--header .compare-cell--param{display:none}
+  .compare-row .compare-cell--param{grid-column:1/-1;padding:14px 18px 8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);background:rgba(255,255,255,.03);border-top:1px solid var(--line)}
+  .compare-row:first-child .compare-cell--param{border-top:0}
+  .compare-cell{padding:14px 18px;font-size:14px}
+  .compare-cell--us::before,.compare-cell--other::before{width:16px;height:16px;background-size:12px}
+  .compare-table::after{display:none}
+}
 /* RESULTS TABS */
 .results{background:var(--surface-section);border-block:1px solid var(--line)}
 .results__tabs{display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-8)}
