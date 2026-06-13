@@ -11,7 +11,6 @@
     ['web-development','Web Development'],
     ['app-development','App Development'],
     ['business-consulting','Business Consulting'],
-    ['video-production','Video Production'],
     ['seo','SEO'],
     ['digital-transformation','Digital Transformation'],
     ['crm-retention','CRM & Retention'],

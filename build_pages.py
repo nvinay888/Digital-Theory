@@ -328,19 +328,6 @@ SERVICES = [
         "case":"nutriglow","case_label":"Nutriglow — pricing &amp; NPD turnaround drove 35% QoQ growth.",
     },
     {
-        "slug":"video-production","title":"Video Production",
-        "hero":"Performance creative, brand films and UGC at the cadence performance marketing demands.",
-        "intro":"Most agencies outsource video. We produce in-house with editors and motion designers embedded with our performance pods — so creative briefs come from the data and ship in days, not months.",
-        "what":["Performance creative (Meta, Google, YouTube)","UGC at scale","Brand films","Product demos &amp; explainers","Motion graphics &amp; animation"],
-        "deliverables":[
-            ("Creative testing batches","Weekly batches of variants engineered around hypotheses, not vibes."),
-            ("Founder &amp; UGC content","Talent sourcing, scripting, shooting and editing for native-feeling content."),
-            ("Brand films","Hero films for launches, pages and earned-media moments."),
-            ("Motion library","Reusable motion templates that fit your identity system."),
-        ],
-        "case":"celio","case_label":"Celio — creative testing framework drove ROAS lift.",
-    },
-    {
         "slug":"seo","title":"SEO",
         "hero":"Technical SEO, content engines and link strategy that lifts organic share-of-search and drives down blended CAC.",
         "intro":"SEO is the cheapest CAC lever most brands ignore. We treat it as a system — technical foundation, programmatic + editorial content, plus a real link program — and report it in the same dashboard as paid.",
@@ -601,7 +588,7 @@ def build_contact():
         <div><label>What do you need help with?</label>
           <select>
             <option>Performance Marketing</option><option>Branding</option><option>Web Development</option>
-            <option>App Development</option><option>Business Consulting</option><option>Video Production</option>
+            <option>App Development</option><option>Business Consulting</option>
             <option>SEO</option><option>Digital Transformation</option><option>CRM &amp; Retention</option><option>Not sure yet</option>
           </select>
         </div>
