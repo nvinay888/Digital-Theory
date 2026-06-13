@@ -205,6 +205,21 @@ p{margin:0}
 .cases{background:var(--surface-section);border-top:1px solid var(--line)}
 .cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
 @media(max-width:880px){.cases-grid{grid-template-columns:1fr}}
+/* Carousel */
+.cases-carousel-wrap{position:relative}
+.cases-carousel{display:flex;gap:var(--space-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:8px;margin:0 -4px;padding-inline:4px}
+.cases-carousel::-webkit-scrollbar{display:none}
+.cases-carousel>*{flex:0 0 calc((100% - var(--space-5))/2);scroll-snap-align:start;min-width:0}
+@media(max-width:760px){.cases-carousel>*{flex-basis:88%}}
+.carousel-controls{display:flex;justify-content:flex-end;align-items:center;gap:var(--space-3);margin-top:var(--space-6);flex-wrap:wrap}
+.carousel-btn{width:48px;height:48px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:transparent;color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all var(--dur-base) var(--ease-out);font-family:inherit}
+.carousel-btn:hover:not(:disabled){border-color:var(--lime-400);color:var(--lime-400);transform:translateY(-1px)}
+.carousel-btn:disabled{opacity:.35;cursor:not-allowed}
+.carousel-btn svg{width:18px;height:18px}
+.carousel-dots{display:flex;gap:8px;flex:1;justify-content:center}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--line-strong);border:0;padding:0;cursor:pointer;transition:all var(--dur-fast) var(--ease-out)}
+.carousel-dot.is-active{background:var(--lime-400);width:24px;border-radius:4px}
+.carousel-cta{margin-top:var(--space-7);text-align:center}
 .case{padding:var(--space-7);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);display:flex;flex-direction:column;gap:var(--space-5);transition:border-color var(--dur-base) var(--ease-out);text-decoration:none}
 .case:hover{border-color:var(--lime-400)}
 .case__head{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4)}

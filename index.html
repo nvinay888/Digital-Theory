@@ -178,9 +178,20 @@
       <div><span class="eyebrow">Case studies</span><h2>Engagements that moved the P&amp;L</h2></div>
       <p class="lead">A diverse portfolio across growth marketing, branding, SEO, business consulting, digital transformation, and web &amp; app development.</p>
     </div>
-    <div class="cases-grid" id="casesGrid"></div>
-    <div style="margin-top:48px;text-align:center">
-      <a href="case-studies.html" class="btn btn--secondary btn--lg">See all case studies <span class="btn__arrow">→</span></a>
+    <div class="cases-carousel-wrap">
+      <div class="cases-carousel" id="casesCarousel"></div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" id="carouselPrev" aria-label="Previous case studies">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="carousel-btn" id="carouselNext" aria-label="Next case studies">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="carousel-cta">
+      <a href="case-studies.html" class="btn btn--primary btn--lg">See all case studies <span class="btn__arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -315,13 +326,57 @@ const CASES = [
   {slug:'pocket52',brand:'Pocket52',industry:'Real-money Gaming',budget:'Yearly Budget ₹3 Cr',desc:"One of India's fastest 1M-download gaming apps. Channel scoring by LTV/ARPU, rebuilt affiliate framework, ran a full ASO program — CAC down 45%.",metrics:[{v:'45',u:'%',l:'CAC reduction'},{v:'20',u:'%',l:'Organic installs'},{v:'18',u:'%',l:'LTV lift'}]},
   {slug:'thulasi',brand:'Thulasi Pharmacy',industry:'Retail Digital Transformation',budget:'80+ branches, ₹750 Cr',desc:'South Indian pharmacy chain. ERP integration, in-house inventory tool, returns dashboard, and ML model predicting store-level product fit drove margin and sell-through.',metrics:[{v:'33',u:'%',l:'Inventory cost ↓'},{v:'37',u:'%',l:'Returns ↓'},{v:'19',u:'%',l:'Revenue ↑'}]},
 ];
-const casesGrid = document.getElementById('casesGrid');
-CASES.forEach(c => {
+const carousel = document.getElementById('casesCarousel');
+const FEATURED_CASES = CASES.slice(0, 4);
+FEATURED_CASES.forEach(c => {
   const el = document.createElement('a');
   el.className = 'case'; el.href = `case-studies/${c.slug}.html`;
   el.innerHTML = `<div class="case__head"><div class="case__brand">${c.brand}</div><span class="case__industry">${c.industry}</span></div><p class="case__desc">${c.desc}</p><div class="case__budget">${c.budget}</div><div class="case__metrics">${c.metrics.map(m=>`<div class="stat case__metric"><div class="stat__num">${m.v}<span class="unit">${m.u}</span></div><div class="stat__label">${m.l}</div></div>`).join('')}</div><span class="case__link">Read case study →</span>`;
-  casesGrid.appendChild(el);
+  carousel.appendChild(el);
 });
+
+/* Carousel controls */
+const carPrev = document.getElementById('carouselPrev');
+const carNext = document.getElementById('carouselNext');
+const dotsWrap = document.getElementById('carouselDots');
+const slidesPerView = () => window.innerWidth <= 760 ? 1 : 2;
+const pageCount = () => Math.max(1, Math.ceil(FEATURED_CASES.length / slidesPerView()));
+
+function renderDots() {
+  dotsWrap.innerHTML = '';
+  for (let i = 0; i < pageCount(); i++) {
+    const d = document.createElement('button');
+    d.className = 'carousel-dot' + (i === currentPage() ? ' is-active' : '');
+    d.setAttribute('aria-label', `Go to page ${i + 1}`);
+    d.onclick = () => goToPage(i);
+    dotsWrap.appendChild(d);
+  }
+}
+function currentPage() {
+  const cardW = carousel.children[0]?.getBoundingClientRect().width || 1;
+  const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+  const stride = (cardW + gap) * slidesPerView();
+  return Math.round(carousel.scrollLeft / stride);
+}
+function goToPage(i) {
+  const cardW = carousel.children[0]?.getBoundingClientRect().width || 1;
+  const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+  const stride = (cardW + gap) * slidesPerView();
+  carousel.scrollTo({ left: i * stride, behavior: 'smooth' });
+}
+function updateControls() {
+  const p = currentPage();
+  const last = pageCount() - 1;
+  carPrev.disabled = p <= 0;
+  carNext.disabled = p >= last;
+  [...dotsWrap.children].forEach((d, i) => d.classList.toggle('is-active', i === p));
+}
+carPrev.addEventListener('click', () => goToPage(Math.max(0, currentPage() - 1)));
+carNext.addEventListener('click', () => goToPage(Math.min(pageCount() - 1, currentPage() + 1)));
+carousel.addEventListener('scroll', () => updateControls(), { passive: true });
+window.addEventListener('resize', () => { renderDots(); updateControls(); });
+renderDots();
+updateControls();
 </script>
 </body>
 </html>
