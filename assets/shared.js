@@ -70,7 +70,8 @@
               </div>
             </div>
           </li>
-          <li><a href="${base}case-studies.html" class="nav__item ${page==='work'?'is-active':''}">Our Work</a></li>
+          <li><a href="${base}our-work.html" class="nav__item ${page==='work'?'is-active':''}">Our Work</a></li>
+          <li><a href="${base}case-studies.html" class="nav__item ${page==='cases'?'is-active':''}">Case Studies</a></li>
           <li><a href="${base}about.html" class="nav__item ${page==='about'?'is-active':''}">About Us</a></li>
           <li><a href="${base}careers.html" class="nav__item ${page==='careers'?'is-active':''}">Careers</a></li>
           <li>
@@ -100,7 +101,8 @@
       <li><details><summary>Industry</summary><ul>
         ${industries.map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
       </ul></details></li>
-      <li><a href="${base}case-studies.html">Our Work</a></li>
+      <li><a href="${base}our-work.html">Our Work</a></li>
+      <li><a href="${base}case-studies.html">Case Studies</a></li>
       <li><a href="${base}about.html">About Us</a></li>
       <li><a href="${base}careers.html">Careers</a></li>
       <li><a href="${base}contact.html">Contact Us</a></li>

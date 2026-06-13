@@ -259,7 +259,7 @@ def build_cases_hub():
 
 {CTA_BAND.format(base='')}
 """
-    return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail digital transformation. Real numbers from real engagements.", body, base="", active="work", path="case-studies.html")
+    return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail digital transformation. Real numbers from real engagements.", body, base="", active="cases", path="case-studies.html")
 
 # ====================== SERVICES ======================
 SERVICES = [
@@ -578,6 +578,136 @@ def build_services_hub():
 """
     return page("Services", "All Digitaltheory services — performance marketing, branding, web development, app development, business consulting, video production, SEO, digital transformation, and CRM & retention.", body, base="", active="services", path="services.html")
 
+# ====================== OUR WORK ======================
+WORKS = [
+    # D2C / E-commerce
+    {"brand":"Celio","industry":"D2C / E-commerce","tags":["Performance","D2C","Retention"],"desc":"Heritage French menswear brand. Rebuilt paid search, paid social and D2C ops — 45% ROAS lift, 23% CM3 improvement.","grad":"linear-gradient(135deg,#1B2A4E,#0E1A36)","initials":"Cl","case":"celio"},
+    {"brand":"Pepperfry","industry":"D2C / E-commerce","tags":["Performance","Marketplace"],"desc":"Furniture &amp; home D2C. Scaled performance media across high-AOV categories and marketplace listings.","grad":"linear-gradient(135deg,#F26430,#A6391C)","initials":"Pf"},
+    {"brand":"Chumbak","industry":"D2C / E-commerce","tags":["Performance","Operations","NPD"],"desc":"Lifestyle D2C brand. 3x profit improvement via NPD, operations, website maintenance and performance marketing.","grad":"linear-gradient(135deg,#E8336B,#992042)","initials":"Cm"},
+    {"brand":"Meatton","industry":"D2C / E-commerce","tags":["Performance","Local SEO"],"desc":"D2C meat &amp; protein brand. Scaled cohort-based acquisition with strong unit economics across paid + organic.","grad":"linear-gradient(135deg,#E84A1C,#A12A0F)","initials":"Mt"},
+    {"brand":"Ira Soleil","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium ethnic wear D2C. Brand-led acquisition with retention loops tied to occasion and seasonality.","grad":"linear-gradient(135deg,#3A3A3A,#1B1B1B)","initials":"Is"},
+    {"brand":"put-chi","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium kids &amp; family D2C. Built brand storytelling and performance funnel from scratch.","grad":"linear-gradient(135deg,#7BA89A,#4F6E60)","initials":"Pc"},
+    {"brand":"august","industry":"D2C / E-commerce","tags":["Performance","CRM"],"desc":"Wellness D2C brand. Drove acquisition with creative testing framework and lifecycle CRM nudges.","grad":"linear-gradient(135deg,#C9A87C,#806B4E)","initials":"Au"},
+    # Beauty & Personal Care
+    {"brand":"Nutriglow","industry":"Beauty & Personal Care","tags":["Performance","Consulting","Marketplace"],"desc":"200+ SKU beauty brand. Pricing, sourcing &amp; channel-mix turnaround drove 35% QoQ revenue growth.","grad":"linear-gradient(135deg,#1F3A8A,#0E1F4F)","initials":"Ng","case":"nutriglow"},
+    {"brand":"svaa.life","industry":"Beauty & Personal Care","tags":["Branding","Performance"],"desc":"Wellness &amp; personal care D2C. Identity, narrative and full-funnel media built to compound.","grad":"linear-gradient(135deg,#A8B59E,#6F7D67)","initials":"Sv"},
+    # Edtech
+    {"brand":"Codingal","industry":"Edtech","tags":["Performance","CRO","International"],"desc":"K-12 coding platform. International market entry with 70% lower CAC; SQL share lifted from 30% to 47%.","grad":"linear-gradient(135deg,#FF6B35,#B44318)","initials":"Cd","case":"codingal"},
+    {"brand":"upGrad","industry":"Edtech","tags":["Performance","SEO"],"desc":"Higher-ed platform. Performance + SEO playbooks across multiple verticals to drive qualified inquiries.","grad":"linear-gradient(135deg,#FF4D2D,#A82F18)","initials":"uG"},
+    {"brand":"Eurokids","industry":"Edtech","tags":["Performance","Local SEO"],"desc":"Pre-school chain. Geo-fenced acquisition + admission funnel optimisation across 100+ centres.","grad":"linear-gradient(135deg,#2E62C8,#1A3D7E)","initials":"Ek"},
+    {"brand":"School Basix","industry":"Edtech","tags":["Branding","Web"],"desc":"K-12 school operating platform. Identity system + web build for category positioning and lead capture.","grad":"linear-gradient(135deg,#F2C744,#9A7E1F)","initials":"Sb"},
+    # Consumer Apps & Services
+    {"brand":"Laundrokart","industry":"Consumer Apps","tags":["App","CRM","Loyalty"],"desc":"12-year-old laundry app. RFM-led CRM + loyalty program lifted retention 17% and LTV 23%.","grad":"linear-gradient(135deg,#7B3FA8,#46225F)","initials":"Lk","case":"laundrokart"},
+    {"brand":"Evolutions Fitness","industry":"Consumer Apps","tags":["Branding","Performance"],"desc":"Fitness club chain. Local acquisition engine + retention program for member LTV uplift.","grad":"linear-gradient(135deg,#191919,#0A0A0A)","initials":"Ev"},
+    # Gaming
+    {"brand":"Pocket52","industry":"Gaming","tags":["App","ASO","CRM"],"desc":"Real-money gaming app. Channel scoring + ASO program cut CAC 45% and lifted organic installs 20%.","grad":"linear-gradient(135deg,#0F6E3D,#063A1F)","initials":"P5","case":"pocket52"},
+    # Retail / Pharma
+    {"brand":"Thulasi Pharmacy","industry":"Retail & Pharma","tags":["Digital Transformation","ML","Operations"],"desc":"80+ branch pharmacy chain. ERP integration + ML for store-level product fit drove margin and sell-through.","grad":"linear-gradient(135deg,#FFE12C,#A8901A)","initials":"Tp","case":"thulasi"},
+    # Fintech
+    {"brand":"Groww","industry":"Fintech","tags":["Performance","Brand Lift"],"desc":"Investment platform. Brand lift &amp; performance media collaboration for user acquisition.","grad":"linear-gradient(135deg,#00D09C,#007A5C)","initials":"Gr"},
+    {"brand":"Onecheq","industry":"Fintech","tags":["Branding","Web"],"desc":"Fintech startup. Identity, narrative and go-to-market positioning for category creation.","grad":"linear-gradient(135deg,#4A4A4A,#1F1F1F)","initials":"Oc"},
+]
+
+INDUSTRY_ORDER = ["All","D2C / E-commerce","Beauty & Personal Care","Edtech","Consumer Apps","Gaming","Retail & Pharma","Fintech"]
+
+def build_our_work():
+    counts = {ind: sum(1 for w in WORKS if w["industry"]==ind) for ind in INDUSTRY_ORDER[1:]}
+    counts["All"] = len(WORKS)
+    tabs_html = "".join(
+        f'<button class="work-tab {"is-active" if ind=="All" else ""}" data-tab="{ind}">{ind} <span class="work-tab__count">({counts[ind]})</span></button>'
+        for ind in INDUSTRY_ORDER
+    )
+    def tile(w):
+        case_link = f'<span class="work-tile__link">Read case study →</span>' if w.get("case") else ''
+        href = f'case-studies/{w["case"]}.html' if w.get("case") else '#'
+        tag_class = "a" if w.get("case") else "div"
+        tags_html = "".join(f'<span class="work-tile__tag">{t}</span>' for t in w["tags"])
+        return f'''<{tag_class} class="work-tile" data-industry="{w["industry"]}" {f'href="{href}"' if w.get("case") else ''}>
+          <div class="work-tile__cover" style="background:{w["grad"]}"><span class="work-tile__cover-text">{w["initials"]}</span></div>
+          <div class="work-tile__body">
+            <div class="work-tile__meta">{w["industry"]}</div>
+            <div class="work-tile__brand">{w["brand"]}</div>
+            <p class="work-tile__desc">{w["desc"]}</p>
+            <div class="work-tile__tags">{tags_html}</div>
+            {case_link}
+          </div>
+        </{tag_class}>'''
+    tiles_html = "".join(tile(w) for w in WORKS)
+
+    body = f"""
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <span class="eyebrow">Our Work</span>
+    <h1>Engagements that built brands and moved the P&amp;L.</h1>
+    <p class="lead page-hero__lead">A working portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — built around performance marketing, branding, web &amp; app, SEO and digital transformation. Filter by industry to see how we&rsquo;ve operated in your category.</p>
+    <div class="page-hero__cta">
+      <a href="contact.html" class="btn btn--primary btn--lg">Start your engagement <span class="btn__arrow">→</span></a>
+      <a href="case-studies.html" class="btn btn--secondary btn--lg">Read full case studies</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
+  <div class="container">
+    <div class="bc-stats" style="margin-top:0;padding-top:0;border-top:0">
+      <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands shipped</div></div>
+      <div class="stat"><div class="stat__num">7</div><div class="stat__label">Industries served</div></div>
+      <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend managed</div></div>
+      <div class="stat"><div class="stat__num">9</div><div class="stat__label">Services delivered</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:var(--space-6)">
+      <div><span class="eyebrow">By industry</span><h2 style="max-width:22ch">Pick a category. See the operating reps.</h2></div>
+      <p class="lead">Patterns travel across categories, specifics don&rsquo;t. We bring both — the playbooks we&rsquo;ve run before, and the depth to adapt them to your category, customer and funnel.</p>
+    </div>
+    <div class="work-tabs" id="workTabs">{tabs_html}</div>
+    <div class="work-grid" id="workGrid">{tiles_html}</div>
+    <div class="work-empty" id="workEmpty" style="display:none">No engagements in this category yet — talk to us about being the first.</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Deeper reads</span><h2>Case studies with the full operating detail</h2></div><p class="lead">When a tile isn&rsquo;t enough, the case study has the strategy, the experiments and the numbers behind the outcome.</p></div>
+    <div class="cases-grid">
+      <a class="case" href="case-studies/celio.html"><div class="case__head"><div class="case__brand">Celio</div><span class="case__industry">D2C Menswear</span></div><p class="case__desc">A heritage French menswear brand scaled across D2C, marketplaces and retail with a unified growth engine.</p><span class="case__link">Read case study →</span></a>
+      <a class="case" href="case-studies/codingal.html"><div class="case__head"><div class="case__brand">Codingal</div><span class="case__industry">K-12 Edtech</span></div><p class="case__desc">5L+ students scaled with 10x revenue via international market entry, full-funnel mix and LP/onboarding revamp.</p><span class="case__link">Read case study →</span></a>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="case-studies.html" class="btn btn--primary btn--lg">See all case studies <span class="btn__arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+{CTA_BAND.format(base='')}
+
+<script>
+(function(){{
+  const tabs = document.querySelectorAll('#workTabs .work-tab');
+  const tiles = document.querySelectorAll('#workGrid .work-tile');
+  const empty = document.getElementById('workEmpty');
+  function filter(ind) {{
+    let visible = 0;
+    tiles.forEach(t => {{
+      const match = ind === 'All' || t.dataset.industry === ind;
+      t.classList.toggle('is-hidden', !match);
+      if (match) visible++;
+    }});
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }}
+  tabs.forEach(b => b.addEventListener('click', () => {{
+    tabs.forEach(x => x.classList.toggle('is-active', x === b));
+    filter(b.dataset.tab);
+  }}));
+}})();
+</script>
+"""
+    return page("Our Work", "Digitaltheory's portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — filter by industry to see relevant engagements.", body, base="", active="work", path="our-work.html")
+
 # ====================== ABOUT ======================
 def build_about():
     body = f"""
@@ -770,7 +900,7 @@ for idx, c in enumerate(CASES):
     next_slug = slugs[idx+1] if idx < len(CASES)-1 else None
     body = render_case_body(c, (prev_slug, next_slug))
     path = f"case-studies/{c['slug']}.html"
-    write(path, page(f"{c['brand']} case study", f"{c['brand']} ({c['industry']}) — case study by Digitaltheory. {c['hero']}", body, base="../", active="work", path=path))
+    write(path, page(f"{c['brand']} case study", f"{c['brand']} ({c['industry']}) — case study by Digitaltheory. {c['hero']}", body, base="../", active="cases", path=path))
 
 write("case-studies.html", build_cases_hub())
 
@@ -782,12 +912,13 @@ for s in SERVICES:
     write(path, page(s["title"], desc, body, base="../", active="services", path=path))
 
 write("services.html", build_services_hub())
+write("our-work.html", build_our_work())
 write("about.html", build_about())
 write("careers.html", build_careers())
 write("contact.html", build_contact())
 
 # ====================== SITEMAP & ROBOTS ======================
-urls = ["", "services.html", "case-studies.html", "about.html", "careers.html", "contact.html"]
+urls = ["", "services.html", "our-work.html", "case-studies.html", "about.html", "careers.html", "contact.html"]
 urls += [f"services/{s['slug']}.html" for s in SERVICES]
 urls += [f"case-studies/{c['slug']}.html" for c in CASES]
 
