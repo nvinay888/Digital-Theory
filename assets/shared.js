@@ -18,13 +18,14 @@
     ['sfmc-implementation','SFMC Implementation'],
   ];
   const industries = [
-    ['D2C & E-commerce','d2c'],
-    ['Beauty & Personal Care','bpc'],
+    ['D2C & E-commerce','d2c-ecommerce'],
+    ['Beauty & Personal Care','beauty-personal-care'],
     ['Edtech','edtech'],
-    ['Consumer Apps','apps'],
+    ['Consumer Apps','consumer-apps'],
     ['Real-money Gaming','gaming'],
-    ['Retail & Pharma','retail'],
-    ['SaaS & B2B Tech','saas'],
+    ['Retail & Pharma','retail-pharma'],
+    ['Fintech','fintech'],
+    ['SaaS & B2B Tech','saas-b2b-tech'],
   ];
 
   const navHtml = `
@@ -101,7 +102,7 @@
         ${services.map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
       </ul></details></li>
       <li><details><summary>Industry</summary><ul>
-        ${industries.map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+        ${industries.map(i=>`<li><a href="${base}industries/${i[1]}.html">${i[0]}</a></li>`).join('')}
       </ul></details></li>
       <li><a href="${base}our-work.html">Our Work</a></li>
       <li><a href="${base}case-studies.html">Case Studies</a></li>

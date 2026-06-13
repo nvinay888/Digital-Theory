@@ -834,6 +834,318 @@ def build_our_work():
 """
     return page("Our Work", "Digitaltheory's portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — filter by industry to see relevant engagements.", body, base="", active="work", path="our-work.html")
 
+# ====================== INDUSTRY PAGES ======================
+INDUSTRIES = [
+    {
+        "slug":"d2c-ecommerce","title":"D2C & E-commerce",
+        "h1":"D2C and E-commerce growth marketing, engineered to the P&amp;L.",
+        "lead":"From paid acquisition to retention loops to creative testing, we build the operating engine behind D2C brands that compound — not just spike.",
+        "intro_h":"The D2C playbook has changed. Yours should too.",
+        "intro":"CAC is rising every quarter, marketplaces are commoditising direct channels, and most performance-only playbooks die at the contribution-margin line. We work inside D2C and e-commerce businesses to rebuild the system — pricing, channel mix, creative, retention — so growth pays.",
+        "challenges":[
+            ("Rising CAC, falling ROAS","Auction prices climb every quarter and yesterday&rsquo;s playbook stops paying back.","trend"),
+            ("Marketplace vs D2C tension","Amazon and Flipkart cannibalise the direct channel — and unit economics fracture across both.","grid"),
+            ("Low repeat rate","Acquisition spend keeps growing because LTV isn&rsquo;t growing fast enough alongside it.","repeat"),
+            ("Creative fatigue","Ad creative dies in two weeks and there&rsquo;s no system to ship fresh hypotheses fast.","sparkle"),
+            ("Inventory &amp; OOS chaos","Bestsellers go out of stock; long-tail sits in the warehouse — both hit the P&amp;L.","box"),
+            ("Attribution &amp; reporting fog","Platforms claim wildly different numbers and nobody trusts the dashboard.","chart"),
+        ],
+        "solutions":[
+            "Full-funnel media mix tied to LTV, not last-click attribution",
+            "Quadcore campaign architecture across prospecting, retargeting, brand defence and creator-led",
+            "RFM segmentation, lifecycle journeys and loyalty programs that lift retention 15–25%",
+            "Creative testing framework that ships weekly batches scored against hypotheses",
+            "Predictive inventory modelling to manage OOS and CM3 sustainability",
+            "Marketplace + D2C pricing parity, MAP enforcement and channel-level margin tracking",
+        ],
+        "clients":[("Celio","celio.in"),("Pepperfry","pepperfry.com"),("Chumbak","chumbak.com"),("Meatton","meatton.com"),("Ira Soleil","irasoleil.com"),("put-chi","put-chi.com")],
+        "cases":[("celio","Celio","D2C Menswear","Heritage menswear brand. Rebuilt paid search, paid social, D2C ops, pricing and retention loops — 45% ROAS lift, 23% CM3.","45","%","ROAS lift","23","%","CM3 lift"),
+                 ("nutriglow","Nutriglow","Beauty & Personal Care","200+ SKU brand. Pricing, sourcing &amp; channel-mix turnaround drove 35% QoQ growth.","57","%","ROAS lift","40","%","COGS cut")],
+    },
+    {
+        "slug":"beauty-personal-care","title":"Beauty & Personal Care",
+        "h1":"Beauty &amp; personal care growth, solved at the contribution-margin line.",
+        "lead":"Hyper-competitive auctions, fragile SKU velocity, marketplaces eating margin — we rebuild beauty brands from COGS and channel mix upward.",
+        "intro_h":"Beauty &amp; PC is a margin game now. Not just a topline game.",
+        "intro":"Topline grew, then profit didn&rsquo;t. Sound familiar? In beauty &amp; personal care, 200+ SKU portfolios live or die on contribution margin. We diagnose pricing, sourcing and channel mix, ship the right NPDs, restructure your Amazon SB/SD, and tie every campaign back to LTV.",
+        "challenges":[
+            ("SKU velocity dropping","Hero SKUs lose share, long-tail eats your shelf and your media spend.","trend"),
+            ("COGS leakage","Sourcing margins erode quietly and CM1 slips without anyone catching it.","chart"),
+            ("Marketplace saturation","Amazon &amp; Nykaa are crowded — basic SB/SD architectures don&rsquo;t cut through anymore.","grid"),
+            ("Claims compliance","Creative gets blocked, then approved, then blocked — and no one tracks the cost.","shield"),
+            ("Content velocity","UGC and creator content need to ship weekly, not quarterly.","sparkle"),
+            ("NPD launch waste","New products launch without a plan and quietly fail in the bestseller flywheel.","box"),
+        ],
+        "solutions":[
+            "Strategic supplier sourcing that lowers COGS 30–40%",
+            "Marketplace Sponsored Brand &amp; Sponsored Display architecture rebuilt on bestseller hierarchy",
+            "NPD ideation, gating and launch playbooks integrated with media plan",
+            "Full-funnel media mix tied to retention and LTV, not just first-purchase ROAS",
+            "Claims-safe creative testing framework that ships weekly batches",
+            "RFM-led CRM journeys for refill, replenishment and cross-category cross-sell",
+        ],
+        "clients":[("Nutriglow","nutriglowcosmetics.com"),("svaa.life","svaa.life"),("august","itsaugust.co")],
+        "cases":[("nutriglow","Nutriglow","Beauty & Personal Care","Turned a 17% YoY profit decline into 35% QoQ growth via pricing, sourcing and full-funnel media.","57","%","ROAS lift","14","%","CM3 lift")],
+    },
+    {
+        "slug":"edtech","title":"Edtech",
+        "h1":"Edtech growth without the CAC death spiral.",
+        "lead":"Lower CAC. Lift SQL share. Reengineer onboarding. We help K-12 and higher-ed platforms compound — and expand internationally when the India market saturates.",
+        "intro_h":"Edtech is funnel engineering, end to end.",
+        "intro":"The Indian edtech market is saturated and CAC won&rsquo;t come down by tweaking bids. We identify under-penetrated international markets, rebuild the funnel from LP to sales follow-up to student onboarding, and drive paid LTV that justifies the spend.",
+        "challenges":[
+            ("CAC rising MoM","Bids climb every month and the cash flow doesn&rsquo;t hold.","trend"),
+            ("Low MQL→SQL conversion","Marketing fills the top of the funnel but sales can&rsquo;t close fast enough.","repeat"),
+            ("LP &amp; form-fill drop-off","Landing pages convert below industry; nobody knows which element to fix first.","chart"),
+            ("Saturated home market","India CAC is plateauing and international expansion isn&rsquo;t scoped.","grid"),
+            ("Onboarding completion","SQL share stuck below 30%; students drop before paying.","box"),
+            ("Brand search flat","Performance keeps spending but branded search isn&rsquo;t growing alongside.","sparkle"),
+        ],
+        "solutions":[
+            "International market entry — country prioritisation, pilot campaigns, scale strategy",
+            "Landing page CRO program scoring hypotheses weekly",
+            "Sales follow-up cadence and SQL design tied to paid LTV",
+            "Student onboarding flow optimisation that lifts SQL from 30% to 47%",
+            "Full-funnel media mix with brand-lift studies for branded search growth",
+            "ASO program for app-led admissions / installs",
+        ],
+        "clients":[("Codingal","codingal.com"),("upGrad","upgrad.com"),("Eurokids","eurokidsindia.com"),("School Basix","schoolbasix.com")],
+        "cases":[("codingal","Codingal","K-12 Edtech","Scaled to 5L+ students with 10x revenue. 70% lower CAC via international expansion, 47% SQL share post-onboarding revamp.","66","%","MQL lift","70","%","CAC cut")],
+    },
+    {
+        "slug":"consumer-apps","title":"Consumer Apps",
+        "h1":"Consumer app growth: install quality first, retention second, monetisation always.",
+        "lead":"Mobile-first growth done right — event-driven acquisition, RFM-led CRM, loyalty programs and ASO that compound LTV.",
+        "intro_h":"Installs are vanity. LTV is the business.",
+        "intro":"Most consumer apps optimise for installs and watch LTV degrow. We rebuild tracking around high-intent events, segment your audience with RFM, layer in CRM nudges across push and WhatsApp, and ship a loyalty program that lifts repeat purchase — all tied to a CAC that pays back.",
+        "challenges":[
+            ("Unqualified installs","Volume looks great until you check Day-7 retention.","trend"),
+            ("LTV degrowth","Quarter-over-quarter LTV falls and unit economics quietly invert.","chart"),
+            ("RFM blindness","No segmentation between high-value, churning and lost users — same comms to all.","grid"),
+            ("Attribution gaps","Event tracking is shallow and platforms claim conflicting attribution.","shield"),
+            ("Push fatigue","Notifications get muted; retention CRM stops working.","sparkle"),
+            ("ASO untapped","App store rank is left to chance — organic installs flatten.","box"),
+        ],
+        "solutions":[
+            "Robust event tracking and high-intent event modelling",
+            "RFM segmentation across 12+ months of data identifying churn-risk and high-value cohorts",
+            "CRM nudges across push, WhatsApp, email and in-app, with cadence engineered to retention",
+            "Loyalty program design with tiering and rewards engineered for repeat",
+            "Affiliate marketing on transaction-based payouts to add 10–15% incremental revenue",
+            "Full ASO program — keyword research, rich media, on/off-page SEO for organic installs",
+        ],
+        "clients":[("Laundrokart","laundrokart.com")],
+        "cases":[("laundrokart","Laundrokart","Consumer App","12-year-old laundry app. Event tracking + RFM + loyalty drove 45% revenue lift, 23% LTV improvement.","55","%","Installs lift","23","%","LTV lift")],
+    },
+    {
+        "slug":"gaming","title":"Real-money Gaming",
+        "h1":"Gaming growth without the CAC spiral.",
+        "lead":"Channel scoring, affiliate frameworks rebuilt around player value, and an ASO program that drives organic installs while CAC compresses.",
+        "intro_h":"Gaming is a player-economics game.",
+        "intro":"Every player has an ARPU, an LTV and a churn curve. We score channels against those, kill what doesn&rsquo;t pay, scale what does, and run the ASO + creative + CRM loop that delivers profitable installs at scale.",
+        "challenges":[
+            ("CAC not coming down","Spend grows, CAC doesn&rsquo;t fall — and cash flow gets brittle.","trend"),
+            ("LTV improvement plateau","Player LTV stops growing despite product releases.","chart"),
+            ("Affiliate waste","High-volume affiliates send low-value players; nobody is unwinding it.","grid"),
+            ("ASO untapped","Organic install share stays flat; brand search doesn&rsquo;t compound.","box"),
+            ("Creative fatigue","Performance creative cycles die fast in regulated categories.","sparkle"),
+            ("Compliance creative drag","Disclaimers and regulations slow down testing cadence.","shield"),
+        ],
+        "solutions":[
+            "Channel scoring on QoQ growth, LTV, ARPU and CAC — kill the low-value, scale the high",
+            "Affiliate framework rebuilt on player engagement model, not install volume",
+            "LTV-based Meta and Google audience modelling",
+            "Rich media images, ASO description rewrite and on/off-page SEO",
+            "RFM-led CRM nudges and in-app offers for loyalty cohorts",
+            "Creative testing framework adapted for regulated-category constraints",
+        ],
+        "clients":[("Pocket52","pocket52.com")],
+        "cases":[("pocket52","Pocket52","Real-money Gaming","One of India&rsquo;s fastest 1M-download gaming apps. 45% CAC cut, 20% organic installs lift, 18% LTV improvement.","45","%","CAC cut","20","%","Organic lift")],
+    },
+    {
+        "slug":"retail-pharma","title":"Retail & Pharma",
+        "h1":"Retail &amp; pharma operations: digitised, modelled, profitable.",
+        "lead":"Inventory automation, store-level SKU fit modelling, returns prediction and ERP integration — for chains where margin lives in the operations.",
+        "intro_h":"Brick-and-mortar margin lives in the small decisions.",
+        "intro":"SKU mix by store. Returns by month. Fill-in vs sell-out by season. For multi-branch retail and pharmacy chains, the next 10% of margin lives in those decisions. We integrate ERPs, ship inventory tools and train ML models that predict store-level product fit.",
+        "challenges":[
+            ("Inventory imbalance","Bestsellers OOS at one branch, dead stock at another — both eat margin.","box"),
+            ("Manual fill-in / sell-out","Operations are spreadsheet-driven and error-prone.","grid"),
+            ("Returns leakage","Reverse logistics costs are invisible until quarterly close.","repeat"),
+            ("SKU mix opacity","Nobody knows which SKUs sell best in which stores or seasons.","chart"),
+            ("Demand prediction","Forecasting is a once-a-quarter exercise instead of an operating loop.","trend"),
+            ("Margin leakage","Store-level P&amp;L is a black box; central can&rsquo;t see what&rsquo;s breaking.","shield"),
+        ],
+        "solutions":[
+            "Digitisation software integrated with your existing ERP",
+            "In-house inventory management tool with branch-level visibility",
+            "Returns dashboards mapping product, branch and reverse-logistics cost",
+            "ML models for store-level product fit and returns prediction",
+            "BI reporting that surfaces the right decisions to the right roles",
+            "Training, SOPs and change-management so adoption sticks",
+        ],
+        "clients":[("Thulasi","thulasipharmacies.lk")],
+        "cases":[("thulasi","Thulasi Pharmacy","Retail & Pharma","80+ branch chain. ERP integration + ML for store fit drove 33% inventory cost cut, 37% returns reduction, 19% revenue lift.","33","%","Inventory cost ↓","37","%","Returns ↓")],
+    },
+    {
+        "slug":"fintech","title":"Fintech",
+        "h1":"Fintech growth inside the regulatory rails.",
+        "lead":"Compliance-aware creative, trust-building funnels and full-funnel media — built for investment, payments and lending categories where trust is the unlock.",
+        "intro_h":"Fintech wins when trust scales with growth.",
+        "intro":"KYC drop-off, compliance review cycles, trust-signal scarcity — fintech CAC is rarely about traffic, it&rsquo;s about conversion. We build creative that respects category constraints, retention CRM that drives habit, and brand-lift studies that grow branded search over time.",
+        "challenges":[
+            ("KYC drop-off","Onboarding funnels lose users at the regulatory steps.","shield"),
+            ("Compliance creative drag","Every ad goes through review cycles that slow the testing cadence.","grid"),
+            ("Trust signal scarcity","First-time users need proof; competitors have it, you&rsquo;re building it.","chart"),
+            ("Habit formation","Retention depends on weekly engagement, not just first purchase.","repeat"),
+            ("Attribution noise","Long consideration windows blur attribution and confuse channel decisions.","trend"),
+            ("Brand search flat","Performance spending grows, brand search doesn&rsquo;t — and CAC keeps rising.","sparkle"),
+        ],
+        "solutions":[
+            "Compliance-aware creative testing framework with pre-approved variations",
+            "KYC and onboarding CRO with friction-point removal",
+            "Retention CRM around habit-forming actions — invest, repay, transact",
+            "Full-funnel media mix with brand-lift studies for branded search growth",
+            "Affiliate and partnership programs with quality-scored payouts",
+            "Long-window attribution modelling tying channel to LTV, not first-touch",
+        ],
+        "clients":[("Groww","groww.in"),("Onecheq","onecheq.com")],
+        "cases":[],
+    },
+    {
+        "slug":"saas-b2b-tech","title":"SaaS & B2B Tech",
+        "h1":"SaaS growth marketing tied to pipeline, not impressions.",
+        "lead":"Account-based marketing, intent-led content engines, lifecycle nurturing and sales-marketing alignment — engineered to MQL→SQL→revenue.",
+        "intro_h":"B2B is a buying-committee game.",
+        "intro":"Long sales cycles, fragmented buying committees, deep ICP nuance — B2B SaaS marketing only pays when it&rsquo;s wired to pipeline. We build the ABM program, the content engine and the attribution stack that gets your CFO behind the spend.",
+        "challenges":[
+            ("Long sales cycles","Pipeline takes months to mature; nobody can prove what worked.","repeat"),
+            ("ICP fit opacity","Marketing fills the funnel; sales rejects it as poor-fit.","grid"),
+            ("Content velocity","Subject-matter content needs to ship weekly, not quarterly.","sparkle"),
+            ("Account-based gap","Top accounts get the same messaging as the long tail.","trend"),
+            ("Low MQL→SQL conversion","Form fills don&rsquo;t become opportunities and nobody knows why.","chart"),
+            ("Attribution &amp; reporting","Marketing claims influence on every deal; sales claims none.","shield"),
+        ],
+        "solutions":[
+            "ABM strategy across tier-1, tier-2 and broad accounts with role-based messaging",
+            "Intent-led content engine that ships weekly across blog, LinkedIn and email",
+            "Lifecycle nurturing journeys mapped to buying-committee personas",
+            "Sales-marketing alignment with shared definitions of MQL, SQL and SAL",
+            "Attribution model linking marketing activity to closed-won revenue",
+            "Conversion-optimised demo flow, free-trial onboarding and pricing-page CRO",
+        ],
+        "clients":[],
+        "cases":[],
+    },
+]
+
+def render_industry_body(ind):
+    icon_svg = {
+        "trend":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
+        "grid":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+        "repeat":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>',
+        "sparkle":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg>',
+        "box":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></svg>',
+        "chart":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+        "shield":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    }
+    challenges_html = "".join(
+        f'<div class="ind-tile"><div class="ind-tile__icon">{icon_svg.get(ic, icon_svg["grid"])}</div><h3>{t}</h3><p>{d}</p></div>'
+        for t,d,ic in ind["challenges"]
+    )
+    solutions_html = "".join(f"<li>{s}</li>" for s in ind["solutions"])
+    clients_html = "".join(
+        f'<div class="logo-cell" title="{n}"><img src="https://www.google.com/s2/favicons?domain={d}&sz=128" alt="{n} logo" loading="lazy" onerror="this.parentElement.classList.add(\'logo-cell--fallback\');this.outerHTML=\'<span>{n}</span>\'" /><span class="logo-cell__name">{n}</span></div>'
+        for n,d in ind["clients"]
+    ) if ind["clients"] else ""
+    cases_html = "".join(
+        f'<a class="case" href="../case-studies/{slug}.html"><div class="case__head"><div class="case__brand">{brand}</div><span class="case__industry">{cat}</span></div><p class="case__desc">{desc}</p><div class="case__metrics"><div class="stat case__metric"><div class="stat__num">{m1v}<span class="unit">{m1u}</span></div><div class="stat__label">{m1l}</div></div><div class="stat case__metric"><div class="stat__num">{m2v}<span class="unit">{m2u}</span></div><div class="stat__label">{m2l}</div></div></div><span class="case__link">Read case study →</span></a>'
+        for slug,brand,cat,desc,m1v,m1u,m1l,m2v,m2u,m2l in ind["cases"]
+    )
+    clients_block = f'<section class="ind-clients"><div class="container"><p class="ind-clients__label">Clients we&rsquo;ve grown in this space</p><div class="logos-grid">{clients_html}</div></div></section>' if clients_html else ''
+    cases_block = f'<section class="section"><div class="container"><div class="sec-head"><div><span class="eyebrow">Success stories</span><h2>Growth marketing case studies</h2></div><p class="lead">When a tile isn&rsquo;t enough, the case study has the strategy, the experiments and the numbers behind the outcome.</p></div><div class="bc-cases">{cases_html}</div></div></section>' if cases_html else ''
+
+    return f"""
+<section class="ind-hero">
+  <div class="container ind-hero__inner">
+    <a href="../case-studies.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← Industries</a>
+    <span class="eyebrow" style="margin-top:24px;justify-content:center;display:inline-flex">{ind["title"]}</span>
+    <h1>{ind["h1"]}</h1>
+    <p class="ind-hero__lead">{ind["lead"]}</p>
+    <div class="ind-hero__cta">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Talk to our experts <span class="btn__arrow">→</span></a>
+      <a href="#solutions" class="btn btn--secondary btn--lg">See our approach</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="ind-intro">
+      <span class="eyebrow" style="justify-content:center">The opportunity</span>
+      <h2>{ind["intro_h"]}</h2>
+      <p>{ind["intro"]}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">Challenges</span><h2 style="max-width:22ch">What we see inside {ind["title"]} businesses</h2></div>
+      <p class="lead">Different brand, same six problems. Here&rsquo;s where the value usually leaks — and where we usually start.</p>
+    </div>
+    <div class="ind-grid">{challenges_html}</div>
+  </div>
+</section>
+
+<section class="section" id="solutions">
+  <div class="container">
+    <div class="ind-solutions">
+      <div>
+        <span class="eyebrow">Our solutions</span>
+        <h2 style="margin-top:14px;max-width:18ch">How we engineer growth in {ind["title"]}</h2>
+        <p class="lead" style="margin-top:18px">Each engagement is scoped to the lever that moves the business — not a fixed scope of deliverables. We pull from any combination of these.</p>
+        <ul>{solutions_html}</ul>
+        <a href="../contact.html" class="btn btn--primary btn--lg" style="margin-top:28px">Connect with us <span class="btn__arrow">→</span></a>
+      </div>
+      <div class="ind-solutions__visual">
+        <h3>By the numbers</h3>
+        <div class="bc-overview__stats">
+          <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands scaled</div></div>
+          <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend managed</div></div>
+          <div class="stat"><div class="stat__num">45<span class="unit">%</span></div><div class="stat__label">Avg ROAS lift</div></div>
+          <div class="stat"><div class="stat__num">5L<span class="unit">+</span></div><div class="stat__label">Users acquired</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{clients_block}
+
+{cases_block}
+
+{CTA_BAND.format(base='../')}
+"""
+
+def build_industries_hub():
+    cards = ''
+    for i in INDUSTRIES:
+        cards += f'<a class="service" href="industries/{i["slug"]}.html"><span class="service__index">→</span><h3 class="service__title">{i["title"]}</h3><p class="service__body">{i["lead"]}</p></a>'
+    body = f"""
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <span class="eyebrow">Industries</span>
+    <h1>Deep operating reps across consumer and tech.</h1>
+    <p class="lead page-hero__lead">Patterns travel across categories; specifics don&rsquo;t. Pick the industry that matches yours to see the levers we pull and the outcomes we&rsquo;ve already shipped.</p>
+  </div>
+</section>
+<section class="section"><div class="container"><div class="services-grid">{cards}</div></div></section>
+{CTA_BAND.format(base='')}
+"""
+    return page("Industries", "Digitaltheory industry expertise across D2C, beauty, edtech, consumer apps, gaming, retail, fintech and B2B SaaS.", body, base="", active="", path="industries.html")
+
 # ====================== ABOUT ======================
 def build_about():
     body = f"""
@@ -1039,14 +1351,22 @@ for s in SERVICES:
 
 write("services.html", build_services_hub())
 write("our-work.html", build_our_work())
+
+# Industry pages
+for ind in INDUSTRIES:
+    ipath = f"industries/{ind['slug']}.html"
+    write(ipath, page(f"{ind['title']} Growth Marketing", ind["lead"], render_industry_body(ind), base="../", active="", path=ipath))
+write("industries.html", build_industries_hub())
+
 write("about.html", build_about())
 write("careers.html", build_careers())
 write("contact.html", build_contact())
 
 # ====================== SITEMAP & ROBOTS ======================
-urls = ["", "services.html", "our-work.html", "case-studies.html", "about.html", "careers.html", "contact.html"]
+urls = ["", "services.html", "our-work.html", "case-studies.html", "industries.html", "about.html", "careers.html", "contact.html"]
 urls += [f"services/{s['slug']}.html" for s in SERVICES]
 urls += [f"case-studies/{c['slug']}.html" for c in CASES]
+urls += [f"industries/{i['slug']}.html" for i in INDUSTRIES]
 
 today = "2026-06-07"  # update on rebuild
 sitemap_entries = []

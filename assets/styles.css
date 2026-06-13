@@ -472,6 +472,35 @@ p{margin:0}
 .work-tile__tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint);padding:5px 10px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);white-space:nowrap}
 .work-tile__link{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-400);margin-top:14px;display:inline-flex;align-items:center;gap:6px}
 .work-empty{padding:var(--space-9) var(--space-6);text-align:center;color:var(--fg-faint);border:1px dashed var(--line-strong);border-radius:var(--radius-lg);font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+/* INDUSTRY PAGES */
+.ind-hero{position:relative;padding-block:clamp(4rem,8vw,7rem) clamp(3rem,5vw,5rem);background:var(--grad-void);border-bottom:1px solid var(--line);text-align:center;overflow:hidden}
+.ind-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 0%,rgba(140,198,63,.12),transparent 60%);pointer-events:none}
+.ind-hero__inner{position:relative;max-width:880px;margin:0 auto}
+.ind-hero h1{font-size:clamp(2.4rem,1.8vw + 2rem,4.6rem);line-height:1.05;letter-spacing:-.025em;margin-top:var(--space-4);max-width:22ch;margin-inline:auto}
+.ind-hero__lead{font-size:var(--fs-lead);color:var(--fg-muted);margin:var(--space-5) auto 0;max-width:60ch;line-height:1.6}
+.ind-hero__cta{margin-top:var(--space-7);display:flex;gap:var(--space-3);flex-wrap:wrap;justify-content:center}
+.ind-intro{max-width:880px;margin:0 auto;text-align:center}
+.ind-intro h2{max-width:20ch;margin:14px auto 0}
+.ind-intro p{margin-top:var(--space-5);font-size:var(--fs-lead);line-height:1.65;color:var(--fg-muted)}
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+@media(max-width:960px){.ind-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ind-grid{grid-template-columns:1fr}}
+.ind-tile{padding:var(--space-7) var(--space-6);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);display:flex;flex-direction:column;gap:14px;transition:border-color var(--dur-base) var(--ease-out)}
+.ind-tile:hover{border-color:var(--lime-400)}
+.ind-tile__icon{width:48px;height:48px;border-radius:12px;background:rgba(140,198,63,.08);border:1px solid rgba(140,198,63,.25);display:flex;align-items:center;justify-content:center;color:var(--lime-400)}
+.ind-tile__icon svg{width:24px;height:24px}
+.ind-tile h3{font-size:1.15rem;margin:0;line-height:1.25}
+.ind-tile p{color:var(--fg-muted);font-size:14.5px;line-height:1.55}
+.ind-solutions{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7);align-items:start}
+@media(max-width:880px){.ind-solutions{grid-template-columns:1fr;gap:32px}}
+.ind-solutions ul{list-style:none;margin:var(--space-5) 0 0;padding:0;display:grid;gap:14px}
+.ind-solutions li{padding:18px 22px 18px 56px;background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-md);position:relative;color:var(--fg);font-size:15px;line-height:1.5;transition:border-color var(--dur-base) var(--ease-out)}
+.ind-solutions li:hover{border-color:var(--lime-400)}
+.ind-solutions li::before{content:"→";position:absolute;left:22px;top:18px;color:var(--lime-400);font-weight:700;font-size:16px}
+.ind-solutions__visual{padding:var(--space-7);background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-lg)}
+.ind-solutions__visual h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);font-weight:500;margin-bottom:24px}
+.ind-clients{background:var(--ink-1000);border-block:1px solid var(--line);padding-block:var(--space-9)}
+.ind-clients__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-faint);text-align:center;margin-bottom:var(--space-6)}
 /* CAREERS */
 .role{padding:var(--space-6);border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-card);display:grid;grid-template-columns:1.2fr .8fr .8fr auto;gap:var(--space-4);align-items:center;transition:border-color var(--dur-base) var(--ease-out)}
 .role:hover{border-color:var(--lime-400)}
