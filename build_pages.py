@@ -418,6 +418,138 @@ def render_service_body(s):
 {CTA_BAND.format(base='../')}
 """
 
+def render_business_consulting_body():
+    pillars = [
+        ("01","Growth Strategy","Diagnose where growth is leaking — channel, pricing, portfolio or funnel — and build the operating plan to close it.",["Channel mix & expansion","Pricing & discount strategy","Funnel diagnostics","Quarterly operating cadence"]),
+        ("02","New Market Entry","Validate adjacent geographies and categories before you spend. Pilot first, scale on signal.",["Country &amp; city prioritisation","Category adjacency mapping","Pilot design &amp; budget","Localisation playbook"]),
+        ("03","Unit Economics &amp; P&amp;L","Rebuild contribution margin from the SKU up — CM1, CM2, CM3 — and tie every decision back to it.",["COGS &amp; supplier strategy","Cohort LTV modelling","Blended &amp; channel CAC","Working capital optimisation"]),
+        ("04","Portfolio &amp; NPD","Score your portfolio on margin, velocity and white-space — and ship the next launch with a plan, not a hope.",["Portfolio rationalisation","SKU prioritisation","NPD ideation &amp; gating","Launch plan &amp; tracking"]),
+        ("05","Omnichannel &amp; D2C","Solve the tension between marketplaces, retail and D2C. Each channel earns its margin or it goes.",["Marketplace vs D2C mix","Pricing parity &amp; MAP","D2C unit economics","Quick-commerce strategy"]),
+        ("06","M&amp;A &amp; Diligence","Commercial diligence, target scanning and post-deal integration — built on the same operating chassis we use day-to-day.",["Buy-side commercial DD","Target scanning","Synergy modelling","Post-deal integration"]),
+    ]
+    pillars_html = "".join(
+        f'<a class="bc-pillar" href="../contact.html"><span class="bc-pillar__num">{n}</span><h3>{t}</h3><p>{d}</p><ul>'
+        + "".join(f"<li>{x}</li>" for x in items)
+        + '</ul></a>'
+        for n,t,d,items in pillars
+    )
+    sectors = ["D2C &amp; E-commerce","Beauty &amp; Personal Care","Fashion &amp; Apparel","Food &amp; Beverages","Consumer Electronics","Consumer Health","Edtech","Retail Chains"]
+    sectors_html = "".join(f'<span class="bc-sector">{s}</span>' for s in sectors)
+    method = [
+        ("01","Diagnose","Two weeks. We sit inside your data — P&amp;L, CRM, marketing platforms, inventory — and write back the three problems that actually matter."),
+        ("02","Hypothesise","One week. A small set of bets, each tied to a target metric. No 40-page deck — a one-page memo and a working financial model."),
+        ("03","Run the play","Six to twelve weeks. We run the experiments alongside your team — pricing tests, channel pivots, NPD launches, inventory resets."),
+        ("04","Operate","Quarterly. The model updates with reality. The wins compound. The losses get cut. The cadence becomes how you run."),
+    ]
+    method_html = "".join(f'<div class="bc-step"><div class="bc-step__num">{n}</div><h4>{t}</h4><p>{d}</p></div>' for n,t,d in method)
+    principles = [
+        ("Operators first","Every recommendation comes from someone who has shipped it before — not a framework borrowed from a textbook."),
+        ("Numbers, not narratives","If a strategy can&rsquo;t be measured on the P&amp;L, it isn&rsquo;t one. Every workstream owns a metric."),
+        ("Skin in the outcome","Engagements are scoped around the result, not the hours. We win when you do — that&rsquo;s the only deal worth having."),
+    ]
+    principles_html = "".join(f'<div class="bc-principle"><h4>{t}</h4><p>{d}</p></div>' for t,d in principles)
+
+    return f"""
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <a href="../services.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All services</a>
+    <span class="eyebrow" style="margin-top:24px;display:inline-flex">Service</span>
+    <h1>Business Consulting</h1>
+    <p class="lead page-hero__lead">Strategic counsel grounded in your P&amp;L. We solve for growth, margin and market entry — and stay long enough to ship the recommendations, not just write them.</p>
+    <div class="page-hero__cta">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Talk to us <span class="btn__arrow">→</span></a>
+      <a href="../case-studies/nutriglow.html" class="btn btn--secondary btn--lg">See case study</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">The opportunity</span>
+        <h2 style="max-width:22ch">Consumer growth is harder, faster and more expensive than ever.</h2>
+      </div>
+      <p class="lead">Channels fragment. Customer acquisition gets pricier each quarter. Retail and marketplaces fight D2C for the same shopper. We help leadership teams find the wedge that still compounds — and the discipline to run it.</p>
+    </div>
+    <div class="bc-stats">
+      <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands advised</div></div>
+      <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend modelled</div></div>
+      <div class="stat"><div class="stat__num">8</div><div class="stat__label">Consumer sub-sectors</div></div>
+      <div class="stat"><div class="stat__num">3<span class="unit">x</span></div><div class="stat__label">Avg profit improvement</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">Our consulting services</span><h2 style="max-width:20ch">Six pillars, one operating model.</h2></div>
+      <p class="lead">Each engagement is scoped to the lever that moves the business — not a fixed scope of deliverables. We pull from any combination of these six.</p>
+    </div>
+    <div class="bc-pillars">{pillars_html}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">Sectors we serve</span><h2 style="max-width:22ch">Deep operating reps across consumer.</h2></div>
+      <p class="lead">We&rsquo;ve run pricing, channel and NPD bets across most consumer verticals in India and SEA. Patterns travel; specifics don&rsquo;t. Both matter.</p>
+    </div>
+    <div class="bc-sectors">{sectors_html}</div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">How we work</span><h2 style="max-width:20ch">Strategy to execution, in one engagement.</h2></div>
+      <p class="lead">No slide-only deliverables. Every phase ships with a working artefact — a model, a memo, a tested campaign or a launched SKU.</p>
+    </div>
+    <div class="bc-method">{method_html}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">What we believe</span><h2>Principles we don&rsquo;t flex on</h2></div>
+    </div>
+    <div class="bc-principles">{principles_html}</div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="solution__intro">
+      <div>
+        <span class="eyebrow">Featured outcome</span>
+        <h2 style="margin-top:12px;max-width:20ch">Nutriglow: pricing, sourcing and channel-mix turnaround.</h2>
+        <p class="lead" style="margin-top:16px">A 200+ SKU beauty brand was bleeding 17% profit YoY in a hyper-competitive market. We rebuilt the mix — 60/40 marketplace vs D2C — restructured Amazon ad architecture, optimised sourcing for a 40% COGS cut, and shipped a full-funnel media plan. Result: 35% QoQ revenue growth, 14% CM3 improvement, 57% ROAS lift.</p>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="../case-studies/nutriglow.html" class="btn btn--secondary">Read the case study <span class="btn__arrow">→</span></a>
+          <a href="../case-studies/celio.html" class="btn btn--ghost">Celio turnaround →</a>
+        </div>
+      </div>
+      <div>
+        <div class="case-detail__panel">
+          <h3>Engagement shapes</h3>
+          <ul>
+            <li><b>Diagnostic sprint</b> — 4-week audit of P&amp;L, channels and funnel, ending in a prioritised one-page plan.</li>
+            <li><b>Strategy &amp; turnaround</b> — 12-week engagement to rebuild pricing, mix and ops alongside your team.</li>
+            <li><b>Market-entry pilot</b> — 8 weeks from country prioritisation to live pilot campaigns and a go/no-go memo.</li>
+            <li><b>Retained advisory</b> — quarterly operating reviews and on-call senior counsel for your leadership team.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{CTA_BAND.format(base='../')}
+"""
+
 def build_services_hub():
     cards = ''
     for s in SERVICES:
@@ -644,9 +776,10 @@ write("case-studies.html", build_cases_hub())
 
 # Services
 for s in SERVICES:
-    body = render_service_body(s)
+    body = render_business_consulting_body() if s["slug"] == "business-consulting" else render_service_body(s)
     path = f"services/{s['slug']}.html"
-    write(path, page(s["title"], f"{s['title']} services by Digitaltheory. {s['hero']}", body, base="../", active="services", path=path))
+    desc = "Strategy, growth, unit economics, market entry, NPD, M&A diligence — consulting that ships, not just advises." if s["slug"] == "business-consulting" else f"{s['title']} services by Digitaltheory. {s['hero']}"
+    write(path, page(s["title"], desc, body, base="../", active="services", path=path))
 
 write("services.html", build_services_hub())
 write("about.html", build_about())
