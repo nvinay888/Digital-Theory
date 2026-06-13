@@ -581,31 +581,31 @@ def build_services_hub():
 # ====================== OUR WORK ======================
 WORKS = [
     # D2C / E-commerce
-    {"brand":"Celio","industry":"D2C / E-commerce","tags":["Performance","D2C","Retention"],"desc":"Heritage French menswear brand. Rebuilt paid search, paid social and D2C ops — 45% ROAS lift, 23% CM3 improvement.","grad":"linear-gradient(135deg,#1B2A4E,#0E1A36)","initials":"Cl","case":"celio"},
-    {"brand":"Pepperfry","industry":"D2C / E-commerce","tags":["Performance","Marketplace"],"desc":"Furniture &amp; home D2C. Scaled performance media across high-AOV categories and marketplace listings.","grad":"linear-gradient(135deg,#F26430,#A6391C)","initials":"Pf"},
-    {"brand":"Chumbak","industry":"D2C / E-commerce","tags":["Performance","Operations","NPD"],"desc":"Lifestyle D2C brand. 3x profit improvement via NPD, operations, website maintenance and performance marketing.","grad":"linear-gradient(135deg,#E8336B,#992042)","initials":"Cm"},
-    {"brand":"Meatton","industry":"D2C / E-commerce","tags":["Performance","Local SEO"],"desc":"D2C meat &amp; protein brand. Scaled cohort-based acquisition with strong unit economics across paid + organic.","grad":"linear-gradient(135deg,#E84A1C,#A12A0F)","initials":"Mt"},
-    {"brand":"Ira Soleil","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium ethnic wear D2C. Brand-led acquisition with retention loops tied to occasion and seasonality.","grad":"linear-gradient(135deg,#3A3A3A,#1B1B1B)","initials":"Is"},
-    {"brand":"put-chi","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium kids &amp; family D2C. Built brand storytelling and performance funnel from scratch.","grad":"linear-gradient(135deg,#7BA89A,#4F6E60)","initials":"Pc"},
-    {"brand":"august","industry":"D2C / E-commerce","tags":["Performance","CRM"],"desc":"Wellness D2C brand. Drove acquisition with creative testing framework and lifecycle CRM nudges.","grad":"linear-gradient(135deg,#C9A87C,#806B4E)","initials":"Au"},
+    {"brand":"Celio","domain":"celio.in","industry":"D2C / E-commerce","tags":["Performance","D2C","Retention"],"desc":"Heritage French menswear brand. Rebuilt paid search, paid social and D2C ops — 45% ROAS lift, 23% CM3 improvement.","initials":"Cl","case":"celio"},
+    {"brand":"Pepperfry","domain":"pepperfry.com","industry":"D2C / E-commerce","tags":["Performance","Marketplace"],"desc":"Furniture &amp; home D2C. Scaled performance media across high-AOV categories and marketplace listings.","initials":"Pf"},
+    {"brand":"Chumbak","domain":"chumbak.com","industry":"D2C / E-commerce","tags":["Performance","Operations","NPD"],"desc":"Lifestyle D2C brand. 3x profit improvement via NPD, operations, website maintenance and performance marketing.","initials":"Cm"},
+    {"brand":"Meatton","domain":"meatton.com","industry":"D2C / E-commerce","tags":["Performance","Local SEO"],"desc":"D2C meat &amp; protein brand. Scaled cohort-based acquisition with strong unit economics across paid + organic.","initials":"Mt"},
+    {"brand":"Ira Soleil","domain":"irasoleil.com","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium ethnic wear D2C. Brand-led acquisition with retention loops tied to occasion and seasonality.","initials":"Is"},
+    {"brand":"put-chi","domain":"put-chi.com","industry":"D2C / E-commerce","tags":["Branding","Performance"],"desc":"Premium kids &amp; family D2C. Built brand storytelling and performance funnel from scratch.","initials":"Pc"},
+    {"brand":"august","domain":"itsaugust.co","industry":"D2C / E-commerce","tags":["Performance","CRM"],"desc":"Wellness D2C brand. Drove acquisition with creative testing framework and lifecycle CRM nudges.","initials":"Au"},
     # Beauty & Personal Care
-    {"brand":"Nutriglow","industry":"Beauty & Personal Care","tags":["Performance","Consulting","Marketplace"],"desc":"200+ SKU beauty brand. Pricing, sourcing &amp; channel-mix turnaround drove 35% QoQ revenue growth.","grad":"linear-gradient(135deg,#1F3A8A,#0E1F4F)","initials":"Ng","case":"nutriglow"},
-    {"brand":"svaa.life","industry":"Beauty & Personal Care","tags":["Branding","Performance"],"desc":"Wellness &amp; personal care D2C. Identity, narrative and full-funnel media built to compound.","grad":"linear-gradient(135deg,#A8B59E,#6F7D67)","initials":"Sv"},
+    {"brand":"Nutriglow","domain":"nutriglowcosmetics.com","industry":"Beauty & Personal Care","tags":["Performance","Consulting","Marketplace"],"desc":"200+ SKU beauty brand. Pricing, sourcing &amp; channel-mix turnaround drove 35% QoQ revenue growth.","initials":"Ng","case":"nutriglow"},
+    {"brand":"svaa.life","domain":"svaa.life","industry":"Beauty & Personal Care","tags":["Branding","Performance"],"desc":"Wellness &amp; personal care D2C. Identity, narrative and full-funnel media built to compound.","initials":"Sv"},
     # Edtech
-    {"brand":"Codingal","industry":"Edtech","tags":["Performance","CRO","International"],"desc":"K-12 coding platform. International market entry with 70% lower CAC; SQL share lifted from 30% to 47%.","grad":"linear-gradient(135deg,#FF6B35,#B44318)","initials":"Cd","case":"codingal"},
-    {"brand":"upGrad","industry":"Edtech","tags":["Performance","SEO"],"desc":"Higher-ed platform. Performance + SEO playbooks across multiple verticals to drive qualified inquiries.","grad":"linear-gradient(135deg,#FF4D2D,#A82F18)","initials":"uG"},
-    {"brand":"Eurokids","industry":"Edtech","tags":["Performance","Local SEO"],"desc":"Pre-school chain. Geo-fenced acquisition + admission funnel optimisation across 100+ centres.","grad":"linear-gradient(135deg,#2E62C8,#1A3D7E)","initials":"Ek"},
-    {"brand":"School Basix","industry":"Edtech","tags":["Branding","Web"],"desc":"K-12 school operating platform. Identity system + web build for category positioning and lead capture.","grad":"linear-gradient(135deg,#F2C744,#9A7E1F)","initials":"Sb"},
+    {"brand":"Codingal","domain":"codingal.com","industry":"Edtech","tags":["Performance","CRO","International"],"desc":"K-12 coding platform. International market entry with 70% lower CAC; SQL share lifted from 30% to 47%.","initials":"Cd","case":"codingal"},
+    {"brand":"upGrad","domain":"upgrad.com","industry":"Edtech","tags":["Performance","SEO"],"desc":"Higher-ed platform. Performance + SEO playbooks across multiple verticals to drive qualified inquiries.","initials":"uG"},
+    {"brand":"Eurokids","domain":"eurokidsindia.com","industry":"Edtech","tags":["Performance","Local SEO"],"desc":"Pre-school chain. Geo-fenced acquisition + admission funnel optimisation across 100+ centres.","initials":"Ek"},
+    {"brand":"School Basix","domain":"schoolbasix.com","industry":"Edtech","tags":["Branding","Web"],"desc":"K-12 school operating platform. Identity system + web build for category positioning and lead capture.","initials":"Sb"},
     # Consumer Apps & Services
-    {"brand":"Laundrokart","industry":"Consumer Apps","tags":["App","CRM","Loyalty"],"desc":"12-year-old laundry app. RFM-led CRM + loyalty program lifted retention 17% and LTV 23%.","grad":"linear-gradient(135deg,#7B3FA8,#46225F)","initials":"Lk","case":"laundrokart"},
-    {"brand":"Evolutions Fitness","industry":"Consumer Apps","tags":["Branding","Performance"],"desc":"Fitness club chain. Local acquisition engine + retention program for member LTV uplift.","grad":"linear-gradient(135deg,#191919,#0A0A0A)","initials":"Ev"},
+    {"brand":"Laundrokart","domain":"laundrokart.com","industry":"Consumer Apps","tags":["App","CRM","Loyalty"],"desc":"12-year-old laundry app. RFM-led CRM + loyalty program lifted retention 17% and LTV 23%.","initials":"Lk","case":"laundrokart"},
+    {"brand":"Evolutions Fitness","domain":"evolutionsfitness.in","industry":"Consumer Apps","tags":["Branding","Performance"],"desc":"Fitness club chain. Local acquisition engine + retention program for member LTV uplift.","initials":"Ev"},
     # Gaming
-    {"brand":"Pocket52","industry":"Gaming","tags":["App","ASO","CRM"],"desc":"Real-money gaming app. Channel scoring + ASO program cut CAC 45% and lifted organic installs 20%.","grad":"linear-gradient(135deg,#0F6E3D,#063A1F)","initials":"P5","case":"pocket52"},
+    {"brand":"Pocket52","domain":"pocket52.com","industry":"Gaming","tags":["App","ASO","CRM"],"desc":"Real-money gaming app. Channel scoring + ASO program cut CAC 45% and lifted organic installs 20%.","initials":"P5","case":"pocket52"},
     # Retail / Pharma
-    {"brand":"Thulasi Pharmacy","industry":"Retail & Pharma","tags":["Digital Transformation","ML","Operations"],"desc":"80+ branch pharmacy chain. ERP integration + ML for store-level product fit drove margin and sell-through.","grad":"linear-gradient(135deg,#FFE12C,#A8901A)","initials":"Tp","case":"thulasi"},
+    {"brand":"Thulasi Pharmacy","domain":"thulasipharmacies.lk","industry":"Retail & Pharma","tags":["Digital Transformation","ML","Operations"],"desc":"80+ branch pharmacy chain. ERP integration + ML for store-level product fit drove margin and sell-through.","initials":"Tp","case":"thulasi"},
     # Fintech
-    {"brand":"Groww","industry":"Fintech","tags":["Performance","Brand Lift"],"desc":"Investment platform. Brand lift &amp; performance media collaboration for user acquisition.","grad":"linear-gradient(135deg,#00D09C,#007A5C)","initials":"Gr"},
-    {"brand":"Onecheq","industry":"Fintech","tags":["Branding","Web"],"desc":"Fintech startup. Identity, narrative and go-to-market positioning for category creation.","grad":"linear-gradient(135deg,#4A4A4A,#1F1F1F)","initials":"Oc"},
+    {"brand":"Groww","domain":"groww.in","industry":"Fintech","tags":["Performance","Brand Lift"],"desc":"Investment platform. Brand lift &amp; performance media collaboration for user acquisition.","initials":"Gr"},
+    {"brand":"Onecheq","domain":"onecheq.com","industry":"Fintech","tags":["Branding","Web"],"desc":"Fintech startup. Identity, narrative and go-to-market positioning for category creation.","initials":"Oc"},
 ]
 
 INDUSTRY_ORDER = ["All","D2C / E-commerce","Beauty & Personal Care","Edtech","Consumer Apps","Gaming","Retail & Pharma","Fintech"]
@@ -640,7 +640,12 @@ def build_our_work():
         tag_class = "a" if w.get("case") else "div"
         tags_html = "".join(f'<span class="work-tile__tag">{t}</span>' for t in w["tags"])
         return f'''<{tag_class} class="work-tile" data-industry="{w["industry"]}" {f'href="{href}"' if w.get("case") else ''}>
-          <div class="work-tile__cover" style="background:{w["grad"]}"><span class="work-tile__cover-text">{w["initials"]}</span></div>
+          <div class="work-tile__cover">
+            <div class="work-tile__logo">
+              <img src="https://www.google.com/s2/favicons?domain={w["domain"]}&sz=128" alt="{w["brand"]} logo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+              <span class="work-tile__initials" style="display:none">{w["initials"]}</span>
+            </div>
+          </div>
           <div class="work-tile__body">
             <div class="work-tile__meta">{w["industry"]}</div>
             <div class="work-tile__brand">{w["brand"]}</div>
