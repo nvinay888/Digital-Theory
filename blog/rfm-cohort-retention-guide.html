@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why RFM still wins: a practical guide to cohort-based retention — Digitaltheory</title>
+<meta name="description" content="Predictive ML and real-time personalisation are great. None of them work if your customer base isn't first segmented into cohorts you can act on weekly." />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://digitaltheory.in/blog/rfm-cohort-retention-guide.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digitaltheory" />
+<meta property="og:title" content="Why RFM still wins: a practical guide to cohort-based retention — Digitaltheory" />
+<meta property="og:description" content="Predictive ML and real-time personalisation are great. None of them work if your customer base isn't first segmented into cohorts you can act on weekly." />
+<meta property="og:url" content="https://digitaltheory.in/blog/rfm-cohort-retention-guide.html" />
+<meta property="og:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why RFM still wins: a practical guide to cohort-based retention — Digitaltheory" />
+<meta name="twitter:description" content="Predictive ML and real-time personalisation are great. None of them work if your customer base isn't first segmented into cohorts you can act on weekly." />
+<meta name="twitter:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css" />
+<script>window.DT_BASE = '../'; window.DT_PAGE = '';</script>
+</head>
+<body>
+<div class="page">
+<div id="dt-nav"></div>
+
+<section class="page-hero" style="padding-block:clamp(2.5rem,5vw,4rem) 0;background:var(--ink-1000)">
+  <div class="container">
+    <a href="../blog.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All blogs</a>
+  </div>
+</section>
+<article class="container">
+  <div class="post">
+    <header class="post__head">
+      <span class="post__cat">CRM & Retention</span>
+      <h1 class="post__title">Why RFM still wins: a practical guide to cohort-based retention</h1>
+      <div class="post__meta">
+        <span>By Digitaltheory</span>
+        <span>8 Apr 2026</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+    <div class="post__body">
+<p class="post__lead">When a consumer business has years of transaction data and unit economics that are quietly degrading, the answer is rarely a new acquisition channel. It is almost always inside the data already sitting in the warehouse. Here is the cleanest first cut.</p>
+
+<h2>Why RFM still wins</h2>
+<p>Retention frameworks come and go. Predictive ML, propensity scoring, real-time personalisation engines &mdash; all worth shipping, none of them mean anything if the customer base isn't first segmented into cohorts that can be acted on weekly. RFM (recency, frequency, monetary) is still the cleanest first cut.</p>
+<p>The discipline it forces is useful: for each customer, compute when they last bought, how often they buy and how much they spend. Score each dimension on a 1&ndash;5 scale, and bucket the base into 12&ndash;15 cohort archetypes (champion, loyal, at-risk, hibernating, lost, new high-value, etc.). Then decide what action belongs to each.</p>
+
+<h2>What the cohorts usually tell you</h2>
+<p>The story RFM tells in most consumer transaction histories is consistent enough to be predictable:</p>
+<ul>
+  <li><strong>The high-value cohort is tiny but compounding.</strong> The top 5&ndash;10% of customers typically drive 30&ndash;40% of revenue &mdash; and crucially, they're still active, still buying, but receiving the same generic comms as the bottom 70%.</li>
+  <li><strong>Win-back economics are inverted.</strong> The cost to reactivate a churned customer (via discount + push + WhatsApp) is usually lower than the cost to acquire a fresh install. Most brands just aren't doing it systematically.</li>
+  <li><strong>Day-30 retention is the kill metric.</strong> Customers who come back inside 30 days of first order tend to have a 3&ndash;5x higher 12-month LTV than those who come back at day 30&ndash;60. Anything after day 60 is effectively a lost customer, regardless of how much discount is thrown at it.</li>
+  <li><strong>Push fatigue is real.</strong> Notification open rates fall off a cliff past 4 sends per week. WhatsApp tolerates more because the format is different and the user opted in.</li>
+</ul>
+
+<h2>The four workstreams of a proper RFM-led rebuild</h2>
+
+<h3>Cohort-based comms</h3>
+<p>Twelve cohorts, each with their own message frequency, channel mix and offer structure. Champions get refill nudges and early-access drops. At-risk customers get win-back triggers tied to the day-30 cliff. Hibernating customers get one big push and then go quiet. Lost customers get a final discount and then suppression.</p>
+
+<h3>Day-30 trigger journeys</h3>
+<p>The single highest-impact change. A behavioural trigger fires if a first-time customer doesn't transact again within 25 days. The journey is push + WhatsApp + email + an in-app banner, sequenced over 5 days with declining intensity. Day-30 retention improves measurably and 12-month LTV moves with it.</p>
+
+<h3>A loyalty program designed for the top decile</h3>
+<p>A tiered loyalty program designed explicitly for the high-value cohort that the data surfaces. The tiers should come with bookable-priority service slots, early access or category-relevant perks &mdash; not just discounts. A customer who is already paying full price values bookability more than 5% off. Programs designed this way tend to contribute a small but pure-margin and self-reinforcing percentage of overall revenue.</p>
+
+<h3>Win-back coupons for the lost-but-recoverable</h3>
+<p>Targeted discounts to a specific cohort &mdash; defined by their RFM bucket &mdash; rather than blasted to the full file. The economics work because the offer doesn't reach active customers who would have bought anyway. The discount is a recovery tool, not a sales tool.</p>
+
+<h2>The discipline most retention programs lack</h2>
+<p>If a business has more than two years of transaction data, RFM gives 80% of the ML value at 5% of the effort. The interesting bit isn't the segmentation &mdash; segmentation is easy. The interesting bit is what action gets assigned to each cohort, and the discipline of suppressing comms to cohorts where there's no action that pays back. Half of every retention program is improved by sending less, not more.</p>
+</div>
+  </div>
+</article>
+
+<section class="section cta-final">
+  <div class="container container--narrow">
+    <span class="eyebrow">Come, say hello</span>
+    <h2>Ready to turn data into <span class="accent">durable growth?</span></h2>
+    <p class="lead">Tell us where you want to go. We'll bring the strategy, the stack and the creative to get you there.</p>
+    <div class="cta-final__row">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Book a growth consult <span class="btn__arrow">→</span></a>
+      <a href="../case-studies.html" class="btn btn--secondary btn--lg">See our work</a>
+    </div>
+  </div>
+</section>
+
+
+<div id="dt-footer"></div>
+</div>
+<script src="../assets/shared.js"></script>
+</body>
+</html>
