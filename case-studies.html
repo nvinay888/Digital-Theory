@@ -39,8 +39,9 @@
 
 <section class="section cases">
   <div class="container">
-    <div class="cases-grid">
-        <a class="case" href="case-studies/celio.html">
+    <div class="work-tabs" id="caseTabs"><button class="work-tab is-active" data-tab="All">All <span class="work-tab__count">(6)</span></button><button class="work-tab " data-tab="D2C / E-commerce">D2C / E-commerce <span class="work-tab__count">(1)</span></button><button class="work-tab " data-tab="Beauty & Personal Care">Beauty & Personal Care <span class="work-tab__count">(1)</span></button><button class="work-tab " data-tab="Edtech">Edtech <span class="work-tab__count">(1)</span></button><button class="work-tab " data-tab="Consumer Apps">Consumer Apps <span class="work-tab__count">(1)</span></button><button class="work-tab " data-tab="Gaming">Gaming <span class="work-tab__count">(1)</span></button><button class="work-tab " data-tab="Retail & Pharma">Retail & Pharma <span class="work-tab__count">(1)</span></button></div>
+    <div class="cases-grid" id="caseGrid">
+        <a class="case" data-cat="D2C / E-commerce" href="case-studies/celio.html">
           <div class="case__head"><div class="case__brand">Celio</div><span class="case__industry">D2C Menswear</span></div>
           <p class="case__desc">A French menswear heritage brand, scaled across D2C, marketplaces and retail with a unified growth engine.</p>
           <div class="case__budget">Yearly Budget ₹2 Cr</div>
@@ -51,7 +52,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a>
-        <a class="case" href="case-studies/nutriglow.html">
+        <a class="case" data-cat="Beauty & Personal Care" href="case-studies/nutriglow.html">
           <div class="case__head"><div class="case__brand">Nutriglow</div><span class="case__industry">Beauty & Personal Care</span></div>
           <p class="case__desc">A 200+ SKU beauty and personal care brand turned around from YoY decline to compounding growth.</p>
           <div class="case__budget">Yearly Budget ₹1 Cr</div>
@@ -62,7 +63,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a>
-        <a class="case" href="case-studies/codingal.html">
+        <a class="case" data-cat="Edtech" href="case-studies/codingal.html">
           <div class="case__head"><div class="case__brand">Codingal</div><span class="case__industry">K-12 Edtech</span></div>
           <p class="case__desc">Scaled a K-12 coding platform to 5L+ students with 10x revenue via international market entry.</p>
           <div class="case__budget">Yearly Budget ₹1 Cr</div>
@@ -73,7 +74,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a>
-        <a class="case" href="case-studies/laundrokart.html">
+        <a class="case" data-cat="Consumer Apps" href="case-studies/laundrokart.html">
           <div class="case__head"><div class="case__brand">Laundrokart</div><span class="case__industry">Consumer App (Services)</span></div>
           <p class="case__desc">Turned a 12-year-old laundry app from declining LTV into a retention-led growth engine.</p>
           <div class="case__budget">Yearly Budget ₹2 Cr</div>
@@ -84,7 +85,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a>
-        <a class="case" href="case-studies/pocket52.html">
+        <a class="case" data-cat="Gaming" href="case-studies/pocket52.html">
           <div class="case__head"><div class="case__brand">Pocket52</div><span class="case__industry">Real-money Gaming</span></div>
           <p class="case__desc">One of India's fastest 1M-download gaming apps — CAC cut, LTV lifted and organic ranking improved.</p>
           <div class="case__budget">Yearly Budget ₹3 Cr</div>
@@ -95,7 +96,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a>
-        <a class="case" href="case-studies/thulasi.html">
+        <a class="case" data-cat="Retail & Pharma" href="case-studies/thulasi.html">
           <div class="case__head"><div class="case__brand">Thulasi Pharmacy</div><span class="case__industry">Retail Digital Transformation</span></div>
           <p class="case__desc">Digitised store operations for a South Indian pharmacy chain — inventory, returns and product mix solved end-to-end.</p>
           <div class="case__budget">80+ branches · ₹750 Cr turnover</div>
@@ -106,6 +107,7 @@
           </div>
           <span class="case__link">Read case study →</span>
         </a></div>
+    <div class="work-empty" id="caseEmpty" style="display:none">No engagements in this category yet — talk to us about being the first.</div>
   </div>
 </section>
 
@@ -122,6 +124,25 @@
   </div>
 </section>
 
+
+<script>
+(function(){
+  const tabs = document.querySelectorAll('#caseTabs .work-tab');
+  const cards = document.querySelectorAll('#caseGrid .case');
+  const empty = document.getElementById('caseEmpty');
+  tabs.forEach(b => b.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.toggle('is-active', x === b));
+    const cat = b.dataset.tab;
+    let visible = 0;
+    cards.forEach(c => {
+      const match = cat === 'All' || c.dataset.cat === cat;
+      c.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }));
+})();
+</script>
 
 <div id="dt-footer"></div>
 </div>

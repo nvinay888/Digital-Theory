@@ -227,11 +227,30 @@ def render_case_body(c, prev_next):
 
 # Build case studies hub
 def build_cases_hub():
+    # Map each case's `industry` string to a tab category
+    CAT_MAP = {
+        "D2C Menswear":"D2C / E-commerce",
+        "Beauty & Personal Care":"Beauty & Personal Care",
+        "K-12 Edtech":"Edtech",
+        "Consumer App (Services)":"Consumer Apps",
+        "Real-money Gaming":"Gaming",
+        "Retail Digital Transformation":"Retail & Pharma",
+    }
+    CAT_ORDER = ["All","D2C / E-commerce","Beauty & Personal Care","Edtech","Consumer Apps","Gaming","Retail & Pharma"]
+    # Tag each case
+    for c in CASES:
+        c["_cat"] = CAT_MAP.get(c["industry"], "Other")
+    counts = {cat: sum(1 for c in CASES if c["_cat"]==cat) for cat in CAT_ORDER[1:]}
+    counts["All"] = len(CASES)
+    tabs_html = "".join(
+        f'<button class="work-tab {"is-active" if cat=="All" else ""}" data-tab="{cat}">{cat} <span class="work-tab__count">({counts[cat]})</span></button>'
+        for cat in CAT_ORDER if counts.get(cat,0)>0 or cat=="All"
+    )
     cards = ''
     for c in CASES:
         m = c["metrics"]
         cards += f'''
-        <a class="case" href="case-studies/{c["slug"]}.html">
+        <a class="case" data-cat="{c["_cat"]}" href="case-studies/{c["slug"]}.html">
           <div class="case__head"><div class="case__brand">{c["brand"]}</div><span class="case__industry">{c["industry"]}</span></div>
           <p class="case__desc">{c["hero"]}</p>
           <div class="case__budget">{c["budget"]}</div>
@@ -253,11 +272,32 @@ def build_cases_hub():
 
 <section class="section cases">
   <div class="container">
-    <div class="cases-grid">{cards}</div>
+    <div class="work-tabs" id="caseTabs">{tabs_html}</div>
+    <div class="cases-grid" id="caseGrid">{cards}</div>
+    <div class="work-empty" id="caseEmpty" style="display:none">No engagements in this category yet — talk to us about being the first.</div>
   </div>
 </section>
 
 {CTA_BAND.format(base='')}
+
+<script>
+(function(){{
+  const tabs = document.querySelectorAll('#caseTabs .work-tab');
+  const cards = document.querySelectorAll('#caseGrid .case');
+  const empty = document.getElementById('caseEmpty');
+  tabs.forEach(b => b.addEventListener('click', () => {{
+    tabs.forEach(x => x.classList.toggle('is-active', x === b));
+    const cat = b.dataset.tab;
+    let visible = 0;
+    cards.forEach(c => {{
+      const match = cat === 'All' || c.dataset.cat === cat;
+      c.style.display = match ? '' : 'none';
+      if (match) visible++;
+    }});
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }}));
+}})();
+</script>
 """
     return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail digital transformation. Real numbers from real engagements.", body, base="", active="cases", path="case-studies.html")
 
