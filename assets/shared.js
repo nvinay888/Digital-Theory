@@ -80,7 +80,7 @@
           <li>
             <button class="nav__item" type="button">Resources <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
             <ul class="nav__dropdown">
-              <li><a href="#">Blogs</a></li>
+              <li><a href="${base}blog.html">Blogs</a></li>
             </ul>
           </li>
         </ul>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Channel scoring for a real-money gaming app: how we cut Pocket52's CAC by 45% — Digitaltheory</title>
+<meta name="description" content="Most channel decisions get made on last-week's CAC. The interesting decisions get made on per-channel LTV trajectories. Here's the scoring model we used." />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://digitaltheory.in/blog/channel-scoring-gaming-cac.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digitaltheory" />
+<meta property="og:title" content="Channel scoring for a real-money gaming app: how we cut Pocket52's CAC by 45% — Digitaltheory" />
+<meta property="og:description" content="Most channel decisions get made on last-week's CAC. The interesting decisions get made on per-channel LTV trajectories. Here's the scoring model we used." />
+<meta property="og:url" content="https://digitaltheory.in/blog/channel-scoring-gaming-cac.html" />
+<meta property="og:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Channel scoring for a real-money gaming app: how we cut Pocket52's CAC by 45% — Digitaltheory" />
+<meta name="twitter:description" content="Most channel decisions get made on last-week's CAC. The interesting decisions get made on per-channel LTV trajectories. Here's the scoring model we used." />
+<meta name="twitter:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css" />
+<script>window.DT_BASE = '../'; window.DT_PAGE = '';</script>
+</head>
+<body>
+<div class="page">
+<div id="dt-nav"></div>
+
+<section class="page-hero" style="padding-block:clamp(2.5rem,5vw,4rem) 0;background:var(--ink-1000)">
+  <div class="container">
+    <a href="../blog.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All blogs</a>
+  </div>
+</section>
+<article class="container">
+  <div class="post">
+    <header class="post__head">
+      <span class="post__cat">Growth Strategy</span>
+      <h1 class="post__title">Channel scoring for a real-money gaming app: how we cut Pocket52's CAC by 45%</h1>
+      <div class="post__meta">
+        <span>By Digitaltheory</span>
+        <span>28 Feb 2026</span>
+        <span>7 min read</span>
+      </div>
+    </header>
+    <div class="post__body">
+<p class="post__lead">When CAC won't fall, the temptation is to throw money at whichever channel has the lowest CAC last week. That is exactly the wrong frame. CAC is a price you pay for an asset (the customer). The asset has a value (LTV). And both vary by channel in ways that aren't visible until you score them properly.</p>
+
+<h2>The problem inside the account</h2>
+<p>Pocket52 is one of India's fastest 1M-download real-money gaming apps. When we picked up the account, CAC was rising despite the volume growth, and LTV improvements weren't keeping pace. Affiliate marketing was carrying meaningful spend but the channel mix was opaque &mdash; nobody could clearly say which affiliates were sending high-value players versus install volume.</p>
+<p>That's the standard gaming-account failure mode. You can scale installs forever. You can't scale a unit-economics problem.</p>
+
+<h2>How we built the channel score</h2>
+<p>Every channel got scored on four dimensions, each weighted:</p>
+<ul>
+  <li><strong>QoQ growth rate</strong> &mdash; was the channel still scaling or already plateauing?</li>
+  <li><strong>LTV trajectory</strong> &mdash; was the per-channel LTV improving, flat or degrading quarter over quarter?</li>
+  <li><strong>ARPU</strong> &mdash; what was the average revenue per player from this channel, calculated at day 60 and day 180?</li>
+  <li><strong>CAC</strong> &mdash; the obvious one, but always last in the order.</li>
+</ul>
+<p>The scoring matrix produced a clear ranking. Some surprises:</p>
+<ul>
+  <li>Google was driving more growth than its CAC suggested &mdash; the LTV trajectory was strong because the audience was high-intent.</li>
+  <li>Affiliates were carrying both ends of the bell curve &mdash; some delivered the highest-value players in the whole account; others delivered installs that churned inside 7 days at no margin.</li>
+  <li>Organic was vastly under-invested &mdash; the channel had no growth not because of the platform but because we weren't running an ASO program.</li>
+</ul>
+
+<h2>What we did with the score</h2>
+
+<h3>Affiliate framework rebuild</h3>
+<p>Built around a player-engagement model. Each affiliate was scored on the LTV of the players they delivered, not their raw install volume. Bottom-quartile affiliates were paused. Top-quartile got scaled and given direct incentive alignment.</p>
+
+<h3>Google BOF optimisation</h3>
+<p>Bottom-of-funnel Google campaigns rebuilt with sharper creative and better targeting. About 3% CAC reduction from this alone.</p>
+
+<h3>Meta LTV audiences</h3>
+<p>Meta targeting rebuilt around LTV-based custom audiences instead of broad lookalikes. The audience base became higher-quality, ad costs stabilised, and CAC dropped below 17% of the previous baseline for the cohorts that lookalike-modelling alone hadn't been reaching.</p>
+
+<h3>ASO program</h3>
+<p>The biggest single CAC win. We rebuilt rich media images, rewrote the description against a primary keyword set, ran on-page and off-page SEO across the landing pages and app store presence. Organic install share lifted 20% and overall CAC dropped 45% &mdash; the organic flow was structurally cheaper than any paid channel.</p>
+
+<h3>RFM and in-app monetisation</h3>
+<p>An RFM segmentation of the player base let us design CRM nudges that lifted LTV 18% inside a quarter. We coordinated with the product team to ship features and in-app offers for the loyalty cohort, which lifted ARPU 7%.</p>
+
+<h2>What we would tell you to do</h2>
+<p>If you only score channels on CAC, you will pay the lowest CAC for the lowest-LTV traffic, indefinitely. Score channels on the full quadruple &mdash; growth, LTV trajectory, ARPU, CAC &mdash; and pause the ones that look cheap but produce churners. The biggest wins are often in channels you've under-invested in for the wrong reasons.</p>
+</div>
+    <div class="post__related"><h4>Related case study</h4><a class="case" href="../case-studies/pocket52.html"><div class="case__head"><div class="case__brand">Pocket52</div><span class="case__industry">Real-money Gaming</span></div><p class="case__desc">One of India's fastest 1M-download gaming apps — CAC cut, LTV lifted and organic ranking improved.</p><span class="case__link">Read case study →</span></a></div>
+  </div>
+</article>
+
+<section class="section cta-final">
+  <div class="container container--narrow">
+    <span class="eyebrow">Come, say hello</span>
+    <h2>Ready to turn data into <span class="accent">durable growth?</span></h2>
+    <p class="lead">Tell us where you want to go. We'll bring the strategy, the stack and the creative to get you there.</p>
+    <div class="cta-final__row">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Book a growth consult <span class="btn__arrow">→</span></a>
+      <a href="../case-studies.html" class="btn btn--secondary btn--lg">See our work</a>
+    </div>
+  </div>
+</section>
+
+
+<div id="dt-footer"></div>
+</div>
+<script src="../assets/shared.js"></script>
+</body>
+</html>

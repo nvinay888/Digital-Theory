@@ -874,6 +874,379 @@ def build_our_work():
 """
     return page("Our Work", "Digitaltheory's portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — filter by industry to see relevant engagements.", body, base="", active="work", path="our-work.html")
 
+# ====================== BLOG ======================
+BLOG_POSTS = [
+    {
+        "slug":"quadcore-campaign-framework",
+        "cat":"Performance Marketing","cat_key":"performance",
+        "title":"The quadcore campaign framework: how we rebuilt Celio's ROAS by 45% in two quarters",
+        "excerpt":"Most performance accounts run two motions — prospecting and retargeting — and then wonder why they plateau. Quadcore adds the two motions that actually drive compounding.",
+        "date":"2026-05-22","read":"7 min read",
+        "case":"celio",
+        "body":"""
+<p class="post__lead">If a paid-media account has only two campaigns — broad prospecting and a retargeting catch-all — it is not actually a system. It is a couple of levers being yanked in opposite directions. After running it inside a 12-year heritage menswear brand, here is how we structured the rebuild.</p>
+
+<h2>Why two motions stop working</h2>
+<p>The two-motion account is the default Meta or Google build. Prospecting carries 70&ndash;80% of spend with broad targeting, lookalikes and a few interest stacks. Retargeting catches the bounce. It works for the first six months of a brand's life. Then auction inflation, creative fatigue and saturation eat the margin from both ends.</p>
+<p>What you start seeing inside the account is predictable: prospecting CPMs climb 25&ndash;40% quarter on quarter, retargeting frequency caps choke incremental conversions, and the absolute number of net-new customers per rupee falls quietly while the dashboard says ROAS is fine. The blended LTV stays flat because the cohort mix doesn't shift.</p>
+
+<h2>The four motions</h2>
+<p>Quadcore splits the account into four orthogonal motions, each with its own brief, audience definition, creative system and target metric. They run in parallel and never trade attribution against one another.</p>
+
+<h3>1. Prospecting</h3>
+<p>Pure cold acquisition with broad audiences and creative engineered for the first-touch unaware buyer. Optimised on landing page view + add to cart, not purchase, so the algorithm gets enough signal density to actually learn. KPI: CPA against blended LTV target, not first-purchase ROAS.</p>
+
+<h3>2. Retargeting</h3>
+<p>Tight remarketing audiences segmented by intent (PDP viewers, ATC abandoners, checkout abandoners) with bespoke creative per stage. Capped frequency, with explicit suppression of recent purchasers. KPI: window-level conversion lift over a holdout group, not raw ROAS.</p>
+
+<h3>3. Brand defence</h3>
+<p>Branded search + branded social terms + the high-intent audience that is already looking for you. This is the most under-built motion in most accounts. It protects margin while branded share-of-search grows; without it, marketplace and competitor bids pick off your best traffic at the worst CPC. KPI: branded SOS, branded CTR, share of clicks against competitor bidders.</p>
+
+<h3>4. Creator-led</h3>
+<p>UGC, founder-led, performance creator content. Different brief, different production pipeline, different reporting. Not influencer marketing in the brand-build sense &mdash; performance creator content that runs as paid ad creative under the same campaign objective. KPI: hook rate &times; conversion rate, scored per variant.</p>
+
+<h2>How Celio's account changed</h2>
+<p>When we picked up Celio, the account ran two motions. Prospecting carried 75% of spend; retargeting carried the rest. Branded search was conceded to marketplace bids. Creative was being made for hero-product pages, not for the platform.</p>
+<p>We split the account into the four motions, gave each its own pod, and set up a weekly cadence where every motion ships 6&ndash;10 creative variants scored against the motion's KPI &mdash; not blended ROAS. Three things compounded inside two quarters:</p>
+<ul>
+  <li><strong>Brand defence</strong> caught traffic that marketplace bids were eating. Branded search terms grew 17% QoQ. CPC on protected terms dropped because organic share grew alongside paid.</li>
+  <li><strong>Creator-led</strong> creative gave the algorithm fresh inventory at the top of the funnel. Hook rates on UGC variants beat hero-product creative by 1.8x, which fed back into cheaper prospecting CPMs.</li>
+  <li><strong>Retargeting</strong> stopped competing with prospecting for the same audience. Frequency caps + suppression made the catch incremental rather than additive.</li>
+</ul>
+<p>Net result inside two quarters: ROAS up 45%, CM3 up 23% sustainably (we paired it with a tightened discount structure), and branded search up 17%. The framework is not the point. The point is that paid acquisition is four problems, not two.</p>
+
+<h2>What we would tell you to do next week</h2>
+<p>Audit your account. Count the motions. If you find two, you have rebuild work to do. Start with brand defence &mdash; it is the cheapest motion to set up and has the largest immediate margin impact. Set up creator-led as a second wave: a small batch of UGC variants tested against your existing creative within four weeks. Then split retargeting from prospecting properly &mdash; suppress, cap frequency, and stop optimising both for the same conversion event.</p>
+<p>The compounding only starts once all four motions are running in parallel with their own briefs and their own KPIs.</p>
+"""
+    },
+    {
+        "slug":"60-40-marketplace-d2c-budget",
+        "cat":"D2C & E-commerce","cat_key":"d2c",
+        "title":"The 60/40 rule: why we split D2C performance budget unevenly across marketplaces and own site",
+        "excerpt":"Most D2C brands either over-index on Amazon or over-index on Shopify. Neither stance is right. Here's the split that turned a 17% YoY profit decline into 35% QoQ growth.",
+        "date":"2026-04-30","read":"6 min read",
+        "case":"nutriglow",
+        "body":"""
+<p class="post__lead">When we first looked at the Nutriglow account, marketplaces and the D2C website were being treated like competing channels. Each had a separate budget, separate team, separate dashboard. Neither was profitable. The fix wasn't to pick one. It was to wire them into a single funnel and split the budget 60/40.</p>
+
+<h2>The two failure modes</h2>
+<p>D2C brands tend to fall into one of two camps. Camp one believes Amazon (or Flipkart, Nykaa, etc.) is the discovery channel and the website is for high-intent repeat. Camp two believes the website is the brand-builder and marketplace is a discount-eating necessary evil. Both are wrong, and both lose money quietly.</p>
+<p>Camp one ends up subsidising marketplace search ranking with paid spend until the COGS-to-fees math collapses. Camp two ends up paying marketplace prices to Meta and Google to acquire customers their competitors are quietly serving on Amazon at half the CAC.</p>
+
+<h2>Why 60/40</h2>
+<p>For Nutriglow &mdash; a 200-SKU beauty &amp; personal care brand &mdash; we split performance budget 60% to marketplaces, 40% to the D2C website. The split came from a model, not a hunch.</p>
+<p>We built a channel-level unit-economics model first. For each SKU, we computed: marketplace fee structure, ad take rate, return rate, contribution margin per channel. Then we scored each SKU on which channel paid it back faster &mdash; not which channel sold more.</p>
+<p>The output: a small subset of SKUs (about 18% of the catalogue) drove 70% of D2C-website revenue at acceptable CM3. The rest only paid back on marketplaces, where the customer was already shopping the category and intent was higher.</p>
+<p>So 60% of spend went to marketplaces &mdash; concentrated on the long tail and category bestsellers. 40% to the D2C website &mdash; concentrated on the 18% of hero SKUs that had real D2C-fit (higher AOV, higher repeat propensity, lower return rates).</p>
+
+<h2>What 60% on marketplaces actually means</h2>
+<p>It is not 60% poured into Sponsored Products. We rebuilt the marketplace ad architecture from scratch:</p>
+<ul>
+  <li><strong>Sponsored Products</strong> on bestsellers and high-velocity SKUs &mdash; defending top-of-search.</li>
+  <li><strong>Sponsored Brands</strong> as the category-shaping motion &mdash; a banner that owns the head term and drives traffic into the storefront, not the PDP.</li>
+  <li><strong>Sponsored Display</strong> as the audience-driven motion &mdash; retargeting Amazon viewers and similar-category shoppers, where ROAS doesn't include the same fee drag.</li>
+</ul>
+<p>Re-introducing SB and SD on top of an SP-only account is one of the cheapest wins available in BPC. For Nutriglow it shifted revenue mix toward higher-margin storefront sessions and let us defend share without bleeding margin into bid wars on SP alone.</p>
+
+<h2>What 40% on D2C actually means</h2>
+<p>The D2C 40% was concentrated on the 18% of SKUs that earned it. Full-funnel media mix &mdash; prospecting plus brand defence plus creator-led &mdash; pushed against retention loops on the website (RFM-segmented winbacks, refill journeys, bundle prompts). We treated the website as a retention asset for the brand's best customers, not as an acquisition substitute for marketplaces.</p>
+
+<h2>The supply-side change that made it work</h2>
+<p>Performance was half the rebuild. The other half was sourcing. Strategic supplier work cut COGS 40% on the hero portfolio, which lifted CM1 enough that the 60/40 split actually had margin to play with. Without the COGS work, the marketplace 60% would have stayed in the red.</p>
+
+<h2>What changed in two quarters</h2>
+<p>Revenue up 35% QoQ. ROAS up 57%. CM3 up 14 points. The split itself wasn't the magic &mdash; the magic was treating marketplace and D2C as the same funnel with two doors, both budgeted from the same P&amp;L, both serving the same customer.</p>
+
+<blockquote>The wrong question is "marketplace or D2C". The right question is "which customer am I winning, on which channel, at what margin?".</blockquote>
+
+<p>Your split won't be 60/40. Maybe yours is 70/30 in fashion, 50/50 in food, 80/20 in electronics. The number isn't the lesson. The lesson is that the split has to come from a SKU-level model, not a CEO preference.</p>
+"""
+    },
+    {
+        "slug":"rfm-7-years-laundrokart",
+        "cat":"CRM & Retention","cat_key":"crm",
+        "title":"Seven years of RFM: what scaling Laundrokart's CRM taught us about retention",
+        "excerpt":"We ran an RFM analysis across seven years of transaction data on a laundry app. Here's what the cohorts told us about LTV, win-back economics and loyalty.",
+        "date":"2026-04-08","read":"8 min read",
+        "case":"laundrokart",
+        "body":"""
+<p class="post__lead">When a business has seven years of transaction data and unit economics that are quietly degrading, the answer is rarely a new acquisition channel. It is almost always inside the data you already have. Here is what we found inside Laundrokart's.</p>
+
+<h2>Why RFM still wins</h2>
+<p>Retention frameworks come and go. Predictive ML, propensity scoring, real-time personalisation engines &mdash; all worth shipping, none of them mean anything if you can't first segment your customer base into cohorts you can run weekly. RFM (recency, frequency, monetary) is still the cleanest first cut.</p>
+<p>The discipline it forces is useful: for each customer you compute when they last bought, how often they buy and how much they spend, score each dimension on a 1&ndash;5 scale, and bucket them into 12&ndash;15 cohort archetypes (champion, loyal, at-risk, hibernating, lost, new high-value, etc.). Then you decide what action belongs to each.</p>
+
+<h2>What seven years of laundry data said</h2>
+<p>We pulled Laundrokart's transaction history end-to-end &mdash; orders, channels, services, ratings, churn events. The story it told us was unforgiving:</p>
+<ul>
+  <li><strong>The high-value cohort was tiny but compounding.</strong> The top 7% of customers were responsible for 38% of revenue &mdash; and crucially, they were still active, still buying, but receiving the same generic comms as the bottom 70%.</li>
+  <li><strong>Win-back economics were inverted.</strong> The cost to reactivate a churned customer (via discount + push + WhatsApp) was actually lower than the cost to acquire a fresh install &mdash; we just weren't doing it.</li>
+  <li><strong>Day-30 retention was the kill metric.</strong> Customers who came back inside 30 days of first order had a 4.6x higher 12-month LTV than those who came back at day 30&ndash;60. Anything after day 60 was effectively a lost customer, regardless of how much discount we threw at it.</li>
+  <li><strong>Push fatigue was real.</strong> Notification open rates fell off a cliff past 4 sends per week. WhatsApp tolerated more because the format was different and the user opted in.</li>
+</ul>
+
+<h2>What we shipped</h2>
+<p>The CRM rebuild had four workstreams:</p>
+
+<h3>Cohort-based comms</h3>
+<p>Twelve cohorts, each with their own message frequency, channel mix and offer structure. Champions get refill nudges and early-access drops. At-risk customers get win-back triggers tied to the day-30 cliff. Hibernating customers get one big push and then stop hearing from us. Lost customers get a final discount and then suppression.</p>
+
+<h3>Day-30 trigger journeys</h3>
+<p>The single highest-impact change. A behavioural trigger fires if a first-time customer doesn't transact again within 25 days. The journey is push + WhatsApp + email + an in-app banner, sequenced over 5 days with declining intensity. Day-30 retention improved measurably and 12-month LTV moved with it.</p>
+
+<h3>Loyalty program for the top 7%</h3>
+<p>A tiered loyalty program designed explicitly for the high-value cohort that the data surfaced. Tiers came with bookable-priority service slots (rather than just discounts), which mattered more to a customer who was already paying full price. The program contributed about 3% of overall revenue inside a quarter &mdash; small in absolute terms but pure-margin and self-reinforcing.</p>
+
+<h3>Win-back coupons for lost customers</h3>
+<p>Targeted discounts to a specific cohort &mdash; lost-but-recoverable customers, defined by their RFM bucket &mdash; rather than blasted to the full file. Twelve percent additional revenue, and it didn't cannibalise active customers because they never saw the offer.</p>
+
+<h2>Numbers from the rebuild</h2>
+<p>Revenue up 45%. App installs up 55% (we paired CRM with rebuilt acquisition). LTV up 23%. Retention up 17 percentage points. The CRM work alone &mdash; net of acquisition changes &mdash; accounted for the majority of the LTV lift.</p>
+
+<h2>What we would tell you to do</h2>
+<p>If you have more than two years of transaction data, RFM gives you 80% of the ML value at 5% of the effort. Start there. The interesting bit isn't the segmentation &mdash; segmentation is easy. The interesting bit is what action you assign to each cohort, and the discipline of suppressing comms to cohorts where you don't have an action that pays back. Half of every retention program we touch is improved by sending less, not more.</p>
+"""
+    },
+    {
+        "slug":"international-market-entry-edtech",
+        "cat":"Edtech","cat_key":"edtech",
+        "title":"International market entry: how we cut Codingal's CAC by 70% by leaving India first",
+        "excerpt":"When CAC is rising 30% MoM in your home market, the answer is rarely better Indian bidding. Sometimes it's an entirely different country.",
+        "date":"2026-03-18","read":"6 min read",
+        "case":"codingal",
+        "body":"""
+<p class="post__lead">For an Indian edtech, the temptation when CAC climbs is to optimise harder against Indian auctions. We did the opposite for Codingal. We left India first.</p>
+
+<h2>The home-market trap</h2>
+<p>Indian edtech CAC has been climbing for four years. The category was saturated; the spending was concentrated in a handful of categories (K-12, test prep, upskilling); and the unit-economics floor kept dropping as players bid each other up on the same set of intent terms. For a K-12 coding platform, the maths on a per-paying-customer basis were tightening every month.</p>
+<p>Most teams respond by trying to win the same auctions harder &mdash; better creative, better landing pages, smarter bid strategies. All worth doing. None of them solve the underlying problem, which is that an auction with N motivated bidders cannot give any one bidder a structural CAC advantage.</p>
+
+<h2>Where the cheap CAC is</h2>
+<p>The hypothesis we ran with: there are international markets where the category awareness is high, the willingness-to-pay is materially higher than India, and the competition is thinner because Indian players haven't scaled outside.</p>
+<p>We scored countries on four criteria:</p>
+<ul>
+  <li><strong>International-school fees</strong> &mdash; a proxy for parent willingness to spend on extracurricular learning at premium price points.</li>
+  <li><strong>Category competition</strong> &mdash; how many global and local edtech competitors were already bidding the category terms.</li>
+  <li><strong>Category awareness</strong> &mdash; whether parents in the market were actively shopping the concept of "coding for kids" or had to be educated into it.</li>
+  <li><strong>Operational tractability</strong> &mdash; payment methods, language fit, time-zone reach for live classes.</li>
+</ul>
+<p>We shortlisted three countries that scored high on all four. None of them are the obvious first guesses.</p>
+
+<h2>The pilot, and the surprise</h2>
+<p>We launched Meta pilots in all three markets simultaneously, at small budgets, with three creative variants per market. Within 14 days, the signal was unambiguous: CAC in the international markets was running at about 30% of the Indian baseline.</p>
+<p>Some of that was lower auction competition. Some of it was higher willingness to pay (which let us run higher-AOV plans at the same conversion rate). And some of it was a surprisingly responsive parent segment in markets where category awareness existed but supply was thin.</p>
+<p>We scaled spend, layered Google search (lower volume but high intent), and ran a small brand-lift study so that branded search would compound in markets where the brand was unknown.</p>
+
+<h2>The funnel rebuild that came alongside</h2>
+<p>Cutting CAC by 70% would still leave you with a broken funnel if the sales motion doesn't keep up. We revamped two parts:</p>
+<ul>
+  <li><strong>Landing page</strong> &mdash; rewritten for the international parent. Different testimonials, different proof points, different price anchoring. The qualified-lead percentage lifted measurably.</li>
+  <li><strong>Sales follow-up cadence</strong> &mdash; rebuilt around the time-zone reality (sales calls had to happen inside the parent's working hours, not Indian working hours). Paid customer rate up 15%.</li>
+  <li><strong>Onboarding</strong> &mdash; rebuilt around the new student archetype. SQL share moved from 30% to 47%.</li>
+</ul>
+
+<h2>The compound result</h2>
+<p>Inside three quarters: 70% CAC reduction, 66% lift in qualified leads, 34% revenue lift and a path to 5L+ students. The decision was strategic, not tactical. No amount of bid optimisation inside India would have produced those numbers.</p>
+
+<blockquote>If CAC is rising MoM in your home market, the most expensive thing you can do is keep buying the same auctions. The cheapest is to run a serious secondary-research sprint on adjacent markets.</blockquote>
+"""
+    },
+    {
+        "slug":"channel-scoring-gaming-cac",
+        "cat":"Growth Strategy","cat_key":"strategy",
+        "title":"Channel scoring for a real-money gaming app: how we cut Pocket52's CAC by 45%",
+        "excerpt":"Most channel decisions get made on last-week's CAC. The interesting decisions get made on per-channel LTV trajectories. Here's the scoring model we used.",
+        "date":"2026-02-28","read":"7 min read",
+        "case":"pocket52",
+        "body":"""
+<p class="post__lead">When CAC won't fall, the temptation is to throw money at whichever channel has the lowest CAC last week. That is exactly the wrong frame. CAC is a price you pay for an asset (the customer). The asset has a value (LTV). And both vary by channel in ways that aren't visible until you score them properly.</p>
+
+<h2>The problem inside the account</h2>
+<p>Pocket52 is one of India's fastest 1M-download real-money gaming apps. When we picked up the account, CAC was rising despite the volume growth, and LTV improvements weren't keeping pace. Affiliate marketing was carrying meaningful spend but the channel mix was opaque &mdash; nobody could clearly say which affiliates were sending high-value players versus install volume.</p>
+<p>That's the standard gaming-account failure mode. You can scale installs forever. You can't scale a unit-economics problem.</p>
+
+<h2>How we built the channel score</h2>
+<p>Every channel got scored on four dimensions, each weighted:</p>
+<ul>
+  <li><strong>QoQ growth rate</strong> &mdash; was the channel still scaling or already plateauing?</li>
+  <li><strong>LTV trajectory</strong> &mdash; was the per-channel LTV improving, flat or degrading quarter over quarter?</li>
+  <li><strong>ARPU</strong> &mdash; what was the average revenue per player from this channel, calculated at day 60 and day 180?</li>
+  <li><strong>CAC</strong> &mdash; the obvious one, but always last in the order.</li>
+</ul>
+<p>The scoring matrix produced a clear ranking. Some surprises:</p>
+<ul>
+  <li>Google was driving more growth than its CAC suggested &mdash; the LTV trajectory was strong because the audience was high-intent.</li>
+  <li>Affiliates were carrying both ends of the bell curve &mdash; some delivered the highest-value players in the whole account; others delivered installs that churned inside 7 days at no margin.</li>
+  <li>Organic was vastly under-invested &mdash; the channel had no growth not because of the platform but because we weren't running an ASO program.</li>
+</ul>
+
+<h2>What we did with the score</h2>
+
+<h3>Affiliate framework rebuild</h3>
+<p>Built around a player-engagement model. Each affiliate was scored on the LTV of the players they delivered, not their raw install volume. Bottom-quartile affiliates were paused. Top-quartile got scaled and given direct incentive alignment.</p>
+
+<h3>Google BOF optimisation</h3>
+<p>Bottom-of-funnel Google campaigns rebuilt with sharper creative and better targeting. About 3% CAC reduction from this alone.</p>
+
+<h3>Meta LTV audiences</h3>
+<p>Meta targeting rebuilt around LTV-based custom audiences instead of broad lookalikes. The audience base became higher-quality, ad costs stabilised, and CAC dropped below 17% of the previous baseline for the cohorts that lookalike-modelling alone hadn't been reaching.</p>
+
+<h3>ASO program</h3>
+<p>The biggest single CAC win. We rebuilt rich media images, rewrote the description against a primary keyword set, ran on-page and off-page SEO across the landing pages and app store presence. Organic install share lifted 20% and overall CAC dropped 45% &mdash; the organic flow was structurally cheaper than any paid channel.</p>
+
+<h3>RFM and in-app monetisation</h3>
+<p>An RFM segmentation of the player base let us design CRM nudges that lifted LTV 18% inside a quarter. We coordinated with the product team to ship features and in-app offers for the loyalty cohort, which lifted ARPU 7%.</p>
+
+<h2>What we would tell you to do</h2>
+<p>If you only score channels on CAC, you will pay the lowest CAC for the lowest-LTV traffic, indefinitely. Score channels on the full quadruple &mdash; growth, LTV trajectory, ARPU, CAC &mdash; and pause the ones that look cheap but produce churners. The biggest wins are often in channels you've under-invested in for the wrong reasons.</p>
+"""
+    },
+    {
+        "slug":"erp-ml-pharmacy-digitisation",
+        "cat":"Digital Transformation","cat_key":"transformation",
+        "title":"ERP, ML and a returns dashboard: digitising an 80-branch pharmacy chain",
+        "excerpt":"Brick-and-mortar margin lives in the small operational decisions. Here's how integrating an ERP, building inventory tools and training a returns-prediction model paid back for an Indian pharmacy chain.",
+        "date":"2026-02-04","read":"8 min read",
+        "case":"thulasi",
+        "body":"""
+<p class="post__lead">In a multi-branch retail business, the next 10 points of margin are rarely on the marketing line. They are in the small operational decisions that happen 50,000 times a week and get logged in spreadsheets. Here is how we found them inside an Indian pharmacy chain.</p>
+
+<h2>The business problem</h2>
+<p>Thulasi Pharmacies is a pharmacy chain in South India: 80+ branches, ₹750 Cr in turnover, and a back-office that had not been digitised at the depth the scale required. The headline problem looked like inventory imbalance &mdash; bestsellers going out of stock at one branch while sitting in dead stock at another &mdash; but the underlying issue was that the operational decisions were happening downstream of an ERP that nobody used as a real-time decision tool.</p>
+<p>Fill-in and sell-out were spreadsheet-driven. Returns were handled at each branch with no central visibility. SKU-mix decisions were made on intuition, not data. Each of those is a small leak; together they were a meaningful margin drag.</p>
+
+<h2>What we built</h2>
+
+<h3>ERP integration and an inventory tool</h3>
+<p>We built a digitisation layer that integrated with the existing ERP and surfaced the data the ops team needed in a tool they could actually use. The first job was to make branch-level inventory visible in real time &mdash; not as a monthly close-out report but as a working tool for the operations team. The fill-in and sell-out automation that followed was downstream of that visibility.</p>
+
+<h3>Returns dashboard</h3>
+<p>Returns were the silent margin leak. We built a dashboard that surfaced returns by product, by branch and by month, with the reverse-logistics cost attached. Once it was visible, the ops team could prioritise interventions. Returns dropped 37%.</p>
+
+<h3>Store-level product-fit ML model</h3>
+<p>The most interesting workstream. We trained a model to predict which SKUs would sell better at which branch, based on historical sales patterns, returns data, seasonality and category indices. The model didn't replace category-manager judgement &mdash; it made the judgement cheaper to scale across 80+ branches.</p>
+<p>Concretely, the model surfaced patterns like: certain antibiotic SKUs had structurally higher sell-through in branches with a hospital within 800 metres; certain wellness SKUs had near-zero sell-through outside dense urban catchments. None of these are surprising in hindsight. The point is none of them were being acted on systematically.</p>
+
+<h2>The numbers</h2>
+<ul>
+  <li>Inventory costs down 33%.</li>
+  <li>Returns down 37%.</li>
+  <li>Revenue up 19%.</li>
+</ul>
+<p>The revenue lift was downstream of the inventory work &mdash; SKUs that previously stocked-out at the wrong branches were now available where the demand was.</p>
+
+<h2>Why it worked</h2>
+<p>Three things, in order of importance:</p>
+<ol>
+  <li><strong>It plugged into the existing ERP rather than replacing it.</strong> Replatforming projects in mid-sized retail businesses fail more often than they succeed. We didn't try.</li>
+  <li><strong>It was built around the operations team, not around a dashboard for leadership.</strong> The tool got used because the people doing the work could use it. Dashboards that only the CXO sees don't change behaviour.</li>
+  <li><strong>The ML was a layer on top of structured data, not a substitute for the structured data.</strong> The model worked because the integration work that came first made the inputs clean.</li>
+</ol>
+
+<h2>What we would tell a retail chain to do</h2>
+<p>If you have more than 20 branches, you already have a returns problem you can't see, a SKU-fit problem you can't measure, and a fill-in problem that's eating 5&ndash;10 points of CM. The fix isn't a new ERP. The fix is a tool on top of the ERP you already have, built around your operations team. The ML model is the last 20% &mdash; the first 80% is the visibility and the workflow.</p>
+
+<blockquote>Brick-and-mortar margin lives in the small decisions. The small decisions only get better when they're visible at the moment they're being made.</blockquote>
+"""
+    },
+]
+BLOG_CATEGORIES = ["All","Performance Marketing","D2C & E-commerce","CRM & Retention","Edtech","Growth Strategy","Digital Transformation"]
+
+def fmt_date(iso):
+    months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    y,m,d = iso.split("-")
+    return f"{int(d)} {months[int(m)-1]} {y}"
+
+def render_blog_post(p):
+    case_link = ''
+    if p.get("case"):
+        for c in CASES:
+            if c["slug"] == p["case"]:
+                case_link = f'<div class="post__related"><h4>Related case study</h4><a class="case" href="../case-studies/{c["slug"]}.html"><div class="case__head"><div class="case__brand">{c["brand"]}</div><span class="case__industry">{c["industry"]}</span></div><p class="case__desc">{c["hero"]}</p><span class="case__link">Read case study →</span></a></div>'
+                break
+    return f"""
+<section class="page-hero" style="padding-block:clamp(2.5rem,5vw,4rem) 0;background:var(--ink-1000)">
+  <div class="container">
+    <a href="../blog.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All blogs</a>
+  </div>
+</section>
+<article class="container">
+  <div class="post">
+    <header class="post__head">
+      <span class="post__cat">{p["cat"]}</span>
+      <h1 class="post__title">{p["title"]}</h1>
+      <div class="post__meta">
+        <span>By Digitaltheory</span>
+        <span>{fmt_date(p["date"])}</span>
+        <span>{p["read"]}</span>
+      </div>
+    </header>
+    <div class="post__body">{p["body"]}</div>
+    {case_link}
+  </div>
+</article>
+{CTA_BAND.format(base='../')}
+"""
+
+def build_blog_hub():
+    counts = {cat: sum(1 for p in BLOG_POSTS if p["cat"]==cat) for cat in BLOG_CATEGORIES[1:]}
+    counts["All"] = len(BLOG_POSTS)
+    tabs_html = "".join(
+        f'<button class="work-tab {"is-active" if cat=="All" else ""}" data-tab="{cat}">{cat} <span class="work-tab__count">({counts[cat]})</span></button>'
+        for cat in BLOG_CATEGORIES if counts.get(cat,0) > 0 or cat=="All"
+    )
+    cards = ""
+    for p in BLOG_POSTS:
+        words = p["title"].split()
+        big_text = " ".join(words[:5]) + ("..." if len(words) > 5 else "")
+        cards += f'''
+        <a class="blog-card" data-cat="{p["cat"]}" href="blog/{p["slug"]}.html">
+          <div class="blog-card__cover"><span class="blog-card__cover-text">{big_text}</span></div>
+          <div class="blog-card__body">
+            <span class="blog-card__cat">{p["cat"]}</span>
+            <h3 class="blog-card__title">{p["title"]}</h3>
+            <p class="blog-card__excerpt">{p["excerpt"]}</p>
+            <div class="blog-card__meta"><span>{fmt_date(p["date"])}</span><span>{p["read"]}</span></div>
+          </div>
+        </a>'''
+    body = f"""
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <span class="eyebrow">The Digitaltheory blog</span>
+    <h1>Field notes on growth, operations and the operating model behind both.</h1>
+    <p class="lead page-hero__lead">Original write-ups from inside our engagements — what we shipped, what we learned, what we&rsquo;d do differently. No frameworks borrowed from textbooks.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="work-tabs" id="blogTabs">{tabs_html}</div>
+    <div class="blog-grid" id="blogGrid">{cards}</div>
+    <div class="work-empty" id="blogEmpty" style="display:none">No posts in this category yet — more on the way.</div>
+  </div>
+</section>
+{CTA_BAND.format(base='')}
+<script>
+(function(){{
+  const tabs = document.querySelectorAll('#blogTabs .work-tab');
+  const cards = document.querySelectorAll('#blogGrid .blog-card');
+  const empty = document.getElementById('blogEmpty');
+  tabs.forEach(b => b.addEventListener('click', () => {{
+    tabs.forEach(x => x.classList.toggle('is-active', x === b));
+    const cat = b.dataset.tab;
+    let visible = 0;
+    cards.forEach(c => {{
+      const match = cat === 'All' || c.dataset.cat === cat;
+      c.style.display = match ? '' : 'none';
+      if (match) visible++;
+    }});
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }}));
+}})();
+</script>
+"""
+    return page("Blog", "Digitaltheory blog — field notes on performance marketing, retention, D2C unit economics and digital transformation, grounded in real engagements.", body, base="", active="", path="blog.html")
+
 # ====================== INDUSTRY PAGES ======================
 INDUSTRIES = [
     {
@@ -1398,15 +1771,22 @@ for ind in INDUSTRIES:
     write(ipath, page(f"{ind['title']} Growth Marketing", ind["lead"], render_industry_body(ind), base="../", active="", path=ipath))
 write("industries.html", build_industries_hub())
 
+# Blog
+for p in BLOG_POSTS:
+    bpath = f"blog/{p['slug']}.html"
+    write(bpath, page(p["title"], p["excerpt"], render_blog_post(p), base="../", active="", path=bpath))
+write("blog.html", build_blog_hub())
+
 write("about.html", build_about())
 write("careers.html", build_careers())
 write("contact.html", build_contact())
 
 # ====================== SITEMAP & ROBOTS ======================
-urls = ["", "services.html", "our-work.html", "case-studies.html", "industries.html", "about.html", "careers.html", "contact.html"]
+urls = ["", "services.html", "our-work.html", "case-studies.html", "industries.html", "blog.html", "about.html", "careers.html", "contact.html"]
 urls += [f"services/{s['slug']}.html" for s in SERVICES]
 urls += [f"case-studies/{c['slug']}.html" for c in CASES]
 urls += [f"industries/{i['slug']}.html" for i in INDUSTRIES]
+urls += [f"blog/{p['slug']}.html" for p in BLOG_POSTS]
 
 today = "2026-06-07"  # update on rebuild
 sitemap_entries = []

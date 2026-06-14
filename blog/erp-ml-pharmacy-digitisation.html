@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ERP, ML and a returns dashboard: digitising an 80-branch pharmacy chain — Digitaltheory</title>
+<meta name="description" content="Brick-and-mortar margin lives in the small operational decisions. Here's how integrating an ERP, building inventory tools and training a returns-prediction model paid back for an Indian pharmacy chain." />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://digitaltheory.in/blog/erp-ml-pharmacy-digitisation.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Digitaltheory" />
+<meta property="og:title" content="ERP, ML and a returns dashboard: digitising an 80-branch pharmacy chain — Digitaltheory" />
+<meta property="og:description" content="Brick-and-mortar margin lives in the small operational decisions. Here's how integrating an ERP, building inventory tools and training a returns-prediction model paid back for an Indian pharmacy chain." />
+<meta property="og:url" content="https://digitaltheory.in/blog/erp-ml-pharmacy-digitisation.html" />
+<meta property="og:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ERP, ML and a returns dashboard: digitising an 80-branch pharmacy chain — Digitaltheory" />
+<meta name="twitter:description" content="Brick-and-mortar margin lives in the small operational decisions. Here's how integrating an ERP, building inventory tools and training a returns-prediction model paid back for an Indian pharmacy chain." />
+<meta name="twitter:image" content="https://digitaltheory.in/assets/og-image.png" />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css" />
+<script>window.DT_BASE = '../'; window.DT_PAGE = '';</script>
+</head>
+<body>
+<div class="page">
+<div id="dt-nav"></div>
+
+<section class="page-hero" style="padding-block:clamp(2.5rem,5vw,4rem) 0;background:var(--ink-1000)">
+  <div class="container">
+    <a href="../blog.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All blogs</a>
+  </div>
+</section>
+<article class="container">
+  <div class="post">
+    <header class="post__head">
+      <span class="post__cat">Digital Transformation</span>
+      <h1 class="post__title">ERP, ML and a returns dashboard: digitising an 80-branch pharmacy chain</h1>
+      <div class="post__meta">
+        <span>By Digitaltheory</span>
+        <span>4 Feb 2026</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+    <div class="post__body">
+<p class="post__lead">In a multi-branch retail business, the next 10 points of margin are rarely on the marketing line. They are in the small operational decisions that happen 50,000 times a week and get logged in spreadsheets. Here is how we found them inside an Indian pharmacy chain.</p>
+
+<h2>The business problem</h2>
+<p>Thulasi Pharmacies is a pharmacy chain in South India: 80+ branches, ₹750 Cr in turnover, and a back-office that had not been digitised at the depth the scale required. The headline problem looked like inventory imbalance &mdash; bestsellers going out of stock at one branch while sitting in dead stock at another &mdash; but the underlying issue was that the operational decisions were happening downstream of an ERP that nobody used as a real-time decision tool.</p>
+<p>Fill-in and sell-out were spreadsheet-driven. Returns were handled at each branch with no central visibility. SKU-mix decisions were made on intuition, not data. Each of those is a small leak; together they were a meaningful margin drag.</p>
+
+<h2>What we built</h2>
+
+<h3>ERP integration and an inventory tool</h3>
+<p>We built a digitisation layer that integrated with the existing ERP and surfaced the data the ops team needed in a tool they could actually use. The first job was to make branch-level inventory visible in real time &mdash; not as a monthly close-out report but as a working tool for the operations team. The fill-in and sell-out automation that followed was downstream of that visibility.</p>
+
+<h3>Returns dashboard</h3>
+<p>Returns were the silent margin leak. We built a dashboard that surfaced returns by product, by branch and by month, with the reverse-logistics cost attached. Once it was visible, the ops team could prioritise interventions. Returns dropped 37%.</p>
+
+<h3>Store-level product-fit ML model</h3>
+<p>The most interesting workstream. We trained a model to predict which SKUs would sell better at which branch, based on historical sales patterns, returns data, seasonality and category indices. The model didn't replace category-manager judgement &mdash; it made the judgement cheaper to scale across 80+ branches.</p>
+<p>Concretely, the model surfaced patterns like: certain antibiotic SKUs had structurally higher sell-through in branches with a hospital within 800 metres; certain wellness SKUs had near-zero sell-through outside dense urban catchments. None of these are surprising in hindsight. The point is none of them were being acted on systematically.</p>
+
+<h2>The numbers</h2>
+<ul>
+  <li>Inventory costs down 33%.</li>
+  <li>Returns down 37%.</li>
+  <li>Revenue up 19%.</li>
+</ul>
+<p>The revenue lift was downstream of the inventory work &mdash; SKUs that previously stocked-out at the wrong branches were now available where the demand was.</p>
+
+<h2>Why it worked</h2>
+<p>Three things, in order of importance:</p>
+<ol>
+  <li><strong>It plugged into the existing ERP rather than replacing it.</strong> Replatforming projects in mid-sized retail businesses fail more often than they succeed. We didn't try.</li>
+  <li><strong>It was built around the operations team, not around a dashboard for leadership.</strong> The tool got used because the people doing the work could use it. Dashboards that only the CXO sees don't change behaviour.</li>
+  <li><strong>The ML was a layer on top of structured data, not a substitute for the structured data.</strong> The model worked because the integration work that came first made the inputs clean.</li>
+</ol>
+
+<h2>What we would tell a retail chain to do</h2>
+<p>If you have more than 20 branches, you already have a returns problem you can't see, a SKU-fit problem you can't measure, and a fill-in problem that's eating 5&ndash;10 points of CM. The fix isn't a new ERP. The fix is a tool on top of the ERP you already have, built around your operations team. The ML model is the last 20% &mdash; the first 80% is the visibility and the workflow.</p>
+
+<blockquote>Brick-and-mortar margin lives in the small decisions. The small decisions only get better when they're visible at the moment they're being made.</blockquote>
+</div>
+    <div class="post__related"><h4>Related case study</h4><a class="case" href="../case-studies/thulasi.html"><div class="case__head"><div class="case__brand">Thulasi Pharmacy</div><span class="case__industry">Retail Digital Transformation</span></div><p class="case__desc">Digitised store operations for a South Indian pharmacy chain — inventory, returns and product mix solved end-to-end.</p><span class="case__link">Read case study →</span></a></div>
+  </div>
+</article>
+
+<section class="section cta-final">
+  <div class="container container--narrow">
+    <span class="eyebrow">Come, say hello</span>
+    <h2>Ready to turn data into <span class="accent">durable growth?</span></h2>
+    <p class="lead">Tell us where you want to go. We'll bring the strategy, the stack and the creative to get you there.</p>
+    <div class="cta-final__row">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Book a growth consult <span class="btn__arrow">→</span></a>
+      <a href="../case-studies.html" class="btn btn--secondary btn--lg">See our work</a>
+    </div>
+  </div>
+</section>
+
+
+<div id="dt-footer"></div>
+</div>
+<script src="../assets/shared.js"></script>
+</body>
+</html>
