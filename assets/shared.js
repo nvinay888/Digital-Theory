@@ -59,10 +59,10 @@
             <div class="nav__mega">
               <div class="nav__mega-inner">
                 <ul class="nav__mega-list">
-                  ${industries.slice(0,4).map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+                  ${industries.slice(0,4).map(i=>`<li><a href="${base}industries/${i[1]}.html">${i[0]}</a></li>`).join('')}
                 </ul>
                 <ul class="nav__mega-list">
-                  ${industries.slice(4).map(i=>`<li><a href="${base}case-studies.html">${i[0]}</a></li>`).join('')}
+                  ${industries.slice(4).map(i=>`<li><a href="${base}industries/${i[1]}.html">${i[0]}</a></li>`).join('')}
                 </ul>
                 <div class="nav__mega-quote">
                   <div class="nav__mega-quote__mark">"</div>
