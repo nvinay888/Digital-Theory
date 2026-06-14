@@ -220,7 +220,16 @@ p{margin:0}
 .cases-carousel{display:flex;gap:var(--space-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:8px;margin:0 -4px;padding-inline:4px}
 .cases-carousel::-webkit-scrollbar{display:none}
 .cases-carousel>*{flex:0 0 calc((100% - var(--space-5))/2);scroll-snap-align:start;min-width:0}
-@media(max-width:760px){.cases-carousel>*{flex-basis:88%}}
+@media(max-width:760px){
+  .cases-carousel>*{flex-basis:calc(100% - 32px)}
+  .cases-carousel .case{padding:24px 20px;gap:18px}
+  .cases-carousel .case__metrics{grid-template-columns:1fr 1fr;gap:14px}
+  .cases-carousel .case__metric .stat__num{font-size:1.7rem}
+  .cases-carousel .case__metric .stat__label{font-size:10px;letter-spacing:.1em}
+  .cases-carousel .case__head{flex-wrap:wrap}
+  .cases-carousel .case__industry{font-size:10px;padding:4px 10px}
+  .cases-carousel .case__desc{font-size:14px}
+}
 .carousel-controls{display:flex;justify-content:flex-end;align-items:center;gap:var(--space-3);margin-top:var(--space-6);flex-wrap:wrap}
 .carousel-btn{width:48px;height:48px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:transparent;color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all var(--dur-base) var(--ease-out);font-family:inherit}
 .carousel-btn:hover:not(:disabled){border-color:var(--lime-400);color:var(--lime-400);transform:translateY(-1px)}
