@@ -214,7 +214,19 @@ p{margin:0}
 /* CASE CARDS */
 .cases{background:var(--surface-section);border-top:1px solid var(--line)}
 .cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+.cases-grid>*{min-width:0}
 @media(max-width:880px){.cases-grid{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .cases-grid .case{padding:24px 20px;gap:18px}
+  .cases-grid .case__head{flex-wrap:wrap;gap:10px}
+  .cases-grid .case__industry{font-size:10px;padding:5px 10px;white-space:nowrap}
+  .cases-grid .case__desc{font-size:14px}
+  .cases-grid .case__metrics{grid-template-columns:1fr 1fr;gap:14px}
+  .cases-grid .case__metric .stat__num{font-size:1.7rem}
+  .cases-grid .case__metric .stat__label{font-size:10px;letter-spacing:.08em}
+  .cases-grid .case__budget{font-size:11px;letter-spacing:.04em}
+  .cases-grid .case__brand{font-size:1.15rem}
+}
 /* Carousel */
 .cases-carousel-wrap{position:relative}
 .cases-carousel{display:flex;gap:var(--space-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:8px;margin:0 -4px;padding-inline:4px}

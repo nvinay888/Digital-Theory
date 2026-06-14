@@ -105,6 +105,9 @@
       <li><a href="${base}case-studies.html">Case Studies</a></li>
       <li><a href="${base}about.html">About Us</a></li>
       <li><a href="${base}careers.html">Careers</a></li>
+      <li><details><summary>Resources</summary><ul>
+        <li><a href="${base}blog.html">Blogs</a></li>
+      </ul></details></li>
       <li><a href="${base}contact.html">Contact Us</a></li>
     </ul>
   </div>`;
