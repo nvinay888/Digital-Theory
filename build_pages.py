@@ -5,10 +5,43 @@ import os, json
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://digitaltheory.in"   # change to your production domain
 
-def page(title, desc, body, base="", active="", path=""):
-    full_title = f"{title} — Digitaltheory"
+def page(title, desc, body, base="", active="", path="", seo_title=None, extra_schema=None, breadcrumbs=None):
+    """
+    title:        used as h1-style label and default OG title
+    seo_title:    optional override for the <title> tag (used when the article headline
+                  is too long for SERP but we still want it as h1)
+    extra_schema: list of dicts to inject as additional JSON-LD
+    breadcrumbs:  list of (name, path) tuples; auto-derived from path if None
+    """
+    full_title = seo_title if seo_title else f"{title} — Digitaltheory"
     canonical = f"{SITE_URL}/{path.lstrip('/')}" if path else SITE_URL + "/"
     og_image = f"{SITE_URL}/assets/og-image.png"
+
+    # Auto-derive breadcrumbs from path if not passed
+    if breadcrumbs is None:
+        crumbs = [("Home", "")]
+        parts = path.split('/') if path else []
+        if len(parts) == 2:  # e.g. services/perf.html
+            section = parts[0]
+            section_label = {"services":"Services","case-studies":"Case Studies","industries":"Industries","blog":"Blog"}.get(section, section.title())
+            crumbs.append((section_label, f"{section}.html" if section not in ("blog",) else f"{section}.html"))
+            crumbs.append((title, path))
+        elif path and path not in ("", "index.html"):
+            crumbs.append((title, path))
+        breadcrumbs = crumbs
+
+    bc_items = []
+    for i, (name, p) in enumerate(breadcrumbs, 1):
+        item_url = SITE_URL + "/" if p == "" else f"{SITE_URL}/{p.lstrip('/')}"
+        bc_items.append({"@type":"ListItem","position":i,"name":name,"item":item_url})
+    bc_schema = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":bc_items}
+
+    schema_blocks = [json.dumps(bc_schema, ensure_ascii=False)]
+    if extra_schema:
+        for s in extra_schema:
+            schema_blocks.append(json.dumps(s, ensure_ascii=False))
+    schema_html = "\n".join(f'<script type="application/ld+json">{s}</script>' for s in schema_blocks)
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +68,7 @@ def page(title, desc, body, base="", active="", path=""):
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="{base}assets/styles.css" />
 <script>window.DT_BASE = '{base}'; window.DT_PAGE = '{active}';</script>
+{schema_html}
 </head>
 <body>
 <div class="page">
@@ -207,11 +241,11 @@ def render_case_body(c, prev_next):
   <div class="container">
     <div class="case-detail__split">
       <div class="case-detail__panel">
-        <h3>Challenges</h3>
+        <h2>Challenges</h2>
         <ul>{challenges_html}</ul>
       </div>
       <div class="case-detail__panel">
-        <h3>Strategy &amp; execution</h3>
+        <h2>Strategy &amp; execution</h2>
         <ul>{strategy_html}</ul>
       </div>
     </div>
@@ -272,6 +306,7 @@ def build_cases_hub():
 
 <section class="section cases">
   <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Filter by industry</span><h2>Case studies by category</h2></div><p class="lead">Real ROAS, CAC, LTV and margin numbers from real engagements.</p></div>
     <div class="work-tabs" id="caseTabs">{tabs_html}</div>
     <div class="cases-grid" id="caseGrid">{cards}</div>
     <div class="work-empty" id="caseEmpty" style="display:none">No engagements in this category yet — talk to us about being the first.</div>
@@ -299,7 +334,10 @@ def build_cases_hub():
 }})();
 </script>
 """
-    return page("Case studies", "Digitaltheory case studies across D2C, BPC, edtech, consumer apps, gaming and retail digital transformation. Real numbers from real engagements.", body, base="", active="cases", path="case-studies.html")
+    return page("Case Studies — Growth Marketing Outcomes",
+                "Digitaltheory case studies across D2C, beauty, edtech, consumer apps, gaming and retail. Real ROAS, CAC, LTV and margin numbers from real engagements.",
+                body, base="", active="cases", path="case-studies.html",
+                seo_title="Case Studies — Growth Marketing Outcomes | Digitaltheory")
 
 # ====================== SERVICES ======================
 SERVICES = [
@@ -318,6 +356,7 @@ SERVICES = [
     },
     {
         "slug":"branding","title":"Branding",
+        "seo_title":"Branding & Identity Services | Digitaltheory",
         "hero":"Build a memorable brand story that captivates audiences across every platform.",
         "intro":"Brand is the compounding asset behind performance. We build identity, positioning and creative systems that travel — from packaging to performance ads to founder LinkedIn.",
         "what":["Brand positioning &amp; narrative","Identity systems (logo, type, colour)","Packaging &amp; print","Brand films &amp; founder content","Tone of voice &amp; copy guidelines"],
@@ -369,6 +408,7 @@ SERVICES = [
     },
     {
         "slug":"seo","title":"SEO",
+        "seo_title":"SEO Services — Technical, Content & GEO | Digitaltheory",
         "hero":"Technical SEO, content engines and link strategy that lifts organic share-of-search and drives down blended CAC.",
         "intro":"SEO is the cheapest CAC lever most brands ignore. We treat it as a system — technical foundation, programmatic + editorial content, plus a real link program — and report it in the same dashboard as paid.",
         "what":["Technical SEO &amp; site audits","Programmatic SEO","Editorial content engine","Link building &amp; digital PR","Local &amp; international SEO"],
@@ -427,7 +467,7 @@ SERVICES = [
 
 def render_service_body(s):
     what_html = ''.join(f'<li>{x}</li>' for x in s["what"])
-    deliverables_html = ''.join(f'<div class="deliverable"><h4>{n}</h4><p>{d}</p></div>' for n,d in s["deliverables"])
+    deliverables_html = ''.join(f'<div class="deliverable"><h3>{n}</h3><p>{d}</p></div>' for n,d in s["deliverables"])
     return f"""
 <section class="page-hero">
   <div class="container page-hero__inner">
@@ -547,13 +587,13 @@ def render_business_consulting_body():
         ("03","Run the play","Six to twelve weeks. We run the experiments alongside your team — pricing tests, channel pivots, NPD launches, inventory resets."),
         ("04","Operate","Quarterly. The model updates with reality. The wins compound. The losses get cut. The cadence becomes how you run."),
     ]
-    method_html = "".join(f'<div class="bc-step"><div class="bc-step__num">{n}</div><h4>{t}</h4><p>{d}</p></div>' for n,t,d in method)
+    method_html = "".join(f'<div class="bc-step"><div class="bc-step__num">{n}</div><h3>{t}</h3><p>{d}</p></div>' for n,t,d in method)
     principles = [
         ("Operators first","Every recommendation comes from someone who has shipped it before — not a framework borrowed from a textbook."),
         ("Numbers, not narratives","If a strategy can&rsquo;t be measured on the P&amp;L, it isn&rsquo;t one. Every workstream owns a metric."),
         ("Skin in the outcome","Engagements are scoped around the result, not the hours. We win when you do — that&rsquo;s the only deal worth having."),
     ]
-    principles_html = "".join(f'<div class="bc-principle"><h4>{t}</h4><p>{d}</p></div>' for t,d in principles)
+    principles_html = "".join(f'<div class="bc-principle"><h3>{t}</h3><p>{d}</p></div>' for t,d in principles)
 
     return f"""
 <section class="bc-hero">
@@ -585,7 +625,7 @@ def render_business_consulting_body():
         </div>
       </div>
       <div class="bc-overview__visual">
-        <h4>What we&rsquo;ve shipped</h4>
+        <h3>What we&rsquo;ve shipped</h3>
         <div class="bc-overview__stats">
           <div class="stat"><div class="stat__num">50<span class="unit">+</span></div><div class="stat__label">Brands advised</div></div>
           <div class="stat"><div class="stat__num">100<span class="unit">Cr+</span></div><div class="stat__label">Ad spend modelled</div></div>
@@ -684,13 +724,20 @@ def build_services_hub():
 
 <section class="section">
   <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">All services</span><h2>Every service, one operating model</h2></div>
+      <p class="lead">Pick the service that fits your stage; we'll bring the pod that fits the service.</p>
+    </div>
     <div class="services-grid">{cards}</div>
   </div>
 </section>
 
 {CTA_BAND.format(base='')}
 """
-    return page("Services", "All Digitaltheory services — performance marketing, branding, web development, app development, business consulting, video production, SEO, digital transformation, and CRM & retention.", body, base="", active="services", path="services.html")
+    return page("Growth Marketing Services",
+                "Performance marketing, branding, web & app development, business consulting, SEO, CRM & retention, and platform implementations from Digitaltheory.",
+                body, base="", active="services", path="services.html",
+                seo_title="Growth Marketing Services — Digitaltheory")
 
 # ====================== OUR WORK ======================
 WORKS = [
@@ -859,7 +906,10 @@ def build_our_work():
 }})();
 </script>
 """
-    return page("Our Work", "Digitaltheory's portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — filter by industry to see relevant engagements.", body, base="", active="work", path="our-work.html")
+    return page("Our Work — 50+ Brands, 7 Industries",
+                "Digitaltheory's portfolio across D2C, beauty, edtech, consumer apps, gaming, retail and fintech — filter by industry to see relevant engagements.",
+                body, base="", active="work", path="our-work.html",
+                seo_title="Our Work — 50+ Brands, 7 Industries | Digitaltheory")
 
 # ====================== BLOG ======================
 BLOG_POSTS = [
@@ -867,6 +917,7 @@ BLOG_POSTS = [
         "slug":"quadcore-campaign-framework",
         "cat":"Performance Marketing","cat_key":"performance",
         "title":"The quadcore framework: why two-motion paid accounts stop compounding",
+        "seo_title":"The Quadcore Paid Media Framework | Digitaltheory",
         "excerpt":"Most performance accounts run two motions — prospecting and retargeting — and then plateau. Here's the four-motion structure that replaces it.",
         "date":"2026-05-22","read":"7 min read",
         "body":"""
@@ -909,6 +960,7 @@ BLOG_POSTS = [
         "slug":"60-40-marketplace-d2c-budget",
         "cat":"D2C & E-commerce","cat_key":"d2c",
         "title":"How to split D2C performance budget between marketplaces and own site",
+        "seo_title":"D2C Budget Split: Marketplaces vs Own Site | Digitaltheory",
         "excerpt":"Most D2C brands either over-index on Amazon or over-index on Shopify. Neither stance is right. Here's how to model the split properly.",
         "date":"2026-04-30","read":"6 min read",
         "body":"""
@@ -947,6 +999,7 @@ BLOG_POSTS = [
         "slug":"rfm-cohort-retention-guide",
         "cat":"CRM & Retention","cat_key":"crm",
         "title":"Why RFM still wins: a practical guide to cohort-based retention",
+        "seo_title":"RFM: A Practical Cohort Retention Guide | Digitaltheory",
         "excerpt":"Predictive ML and real-time personalisation are great. None of them work if your customer base isn't first segmented into cohorts you can act on weekly.",
         "date":"2026-04-08","read":"8 min read",
         "body":"""
@@ -987,6 +1040,7 @@ BLOG_POSTS = [
         "slug":"edtech-international-expansion",
         "cat":"Edtech","cat_key":"edtech",
         "title":"When edtech CAC won't fall, leave the market: an international expansion playbook",
+        "seo_title":"Edtech International Expansion Playbook | Digitaltheory",
         "excerpt":"For Indian edtech businesses, the temptation when CAC climbs is to optimise harder against Indian auctions. Often, the cheaper answer is an entirely different country.",
         "date":"2026-03-18","read":"6 min read",
         "body":"""
@@ -1029,6 +1083,7 @@ BLOG_POSTS = [
         "slug":"channel-scoring-consumer-apps",
         "cat":"Growth Strategy","cat_key":"strategy",
         "title":"Channel scoring for consumer apps: the four-dimensional model that beats CAC-only thinking",
+        "seo_title":"Channel Scoring for Consumer Apps | Digitaltheory",
         "excerpt":"Most channel decisions get made on last-week's CAC. The interesting decisions get made on per-channel LTV trajectories. Here's the scoring model that surfaces them.",
         "date":"2026-02-28","read":"7 min read",
         "body":"""
@@ -1078,6 +1133,7 @@ BLOG_POSTS = [
         "slug":"multi-branch-retail-margin",
         "cat":"Growth Strategy","cat_key":"strategy",
         "title":"Where the next 10 points of margin live in multi-branch retail",
+        "seo_title":"Multi-Branch Retail Margin Playbook | Digitaltheory",
         "excerpt":"The fix isn't a new ERP. The fix is a tool on top of the ERP you already have, built around the operations team — plus an ML layer on the cleaned data.",
         "date":"2026-02-04","read":"8 min read",
         "body":"""
@@ -1121,6 +1177,7 @@ BLOG_POSTS = [
         "slug":"agentic-ai-growth-team-workflow",
         "cat":"MarTech","cat_key":"martech",
         "title":"Where agentic AI fits in a growth team's actual workflow (and where it doesn't)",
+        "seo_title":"Agentic AI in Growth Teams: Where It Fits | Digitaltheory",
         "excerpt":"Agentic AI is being sold as a replacement for performance teams. In practice, it's a force multiplier on a narrow set of jobs and a liability on the rest.",
         "date":"2026-06-04","read":"6 min read",
         "body":"""
@@ -1159,6 +1216,7 @@ BLOG_POSTS = [
         "slug":"martech-stack-triage",
         "cat":"MarTech","cat_key":"martech",
         "title":"MarTech stack triage: when to consolidate, when to add, when to rip out",
+        "seo_title":"MarTech Stack Triage — A Practical Guide | Digitaltheory",
         "excerpt":"Most marketing teams own 30+ tools and use 12. The triage isn't a procurement exercise — it's a workflow audit.",
         "date":"2026-05-12","read":"5 min read",
         "body":"""
@@ -1194,6 +1252,7 @@ BLOG_POSTS = [
         "slug":"geo-b2b-llm-discovery",
         "cat":"SEO","cat_key":"seo",
         "title":"Generative Engine Optimization for B2B: how to rank inside LLM answers",
+        "seo_title":"GEO for B2B: Ranking Inside LLM Answers | Digitaltheory",
         "excerpt":"Search traffic is no longer the only entry point. ChatGPT and Perplexity answers are. Here's what a serious GEO program looks like for a B2B brand.",
         "date":"2026-05-05","read":"6 min read",
         "body":"""
@@ -1233,6 +1292,7 @@ BLOG_POSTS = [
         "slug":"march-2026-core-update-d2c",
         "cat":"SEO","cat_key":"seo",
         "title":"What the March 2026 core update actually changes for D2C SEO",
+        "seo_title":"March 2026 Google Core Update for D2C SEO | Digitaltheory",
         "excerpt":"Core updates have been compressing thin-content sites for years. The latest cycle tightens the screws on aggregator pages and lifts brand-led editorial.",
         "date":"2026-04-22","read":"5 min read",
         "body":"""
@@ -1274,7 +1334,8 @@ BLOG_POSTS = [
         "slug":"brand-measurement-performance-cadence",
         "cat":"Performance Marketing","cat_key":"performance",
         "title":"How to measure brand at a performance cadence",
-        "excerpt":"Brand is usually measured quarterly with surveys nobody reads. Performance is measured daily. The fix is to track brand at weekly cadence using signals already in the stack.",
+        "seo_title":"How to Measure Brand at a Performance Cadence | Digitaltheory",
+        "excerpt":"Brand is usually measured quarterly with surveys nobody reads. Performance is measured daily. Track brand at weekly cadence using signals already in the stack.",
         "date":"2026-03-30","read":"6 min read",
         "body":"""
 <p class="post__lead">The argument between brand and performance is usually about which gets the budget. The real problem is that brand is measured quarterly with surveys nobody reads, while performance is measured daily. No CFO is going to reallocate from a daily-measured channel to a quarterly-measured one. The fix is to measure brand at performance cadence.</p>
@@ -1309,6 +1370,7 @@ BLOG_POSTS = [
         "slug":"abm-without-noise",
         "cat":"B2B Marketing","cat_key":"b2b",
         "title":"ABM without the noise: a stripped-down B2B playbook",
+        "seo_title":"ABM Without the Noise: A B2B Playbook | Digitaltheory",
         "excerpt":"Account-based marketing has been over-engineered into a discipline only enterprise teams can afford. The stripped-down version works for mid-market SaaS too.",
         "date":"2026-03-10","read":"6 min read",
         "body":"""
@@ -1408,6 +1470,7 @@ def build_blog_hub():
 </section>
 <section class="section">
   <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Latest articles</span><h2>Field notes from inside our engagements</h2></div><p class="lead">Frameworks, playbooks and post-mortems from performance, D2C, edtech and MarTech work.</p></div>
     <div class="work-tabs" id="blogTabs">{tabs_html}</div>
     <div class="blog-grid" id="blogGrid">{cards}</div>
     <div class="work-empty" id="blogEmpty" style="display:none">No posts in this category yet — more on the way.</div>
@@ -1433,7 +1496,9 @@ def build_blog_hub():
 }})();
 </script>
 """
-    return page("Blog", "Digitaltheory blog — field notes on performance marketing, retention, D2C unit economics and digital transformation, grounded in real engagements.", body, base="", active="", path="blog.html")
+    return page("Growth Marketing Blog — Trends & Frameworks",
+                "Digitaltheory blog — field notes on performance marketing, retention, D2C unit economics, MarTech and SEO grounded in real engagements.",
+                body, base="", active="", path="blog.html")
 
 # ====================== INDUSTRY PAGES ======================
 INDUSTRIES = [
@@ -1742,10 +1807,15 @@ def build_industries_hub():
     <p class="lead page-hero__lead">Patterns travel across categories; specifics don&rsquo;t. Pick the industry that matches yours to see the levers we pull and the outcomes we&rsquo;ve already shipped.</p>
   </div>
 </section>
-<section class="section"><div class="container"><div class="services-grid">{cards}</div></div></section>
+<section class="section"><div class="container">
+<div class="sec-head"><div><span class="eyebrow">All industries</span><h2>Categories we've operated inside</h2></div><p class="lead">Deep operating reps across consumer and tech verticals.</p></div>
+<div class="services-grid">{cards}</div></div></section>
 {CTA_BAND.format(base='')}
 """
-    return page("Industries", "Digitaltheory industry expertise across D2C, beauty, edtech, consumer apps, gaming, retail, fintech and B2B SaaS.", body, base="", active="", path="industries.html")
+    return page("Industries We Serve — D2C, Edtech, Fintech & More",
+                "Digitaltheory industry expertise across D2C, beauty, edtech, consumer apps, gaming, retail, fintech and B2B SaaS.",
+                body, base="", active="", path="industries.html",
+                seo_title="Industries We Serve — D2C, Edtech, Fintech & More | Digitaltheory")
 
 # ====================== ABOUT ======================
 def build_about():
@@ -1818,7 +1888,9 @@ def build_about():
 
 {CTA_BAND.format(base='')}
 """
-    return page("About", "Digitaltheory is a data-first growth marketing company helping brands turn theory into durable growth across performance, branding, web, app, and CRM.", body, base="", active="about", path="about.html")
+    return page("About Digitaltheory — Data-First Growth Marketing",
+                "Digitaltheory is a data-first growth marketing company helping brands turn theory into durable growth across performance, branding, web, app and CRM.",
+                body, base="", active="about", path="about.html")
 
 # ====================== CAREERS ======================
 def build_careers():
@@ -1866,7 +1938,9 @@ def build_careers():
 
 {CTA_BAND.format(base='')}
 """
-    return page("Careers", "Open roles at Digitaltheory across performance marketing, creative, engineering, data and CRM. Work on real brands with real budgets.", body, base="", active="careers", path="careers.html")
+    return page("Careers — Digitaltheory Growth Team",
+                "Open roles at Digitaltheory across performance marketing, creative, engineering, data and CRM. Work on real brands with real budgets.",
+                body, base="", active="careers", path="careers.html")
 
 # ====================== CONTACT ======================
 def build_contact():
@@ -1922,7 +1996,9 @@ def build_contact():
   </div>
 </section>
 """
-    return page("Contact", "Contact Digitaltheory — offices in Bengaluru and Mumbai. Performance marketing, branding, web, app, CRM and digital transformation.", body, base="", active="contact", path="contact.html")
+    return page("Contact Digitaltheory — Talk to Our Growth Team",
+                "Contact Digitaltheory — offices in Bengaluru and Mumbai. Performance marketing, branding, web, app, CRM and consulting.",
+                body, base="", active="contact", path="contact.html")
 
 # ====================== WRITE ALL ======================
 def write(path, content):
@@ -1939,7 +2015,24 @@ for idx, c in enumerate(CASES):
     next_slug = slugs[idx+1] if idx < len(CASES)-1 else None
     body = render_case_body(c, (prev_slug, next_slug))
     path = f"case-studies/{c['slug']}.html"
-    write(path, page(f"{c['brand']} case study", f"{c['brand']} ({c['industry']}) — case study by Digitaltheory. {c['hero']}", body, base="../", active="cases", path=path))
+    desc = f"{c['brand']} ({c['industry']}) — case study by Digitaltheory. {c['hero']}"
+    if len(desc) > 165:
+        desc = desc[:155].rsplit(" ",1)[0] + "…"
+    case_schema = {
+        "@context":"https://schema.org","@type":"Article",
+        "headline": f"{c['brand']} case study",
+        "description": c["hero"],
+        "author":{"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/"},
+        "publisher":{"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/","logo":{"@type":"ImageObject","url":SITE_URL+"/assets/favicon.svg"}},
+        "about":{"@type":"Organization","name": c["brand"]},
+        "articleSection": c["industry"],
+        "mainEntityOfPage":{"@type":"WebPage","@id": f"{SITE_URL}/{path}"},
+        "url": f"{SITE_URL}/{path}","inLanguage":"en",
+    }
+    crumbs = [("Home",""),("Case Studies","case-studies.html"),(c["brand"], path)]
+    write(path, page(f"{c['brand']} Case Study", desc, body, base="../", active="cases", path=path,
+                     seo_title=(f"{c['brand']} Case Study | Digitaltheory" if len(c['brand'])+len(c['industry']) > 40 else f"{c['brand']} Case Study — {c['industry']} | Digitaltheory"),
+                     extra_schema=[case_schema], breadcrumbs=crumbs))
 
 write("case-studies.html", build_cases_hub())
 
@@ -1948,7 +2041,21 @@ for s in SERVICES:
     body = render_business_consulting_body() if s["slug"] == "business-consulting" else render_service_body(s)
     path = f"services/{s['slug']}.html"
     desc = "Strategy, growth, unit economics, market entry, NPD, M&A diligence — consulting that ships, not just advises." if s["slug"] == "business-consulting" else f"{s['title']} services by Digitaltheory. {s['hero']}"
-    write(path, page(s["title"], desc, body, base="../", active="services", path=path))
+    if len(desc) > 165:
+        desc = desc[:155].rsplit(" ",1)[0] + "…"
+    service_schema = {
+        "@context":"https://schema.org","@type":"Service",
+        "name": s["title"],
+        "description": s["hero"],
+        "provider": {"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/"},
+        "areaServed": ["IN","AE","US","SG"],
+        "serviceType": s["title"],
+        "url": f"{SITE_URL}/{path}",
+    }
+    crumbs = [("Home",""),("Services","services.html"),(s["title"], path)]
+    write(path, page(s["title"], desc, body, base="../", active="services", path=path,
+                     seo_title=s.get("seo_title"),
+                     extra_schema=[service_schema], breadcrumbs=crumbs))
 
 write("services.html", build_services_hub())
 write("our-work.html", build_our_work())
@@ -1956,13 +2063,43 @@ write("our-work.html", build_our_work())
 # Industry pages
 for ind in INDUSTRIES:
     ipath = f"industries/{ind['slug']}.html"
-    write(ipath, page(f"{ind['title']} Growth Marketing", ind["lead"], render_industry_body(ind), base="../", active="", path=ipath))
+    desc = ind["lead"]
+    if len(desc) > 165:
+        desc = desc[:155].rsplit(" ",1)[0] + "…"
+    ind_schema = {
+        "@context":"https://schema.org","@type":"Service",
+        "name": f"{ind['title']} Growth Marketing",
+        "description": ind["lead"],
+        "provider":{"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/"},
+        "audience":{"@type":"BusinessAudience","audienceType": ind["title"]},
+        "url": f"{SITE_URL}/{ipath}",
+    }
+    crumbs = [("Home",""),("Industries","industries.html"),(ind["title"], ipath)]
+    write(ipath, page(f"{ind['title']} Growth Marketing", desc, render_industry_body(ind), base="../", active="", path=ipath,
+                      extra_schema=[ind_schema], breadcrumbs=crumbs))
 write("industries.html", build_industries_hub())
 
 # Blog
 for p in BLOG_POSTS:
     bpath = f"blog/{p['slug']}.html"
-    write(bpath, page(p["title"], p["excerpt"], render_blog_post(p), base="../", active="", path=bpath))
+    article_schema = {
+        "@context":"https://schema.org","@type":"Article",
+        "headline": p["title"],
+        "description": p["excerpt"],
+        "datePublished": p["date"],
+        "dateModified": p["date"],
+        "author": {"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/"},
+        "publisher": {"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/","logo":{"@type":"ImageObject","url":SITE_URL+"/assets/favicon.svg"}},
+        "articleSection": p["cat"],
+        "mainEntityOfPage": {"@type":"WebPage","@id": f"{SITE_URL}/{bpath}"},
+        "url": f"{SITE_URL}/{bpath}",
+        "inLanguage":"en",
+    }
+    crumbs = [("Home",""),("Blog","blog.html"),(p["cat"],"blog.html"),(p["title"], bpath)]
+    write(bpath, page(p["title"], p["excerpt"], render_blog_post(p),
+                      base="../", active="", path=bpath,
+                      seo_title=p.get("seo_title"),
+                      extra_schema=[article_schema], breadcrumbs=crumbs))
 write("blog.html", build_blog_hub())
 
 write("about.html", build_about())
