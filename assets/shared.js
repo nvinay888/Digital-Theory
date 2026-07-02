@@ -136,7 +136,7 @@
         <div class="footer__col">
           <h4>Connect</h4>
           <ul>
-            <li><a href="mailto:hello@digitaltheory.in">hello@digitaltheory.in</a></li>
+            <li><a href="mailto:hello@digitaltheory.co.in">hello@digitaltheory.co.in</a></li>
             <li><a href="#">LinkedIn</a></li>
             <li><a href="#">Instagram</a></li>
           </ul>

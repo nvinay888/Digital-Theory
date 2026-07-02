@@ -3,7 +3,37 @@
 import os, json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SITE_URL = "https://digitaltheory.in"   # change to your production domain
+SITE_URL = "https://digitaltheory.co.in"   # production domain
+
+def render_faq(items, section_title="Frequently Asked Questions", eyebrow="FAQ"):
+    """items: list of (question, answer_html). Returns (html, schema_dict)."""
+    import re as _re
+    def to_text(html_str):
+        return _re.sub(r'\s+', ' ', _re.sub(r'<[^>]+>', '', html_str)).strip()
+    faq_html_items = "\n".join(
+        f'<details><summary>{q}</summary><div class="faq__answer">{a}</div></details>'
+        for q,a in items
+    )
+    html = f'''
+<section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)" id="faq">
+  <div class="container">
+    <div class="sec-head" style="justify-content:center;text-align:center">
+      <div style="margin:0 auto"><span class="eyebrow" style="justify-content:center">{eyebrow}</span><h2 style="margin-top:12px">{section_title}</h2></div>
+    </div>
+    <div class="faq">
+      {faq_html_items}
+    </div>
+  </div>
+</section>
+'''
+    schema = {
+        "@context":"https://schema.org","@type":"FAQPage",
+        "mainEntity":[
+            {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text": to_text(a)}}
+            for q,a in items
+        ],
+    }
+    return html, schema
 
 def page(title, desc, body, base="", active="", path="", seo_title=None, extra_schema=None, breadcrumbs=None):
     """
@@ -516,6 +546,21 @@ def render_service_body(s):
 """
 
 def render_business_consulting_body():
+    global BC_FAQ_SCHEMA
+    bc_faq_html, BC_FAQ_SCHEMA = render_faq([
+        ("What does a Digitaltheory consulting engagement look like?",
+         "<p>Every engagement runs on a four-phase operating model: <strong>Diagnose</strong> (two weeks inside your data), <strong>Hypothesise</strong> (a one-page memo and a working financial model), <strong>Run the play</strong> (six to twelve weeks of experiments shipped alongside your team) and <strong>Operate</strong> (quarterly cadence where the model updates with reality).</p>"),
+        ("Do you write recommendations or ship them?",
+         "<p>Both. Every phase ends with a working artefact — a model, a memo, a tested campaign or a launched SKU. We don't do slide-only deliverables.</p>"),
+        ("Which consumer sub-sectors do you cover?",
+         "<p>D2C &amp; e-commerce, beauty &amp; personal care, fashion &amp; apparel, food &amp; beverages, consumer electronics, consumer health, edtech and multi-branch retail. Patterns travel across sub-sectors; specifics don't. We bring both.</p>"),
+        ("What's a typical engagement size and duration?",
+         "<p>Diagnostic sprints are 4 weeks. Strategy &amp; turnaround engagements are 12 weeks. Market-entry pilots are 8 weeks (country prioritisation to live pilot). Retained advisory is quarterly on-call counsel for leadership teams.</p>"),
+        ("Do you help with M&amp;A due diligence?",
+         "<p>Yes. We run buy-side commercial due diligence, target scanning, synergy modelling and post-deal integration — using the same operating chassis we use for organic growth engagements.</p>"),
+        ("How is pricing structured?",
+         "<p>Outcome-driven pricing tied to the metric that matters to the P&amp;L — CAC, CM3, LTV, category share or NPD payback. Engagements are scoped around the result, not the hours.</p>"),
+    ], section_title="Frequently asked questions about our consulting practice")
     icon = lambda name: {
       "growth":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
       "entry":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>',
@@ -690,6 +735,8 @@ def render_business_consulting_body():
   </div>
 </section>
 
+{bc_faq_html}
+
 {CTA_BAND.format(base='../')}
 
 <script>
@@ -703,6 +750,7 @@ def render_business_consulting_body():
 }})();
 </script>
 """
+BC_FAQ_SCHEMA = None  # populated by render_business_consulting_body()
 
 def build_services_hub():
     cards = ''
@@ -1904,7 +1952,7 @@ def build_careers():
         ("Video Editor — Performance Creative","Mumbai","Full-time"),
         ("Account Manager — D2C","Bengaluru","Full-time"),
     ]
-    role_html = ''.join(f'<div class="role"><div class="role__title">{t}</div><div class="role__meta">{loc}</div><div class="role__meta">{ty}</div><a href="mailto:careers@digitaltheory.in?subject={t}" class="btn btn--secondary btn--sm">Apply <span class="btn__arrow">→</span></a></div>' for t,loc,ty in roles)
+    role_html = ''.join(f'<div class="role"><div class="role__title">{t}</div><div class="role__meta">{loc}</div><div class="role__meta">{ty}</div><a href="mailto:careers@digitaltheory.co.in?subject={t}" class="btn btn--secondary btn--sm">Apply <span class="btn__arrow">→</span></a></div>' for t,loc,ty in roles)
     body = f"""
 <section class="page-hero">
   <div class="container page-hero__inner">
@@ -1913,7 +1961,7 @@ def build_careers():
     <p class="lead page-hero__lead">We hire operators. People who own outcomes, not deliverables. If you want to do the best work of your career on brands you'll actually recognise, come talk to us.</p>
     <div class="page-hero__cta">
       <a href="#roles" class="btn btn--primary btn--lg">See open roles <span class="btn__arrow">→</span></a>
-      <a href="mailto:careers@digitaltheory.in" class="btn btn--secondary btn--lg">Drop us a line</a>
+      <a href="mailto:careers@digitaltheory.co.in" class="btn btn--secondary btn--lg">Drop us a line</a>
     </div>
   </div>
 </section>
@@ -1931,7 +1979,7 @@ def build_careers():
 
 <section class="section" id="roles" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">Open roles</span><h2>Currently hiring</h2></div><p class="lead">Don't see your role? Email us anyway — careers@digitaltheory.in</p></div>
+    <div class="sec-head"><div><span class="eyebrow">Open roles</span><h2>Currently hiring</h2></div><p class="lead">Don't see your role? Email us anyway — careers@digitaltheory.co.in</p></div>
     <div class="role-list">{role_html}</div>
   </div>
 </section>
@@ -1944,6 +1992,20 @@ def build_careers():
 
 # ====================== CONTACT ======================
 def build_contact():
+    faq_html, faq_schema = render_faq([
+        ("How quickly do you respond to enquiries?",
+         "<p>We reply to every enquiry within one business day. Discovery calls are usually scheduled within the same week.</p>"),
+        ("What does a Digitaltheory engagement look like?",
+         "<p>Every engagement follows a four-step operating cadence: <strong>Discovery call</strong> → <strong>Strategy</strong> → <strong>Resource plan</strong> → <strong>Biweekly updates</strong>. We scope around the outcome you want to move, not a fixed list of deliverables.</p>"),
+        ("Do you work with our existing MarTech, ERP or CRM stack?",
+         "<p>Yes. We integrate with your existing Shopify, Amazon, HubSpot, Salesforce, Klaviyo, GA4, ERP or CDP — no forced replatforming. Where a tool is missing, we recommend the smallest incremental spend that closes the gap.</p>"),
+        ("What's the smallest engagement you take on?",
+         "<p>A four-week diagnostic sprint that ends in a prioritised, one-page plan and a working financial model. Most clients start there and expand into a strategy &amp; turnaround engagement afterwards.</p>"),
+        ("Where are you based and which markets do you cover?",
+         "<p>Offices in Bengaluru and Mumbai. We run engagements across India, GCC (UAE, Saudi Arabia), Southeast Asia and select US brands.</p>"),
+        ("How do you price consulting and performance engagements?",
+         "<p>Outcome-driven pricing tied to the metric that matters — CAC, ROAS, CM3, LTV or category share. We win when your business does.</p>"),
+    ], section_title="Common questions about working with us")
     body = f"""
 <section class="page-hero">
   <div class="container page-hero__inner">
@@ -1973,11 +2035,11 @@ def build_contact():
       <div class="contact-info">
         <div class="contact-info__row">
           <div class="contact-info__label">Email</div>
-          <div class="contact-info__value"><a href="mailto:hello@digitaltheory.in">hello@digitaltheory.in</a></div>
+          <div class="contact-info__value"><a href="mailto:hello@digitaltheory.co.in">hello@digitaltheory.co.in</a></div>
         </div>
         <div class="contact-info__row">
           <div class="contact-info__label">Careers</div>
-          <div class="contact-info__value"><a href="mailto:careers@digitaltheory.in">careers@digitaltheory.in</a></div>
+          <div class="contact-info__value"><a href="mailto:careers@digitaltheory.co.in">careers@digitaltheory.co.in</a></div>
         </div>
         <div class="contact-info__row">
           <div class="contact-info__label">Bengaluru</div>
@@ -1996,9 +2058,11 @@ def build_contact():
   </div>
 </section>
 """
+    body = body + faq_html
     return page("Contact Digitaltheory — Talk to Our Growth Team",
                 "Contact Digitaltheory — offices in Bengaluru and Mumbai. Performance marketing, branding, web, app, CRM and consulting.",
-                body, base="", active="contact", path="contact.html")
+                body, base="", active="contact", path="contact.html",
+                extra_schema=[faq_schema])
 
 # ====================== WRITE ALL ======================
 def write(path, content):
@@ -2053,9 +2117,12 @@ for s in SERVICES:
         "url": f"{SITE_URL}/{path}",
     }
     crumbs = [("Home",""),("Services","services.html"),(s["title"], path)]
+    schemas = [service_schema]
+    if s["slug"] == "business-consulting" and BC_FAQ_SCHEMA:
+        schemas.append(BC_FAQ_SCHEMA)
     write(path, page(s["title"], desc, body, base="../", active="services", path=path,
                      seo_title=s.get("seo_title"),
-                     extra_schema=[service_schema], breadcrumbs=crumbs))
+                     extra_schema=schemas, breadcrumbs=crumbs))
 
 write("services.html", build_services_hub())
 write("our-work.html", build_our_work())
