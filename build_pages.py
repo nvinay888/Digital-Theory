@@ -381,19 +381,6 @@ SERVICES = [
         "case":"pocket52","case_label":"Pocket52 — ASO + content lifted organic installs 20%.",
     },
     {
-        "slug":"digital-transformation","title":"Digital Transformation",
-        "hero":"ERP integration, inventory automation, predictive analytics and ML — for measurable margin impact.",
-        "intro":"For brick-and-mortar and omnichannel businesses, the next 10% of margin lives in operations, not ads. We digitise inventory, returns, fulfilment and store-level decision-making — and prove it on the P&amp;L.",
-        "what":["ERP &amp; OMS integration","Inventory management automation","Returns &amp; reverse logistics dashboards","Predictive analytics &amp; ML","Store operations digitisation"],
-        "deliverables":[
-            ("Process audit","Map your data, decisions and handoffs — and where they leak time and money."),
-            ("Software builds","Custom tools and integrations that sit on top of your existing ERP."),
-            ("ML models","Demand forecasting, returns prediction and store-fit scoring."),
-            ("Change management","Training, dashboards and ops cadence so the system actually gets used."),
-        ],
-        "case":"thulasi","case_label":"Thulasi — 33% inventory cost reduction, 37% returns reduction.",
-    },
-    {
         "slug":"sap-b1-implementation","title":"SAP Business One Implementation",
         "hero":"Deploy SAP Business One as the operating spine of your business — finance, sales, inventory, purchasing, MRP and analytics in one system.",
         "intro":"SAP Business One (B1) is the ERP we install when a growing business has outgrown its spreadsheets and disconnected tools. We scope, configure, migrate, integrate and train — and we stay on after go-live so the system actually gets used.",
@@ -1089,7 +1076,7 @@ BLOG_POSTS = [
     },
     {
         "slug":"multi-branch-retail-margin",
-        "cat":"Digital Transformation","cat_key":"transformation",
+        "cat":"Growth Strategy","cat_key":"strategy",
         "title":"Where the next 10 points of margin live in multi-branch retail",
         "excerpt":"The fix isn't a new ERP. The fix is a tool on top of the ERP you already have, built around the operations team — plus an ML layer on the cleaned data.",
         "date":"2026-02-04","read":"8 min read",
@@ -1360,7 +1347,7 @@ BLOG_POSTS = [
 """
     },
 ]
-BLOG_CATEGORIES = ["All","Performance Marketing","D2C & E-commerce","CRM & Retention","Edtech","Growth Strategy","Digital Transformation","SEO","MarTech","B2B Marketing"]
+BLOG_CATEGORIES = ["All","Performance Marketing","D2C & E-commerce","CRM & Retention","Edtech","Growth Strategy","SEO","MarTech","B2B Marketing"]
 
 def fmt_date(iso):
     months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
@@ -1814,7 +1801,7 @@ def build_about():
       <a class="service" href="services/web-development.html"><span class="service__index">03</span><h3 class="service__title">Web Development</h3><p class="service__body">D2C storefronts, landing pages and marketing sites that convert.</p></a>
       <a class="service" href="services/app-development.html"><span class="service__index">04</span><h3 class="service__title">App Development</h3><p class="service__body">Consumer apps with ASO, analytics and CRM baked in from day one.</p></a>
       <a class="service" href="services/business-consulting.html"><span class="service__index">05</span><h3 class="service__title">Business Consulting</h3><p class="service__body">Pricing, unit economics, NPD and channel-mix counsel grounded in your P&amp;L.</p></a>
-      <a class="service" href="services/digital-transformation.html"><span class="service__index">06</span><h3 class="service__title">Digital Transformation</h3><p class="service__body">ERP, inventory, returns and ML for measurable margin impact.</p></a>
+      <a class="service" href="services/crm-retention.html"><span class="service__index">06</span><h3 class="service__title">CRM &amp; Retention</h3><p class="service__body">RFM segmentation, lifecycle journeys and loyalty programs that lift LTV.</p></a>
     </div>
   </div>
 </section>
@@ -1903,7 +1890,7 @@ def build_contact():
           <select>
             <option>Performance Marketing</option><option>Branding</option><option>Web Development</option>
             <option>App Development</option><option>Business Consulting</option>
-            <option>SEO</option><option>Digital Transformation</option><option>CRM &amp; Retention</option><option>Not sure yet</option>
+            <option>SEO</option><option>CRM &amp; Retention</option><option>Not sure yet</option>
           </select>
         </div>
         <div><label>A bit about the project</label><textarea placeholder="Stage, goals, timelines, current numbers if you have them..."></textarea></div>

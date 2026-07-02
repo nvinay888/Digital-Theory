@@ -12,7 +12,6 @@
     ['app-development','App Development'],
     ['business-consulting','Business Consulting'],
     ['seo','SEO'],
-    ['digital-transformation','Digital Transformation'],
     ['crm-retention','CRM & Retention'],
     ['sap-b1-implementation','SAP B1 Implementation'],
     ['sfmc-implementation','SFMC Implementation'],
