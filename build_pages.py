@@ -5,6 +5,31 @@ import os, json
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://digitaltheory.co.in"   # production domain
 
+LOCALBUSINESS_SCHEMA = [
+    {
+        "@context":"https://schema.org","@type":"ProfessionalService",
+        "name":"Digitaltheory — Bengaluru",
+        "image": f"{SITE_URL}/assets/og-image.png",
+        "url": f"{SITE_URL}/",
+        "email":"hello@digitaltheory.co.in",
+        "priceRange":"$$$",
+        "address":{"@type":"PostalAddress","streetAddress":"Indiranagar","addressLocality":"Bengaluru","postalCode":"560038","addressRegion":"KA","addressCountry":"IN"},
+        "openingHours":"Mo-Fr 10:00-19:00",
+        "areaServed":{"@type":"Country","name":"India"},
+    },
+    {
+        "@context":"https://schema.org","@type":"ProfessionalService",
+        "name":"Digitaltheory — Mumbai",
+        "image": f"{SITE_URL}/assets/og-image.png",
+        "url": f"{SITE_URL}/",
+        "email":"hello@digitaltheory.co.in",
+        "priceRange":"$$$",
+        "address":{"@type":"PostalAddress","streetAddress":"Bandra West","addressLocality":"Mumbai","postalCode":"400050","addressRegion":"MH","addressCountry":"IN"},
+        "openingHours":"Mo-Fr 10:00-19:00",
+        "areaServed":{"@type":"Country","name":"India"},
+    },
+]
+
 def render_faq(items, section_title="Frequently Asked Questions", eyebrow="FAQ"):
     """items: list of (question, answer_html). Returns (html, schema_dict)."""
     import re as _re
@@ -495,6 +520,119 @@ SERVICES = [
     },
 ]
 
+# Geo-optimised <title> + meta description per service (India-national targeting; visible H1 unchanged)
+SERVICE_META = {
+    "performance-marketing": ("Performance Marketing Agency in India | Meta, Google & Amazon Ads — Digitaltheory",
+        "Performance marketing agency in India running full-funnel paid ads on Meta, Google & Amazon. Creative testing built for compounding ROAS. 45% avg ROAS lift. Talk to us."),
+    "branding": ("Branding Agency in India | Brand Strategy, Identity & Design — Digitaltheory",
+        "Branding agency in India: brand positioning, identity systems, packaging and brand films that travel from D2C to retail. Build a brand that compounds. Talk to us."),
+    "web-development": ("Web Development Company in India | Shopify & Next.js D2C — Digitaltheory",
+        "Web development company in India building high-converting Shopify & Next.js D2C storefronts and landing pages. CRO + Core Web Vitals baked in. See the work."),
+    "app-development": ("App Development Company in India | iOS, Android & ASO — Digitaltheory",
+        "App development company in India building native & React Native consumer apps with ASO, analytics and CRM built in. 55% installs lift for Laundrokart. Talk to us."),
+    "business-consulting": ("Growth & Business Consulting in India | Unit Economics & D2C — Digitaltheory",
+        "Consumer growth consulting in India: pricing, unit economics, channel mix, NPD and market entry — strategy that ships, tied to your P&L. 3x avg profit lift."),
+    "seo": ("SEO Services in India | Technical SEO, Content & Link Building — Digitaltheory",
+        "SEO services in India: technical SEO, content engines and link building that grow organic share-of-search and cut blended CAC. Reported next to paid. Talk to us."),
+    "crm-retention": ("CRM & Retention Marketing in India | RFM, Lifecycle & Loyalty — Digitaltheory",
+        "CRM & retention marketing in India: RFM segmentation, lifecycle journeys and loyalty across WhatsApp, email, push & in-app that lift LTV. 23% LTV lift. Talk to us."),
+    "sap-b1-implementation": ("SAP Business One (SAP B1) Implementation Partner in India — Digitaltheory",
+        "SAP Business One (SAP B1) implementation partner in India: scoping, configuration, data migration, integrations, training & AMC. Live in weeks. Talk to us."),
+    "sfmc-implementation": ("Salesforce Marketing Cloud (SFMC) Implementation Partner in India — Digitaltheory",
+        "Salesforce Marketing Cloud (SFMC) implementation partner in India: data model, Journey Builder, channels and Einstein AI wired end-to-end. Pays back in months."),
+}
+
+# Answer-first FAQs per service (for FAQPage schema + visible accordion)
+SERVICE_FAQS = {
+    "performance-marketing": [
+        ("What is performance marketing?", "<p>Performance marketing is paid acquisition where every rupee is tied to a measurable outcome — sales, leads or LTV — rather than impressions. It spans paid search, paid social, marketplace and affiliate channels, run as one system.</p>"),
+        ("Which ad channels does Digitaltheory manage?", "<p>We run full-funnel campaigns across Meta, Google, Amazon and Flipkart, LinkedIn and TikTok, plus programmatic, native, affiliate and influencer performance — orchestrated as one system, not siloed channels.</p>"),
+        ("How does Digitaltheory improve ROAS?", "<p>We pair a weekly creative-testing framework with full-funnel media planning and cohort-based attribution, measuring to LTV rather than last-click. Brands such as Celio have seen a 45% ROAS lift.</p>"),
+        ("How much does performance marketing cost in India?", "<p>It depends on ad spend, channels and scope. We use an outcome-driven pricing model tied to business results rather than fixed retainers — share your budget and targets on a discovery call.</p>"),
+        ("What deliverables do I get?", "<p>A channel strategy grounded in your unit economics, a repeatable creative-testing framework, the Quadcore campaign architecture (prospecting, retargeting, brand-defence, creator-led), and transparent weekly reviews.</p>"),
+    ],
+    "branding": [
+        ("What does a branding agency do?", "<p>A branding agency defines how your brand is perceived — positioning, narrative, visual identity, packaging and tone of voice — so it is memorable and consistent across every touchpoint, from packaging to performance ads.</p>"),
+        ("What is included in Digitaltheory's branding service?", "<p>Brand positioning and narrative, identity systems (logo, type, colour, motion), packaging and print, brand films and founder content, and tone-of-voice and copy guidelines — delivered as a usable system.</p>"),
+        ("How long does a branding project take?", "<p>Most positioning and identity engagements run over a few weeks, starting with a positioning workshop and moving through identity design to a launch plan. Timelines depend on scope and rounds of review.</p>"),
+        ("Why does branding matter for performance marketing?", "<p>Brand is the compounding asset behind paid performance — stronger recall lifts click-through, conversion and, over time, brand search. For Celio, brand work contributed to 17% brand-search growth.</p>"),
+        ("What deliverables do I walk away with?", "<p>A one-page positioning narrative, a full identity system with usage rules, a creative playbook of templates and guardrails, and a sequenced launch plan across owned, earned and paid surfaces.</p>"),
+    ],
+    "web-development": [
+        ("What platforms does Digitaltheory build on?", "<p>We build on Shopify and Shopify Plus, Next.js/React headless, WordPress and Webflow — chosen to fit your commerce model, and always engineered for Core Web Vitals, speed and conversion.</p>"),
+        ("Do you build D2C ecommerce stores?", "<p>Yes. We build high-converting D2C storefronts engineered around your AOV, attach-rate and repeat-rate goals, plus reusable landing-page systems your marketing team can spin up per campaign in hours.</p>"),
+        ("Why is site speed important for marketing?", "<p>Performance marketing dies at a slow site — slow load times cut conversion and raise CAC. We treat Core Web Vitals as non-negotiable and wire GA4, server-side events, CAPI and Mixpanel from day one.</p>"),
+        ("What results has Digitaltheory delivered?", "<p>For Codingal, a landing-page and onboarding revamp lifted SQL conversion from 30% to 47%. Our CRO program pairs a hypothesis pipeline with an A/B testing cadence and documented uplift.</p>"),
+        ("What do I get at the end of a web project?", "<p>D2C storefronts, a reusable landing-page module system, full analytics and tracking (GA4, server-side, CAPI, Mixpanel), and an ongoing CRO program with a testing cadence and uplift documentation.</p>"),
+    ],
+    "app-development": [
+        ("What kind of apps does Digitaltheory build?", "<p>We build native iOS and Android apps and cross-platform React Native apps for consumer businesses — with ASO, in-app analytics and event-driven CRM baked in from day one so the app is a growth engine.</p>"),
+        ("What is ASO and do you offer it?", "<p>ASO (app store optimisation) improves your app's visibility and install rate in the App Store and Play Store through keyword research, creative refresh and rank monitoring. It is included in our app engagements.</p>"),
+        ("How do you improve app retention and LTV?", "<p>We design a shared event taxonomy across product, performance and CRM, then wire push and in-app messaging to behaviour. For Laundrokart this helped drive a 55% installs lift and 23% LTV improvement.</p>"),
+        ("How much does it cost to build an app in India?", "<p>Cost depends on platforms (native vs cross-platform), features and integrations. We scope on a discovery call and price around the outcome — share your product goals for a tailored estimate.</p>"),
+        ("What deliverables are included?", "<p>Product and UX (flows, prototypes, research), native or cross-platform engineering with store submissions, a shared event-taxonomy analytics schema, and an ongoing ASO program.</p>"),
+    ],
+    "seo": [
+        ("What SEO services does Digitaltheory offer?", "<p>Technical SEO and site audits, programmatic SEO, an editorial content engine, link building and digital PR, and local and international SEO — reported in the same dashboard as your paid channels.</p>"),
+        ("How long does SEO take to show results?", "<p>SEO compounds over months rather than days. Technical fixes can show quickly, while content and links typically build organic share-of-search over 3-6 months and beyond, steadily lowering blended CAC.</p>"),
+        ("How does SEO reduce customer acquisition cost?", "<p>Organic traffic has no per-click cost, so growing organic share-of-search lowers your blended CAC. We report share-of-search, blended CAC and organic-attributed revenue in one view.</p>"),
+        ("Do you do technical SEO and Core Web Vitals?", "<p>Yes. Our technical audits cover crawlability, indexation, schema, Core Web Vitals and information architecture — the foundation content and links are built on.</p>"),
+        ("What SEO results have you delivered?", "<p>For Pocket52, combined ASO and content work lifted organic installs by 20%. Our deliverables include a technical audit, a content engine with topic clusters and cadence, a link program, and clear reporting.</p>"),
+    ],
+    "crm-retention": [
+        ("What is CRM and retention marketing?", "<p>It is the practice of growing revenue from existing customers through segmentation, lifecycle journeys and loyalty — across WhatsApp, email, SMS, push and in-app — measured by repeat rate and LTV rather than opens.</p>"),
+        ("Which channels does Digitaltheory use for CRM?", "<p>WhatsApp, push, email, SMS and in-app messaging, orchestrated together through lifecycle journeys rather than run as isolated blasts.</p>"),
+        ("How do you increase customer LTV?", "<p>We build RFM and behavioural segments, wire lifecycle journeys (welcome, browse-abandon, post-purchase, win-back, VIP) and design loyalty economics. For Laundrokart this lifted retention 17% and LTV 23%.</p>"),
+        ("What is RFM segmentation?", "<p>RFM segments customers by Recency, Frequency and Monetary value, so you can target each group with the right message and offer. We combine it with behavioural clusters tied to weekly actions.</p>"),
+        ("What deliverables do I get?", "<p>An RFM plus behavioural segmentation model, a cross-channel journey library, a loyalty program with sustainable economics, and cohort LTV and program-attributable revenue reporting.</p>"),
+    ],
+    "sap-b1-implementation": [
+        ("What is SAP Business One (SAP B1)?", "<p>SAP Business One is an ERP for small and mid-sized businesses that unifies finance, sales, CRM, inventory, purchasing, MRP and analytics in one system — the operating spine for a company that has outgrown spreadsheets.</p>"),
+        ("What does Digitaltheory's SAP B1 implementation include?", "<p>Discovery and blueprint, configuration and customisation, data migration, integrations (Shopify, Amazon, banks, payment gateways, WhatsApp/CRM, BI), plus training, change management and AMC.</p>"),
+        ("How long does SAP B1 implementation take?", "<p>Well-scoped implementations can go live in weeks rather than months, phased by module. Timelines depend on process complexity, data quality and the number of integrations.</p>"),
+        ("Can SAP B1 integrate with Shopify and Amazon?", "<p>Yes. We connect SAP B1 to Shopify, Amazon and other marketplaces, banks, payment gateways and BI dashboards via the DI-API or service layer, so orders, inventory and finance stay in sync.</p>"),
+        ("Do you provide support after go-live?", "<p>Yes. Our hyper-care and AMC covers post-go-live support, version upgrades, query resolution and continuous improvement against your operating KPIs, so adoption sticks.</p>"),
+    ],
+    "sfmc-implementation": [
+        ("What is Salesforce Marketing Cloud (SFMC)?", "<p>SFMC is Salesforce's enterprise marketing platform for cross-channel engagement — email, SMS, push, WhatsApp and in-app — powered by Journey Builder, a flexible data model and Einstein AI personalisation.</p>"),
+        ("What does Digitaltheory's SFMC implementation include?", "<p>Audit and strategy, data model and ingestion, journey design and build, personalisation and Einstein AI, reporting and attribution, and training plus an optional managed-service for ongoing ops.</p>"),
+        ("How long until SFMC pays back?", "<p>With the right data model and priority journeys built first, SFMC typically pays back in months rather than years — because value comes from how it is implemented, not just the licence.</p>"),
+        ("Which journeys do you build first?", "<p>Usually the highest-value lifecycle journeys — welcome, browse-abandon, cart-abandon, post-purchase, win-back and VIP — orchestrated across email, push, WhatsApp, SMS and in-app.</p>"),
+        ("Do you offer ongoing SFMC support?", "<p>Yes. Beyond enablement for your in-house team, we offer a managed-service option covering ongoing campaign operations, QA and continuous improvement.</p>"),
+    ],
+}
+
+# Related-services cross-links (2-3 siblings per service for topical authority)
+RELATED_SERVICES = {
+    "performance-marketing": ["branding","seo","crm-retention"],
+    "branding": ["performance-marketing","web-development","video-production" if False else "web-development"],
+    "web-development": ["app-development","branding","seo"],
+    "app-development": ["web-development","crm-retention","performance-marketing"],
+    "business-consulting": ["performance-marketing","crm-retention","sap-b1-implementation"],
+    "seo": ["performance-marketing","web-development","branding"],
+    "crm-retention": ["performance-marketing","sfmc-implementation","app-development"],
+    "sap-b1-implementation": ["business-consulting","sfmc-implementation","web-development"],
+    "sfmc-implementation": ["crm-retention","sap-b1-implementation","performance-marketing"],
+}
+SERVICE_TITLES = {s["slug"]: s["title"] for s in SERVICES}
+SERVICE_HEROES = {s["slug"]: s.get("hero","") for s in SERVICES}
+
+def render_related_services(slug):
+    rel = [r for r in RELATED_SERVICES.get(slug, []) if r in SERVICE_TITLES]
+    if not rel:
+        return ""
+    cards = "".join(
+        f'<a class="service" href="../services/{r}.html"><span class="service__index">→</span><h3 class="service__title">{SERVICE_TITLES[r]}</h3><p class="service__body">{SERVICE_HEROES[r]}</p></a>'
+        for r in rel
+    )
+    return f'''
+<section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Related services</span><h2>Pairs well with</h2></div><p class="lead">Most engagements combine two or three of these into one operating system.</p></div>
+    <div class="services-grid">{cards}</div>
+  </div>
+</section>'''
+
 def render_service_body(s):
     what_html = ''.join(f'<li>{x}</li>' for x in s["what"])
     deliverables_html = ''.join(f'<div class="deliverable"><h3>{n}</h3><p>{d}</p></div>' for n,d in s["deliverables"])
@@ -541,7 +679,8 @@ def render_service_body(s):
     <div class="solution__deliverables">{deliverables_html}</div>
   </div>
 </section>
-
+{render_related_services(s["slug"])}
+{{SERVICE_FAQ_HTML}}
 {CTA_BAND.format(base='../')}
 """
 
@@ -2017,6 +2156,7 @@ def build_contact():
 
 <section class="section">
   <div class="container">
+    <div class="sec-head" style="margin-bottom:var(--space-6)"><div><span class="eyebrow">Get in touch</span><h2>Our offices in Bengaluru &amp; Mumbai</h2></div><p class="lead">Two India offices, engagements across India, GCC, Southeast Asia and select US brands.</p></div>
     <div class="contact-grid">
       <form class="form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks — we\\'ll be in touch.';">
         <div><label>Your name</label><input type="text" required placeholder="Jane Doe" /></div>
@@ -2059,10 +2199,11 @@ def build_contact():
 </section>
 """
     body = body + faq_html
-    return page("Contact Digitaltheory — Talk to Our Growth Team",
-                "Contact Digitaltheory — offices in Bengaluru and Mumbai. Performance marketing, branding, web, app, CRM and consulting.",
+    return page("Contact Digitaltheory",
+                "Contact Digitaltheory's growth marketing team in Bengaluru & Mumbai. Tell us your goals — performance, brand, SEO, web, app & CRM. We reply within a business day.",
                 body, base="", active="contact", path="contact.html",
-                extra_schema=[faq_schema])
+                seo_title="Contact Digitaltheory | Growth Agency, Bengaluru & Mumbai",
+                extra_schema=[faq_schema] + LOCALBUSINESS_SCHEMA)
 
 # ====================== WRITE ALL ======================
 def write(path, content):
@@ -2102,26 +2243,37 @@ write("case-studies.html", build_cases_hub())
 
 # Services
 for s in SERVICES:
-    body = render_business_consulting_body() if s["slug"] == "business-consulting" else render_service_body(s)
     path = f"services/{s['slug']}.html"
-    desc = "Strategy, growth, unit economics, market entry, NPD, M&A diligence — consulting that ships, not just advises." if s["slug"] == "business-consulting" else f"{s['title']} services by Digitaltheory. {s['hero']}"
-    if len(desc) > 165:
-        desc = desc[:155].rsplit(" ",1)[0] + "…"
+    meta_title, meta_desc = SERVICE_META.get(s["slug"], (None, None))
+    crumbs = [("Home",""),("Services","services.html"),(s["title"], path)]
     service_schema = {
         "@context":"https://schema.org","@type":"Service",
         "name": s["title"],
         "description": s["hero"],
         "provider": {"@type":"Organization","name":"Digitaltheory","url":SITE_URL+"/"},
-        "areaServed": ["IN","AE","US","SG"],
+        "areaServed": {"@type":"Country","name":"India"},
         "serviceType": s["title"],
         "url": f"{SITE_URL}/{path}",
     }
-    crumbs = [("Home",""),("Services","services.html"),(s["title"], path)]
     schemas = [service_schema]
-    if s["slug"] == "business-consulting" and BC_FAQ_SCHEMA:
-        schemas.append(BC_FAQ_SCHEMA)
+    if s["slug"] == "business-consulting":
+        body = render_business_consulting_body()
+        if BC_FAQ_SCHEMA:
+            schemas.append(BC_FAQ_SCHEMA)
+    else:
+        body = render_service_body(s)
+        faq_items = SERVICE_FAQS.get(s["slug"])
+        if faq_items:
+            faq_html, faq_schema = render_faq(faq_items, section_title=f"Frequently asked questions about {s['title'].lower()}")
+            body = body.replace("{SERVICE_FAQ_HTML}", faq_html)
+            schemas.append(faq_schema)
+        else:
+            body = body.replace("{SERVICE_FAQ_HTML}", "")
+    desc = meta_desc if meta_desc else (f"{s['title']} services by Digitaltheory. {s['hero']}")
+    if len(desc) > 165:
+        desc = desc[:155].rsplit(" ",1)[0] + "…"
     write(path, page(s["title"], desc, body, base="../", active="services", path=path,
-                     seo_title=s.get("seo_title"),
+                     seo_title=meta_title if meta_title else s.get("seo_title"),
                      extra_schema=schemas, breadcrumbs=crumbs))
 
 write("services.html", build_services_hub())
