@@ -518,6 +518,14 @@ SERVICES = [
         ],
         "case":"laundrokart","case_label":"Laundrokart — RFM-led CRM lifted retention 17% and LTV 23%.",
     },
+    {"slug":"social-media-marketing","title":"Social Media Marketing","custom":True,
+     "hero":"Build a brand people follow, remember and buy from — organic content, paid social, influencer and community, run as one system across every platform."},
+    {"slug":"personal-branding","title":"Personal Branding","custom":True,
+     "hero":"Turn founders and executives into the most trusted voice in their category — positioning, ghostwritten content and a compounding inbound engine."},
+    {"slug":"odoo-implementation","title":"Odoo Implementation","custom":True,
+     "hero":"Deploy Odoo as the operating spine of your business — sales, CRM, inventory, accounting, HR, manufacturing and e-commerce, configured, migrated and live."},
+    {"slug":"ai-automations","title":"AI & Automations","custom":True,
+     "hero":"Put AI and automation to work where it pays back — an AI readiness assessment, custom agents, workflow automation and secure, governed implementation."},
 ]
 
 # Geo-optimised <title> + meta description per service (India-national targeting; visible H1 unchanged)
@@ -540,6 +548,14 @@ SERVICE_META = {
         "SAP Business One (SAP B1) implementation partner in India: scoping, configuration, data migration, integrations, training & AMC. Live in weeks. Talk to us."),
     "sfmc-implementation": ("Salesforce Marketing Cloud (SFMC) Implementation Partner in India — Digitaltheory",
         "Salesforce Marketing Cloud (SFMC) implementation partner in India: data model, Journey Builder, channels and Einstein AI wired end-to-end. Pays back in months."),
+    "social-media-marketing": ("Social Media Marketing Agency in India | Organic, Paid & Influencer — Digitaltheory",
+        "Social media marketing agency in India: organic content, paid social, influencer and community across Instagram, LinkedIn, YouTube & more. Built for brand + demand."),
+    "personal-branding": ("Personal Branding Agency in India | Founder & Executive Branding — Digitaltheory",
+        "Personal branding agency in India for founders & executives: positioning, ghostwritten LinkedIn content and an inbound engine that compounds. Built by humans."),
+    "odoo-implementation": ("Odoo Implementation Partner in India | ERP Setup & Migration — Digitaltheory",
+        "Odoo implementation partner in India: requirement analysis, configuration, customisation, data migration, integration and training across every Odoo module. Live fast."),
+    "ai-automations": ("AI & Automation Company in India | AI Agents & Workflow Automation — Digitaltheory",
+        "AI & automation company in India: AI readiness assessment, custom AI agents, sales & ops automation and secure, governed implementation. Automate what pays back."),
 }
 
 # Answer-first FAQs per service (for FAQPage schema + visible accordion)
@@ -600,6 +616,34 @@ SERVICE_FAQS = {
         ("Which journeys do you build first?", "<p>Usually the highest-value lifecycle journeys — welcome, browse-abandon, cart-abandon, post-purchase, win-back and VIP — orchestrated across email, push, WhatsApp, SMS and in-app.</p>"),
         ("Do you offer ongoing SFMC support?", "<p>Yes. Beyond enablement for your in-house team, we offer a managed-service option covering ongoing campaign operations, QA and continuous improvement.</p>"),
     ],
+    "social-media-marketing": [
+        ("What does a social media marketing agency do?", "<p>A social media marketing agency plans, produces and distributes content, runs paid social and influencer campaigns, and manages community across platforms — building both brand affinity and measurable demand, not just followers.</p>"),
+        ("Which platforms does Digitaltheory manage?", "<p>Instagram, LinkedIn, YouTube, Facebook, X and Pinterest — plus emerging formats like Reels and Shorts. We pick the platform mix from where your audience actually is, not a fixed template.</p>"),
+        ("Do you handle both organic and paid social?", "<p>Yes. We run them as one system: organic content builds the brand and feeds creative learnings into paid social, while paid amplifies the best-performing organic and drives measurable conversions.</p>"),
+        ("Do you offer influencer and community management?", "<p>Yes. We handle influencer sourcing, briefing and performance measurement, plus day-to-day community management — comments, DMs and reputation — so your brand stays responsive and human.</p>"),
+        ("How do you measure social media success?", "<p>By outcomes, not vanity metrics. We track reach and engagement as leading indicators, but report on branded search lift, qualified traffic, leads and revenue attributable to social.</p>"),
+    ],
+    "personal-branding": [
+        ("What is personal branding for founders and executives?", "<p>Personal branding turns a founder or executive into a recognised, trusted voice in their category — through clear positioning, consistent thought-leadership content and an inbound engine that drives sales, hiring and fundraising conversations.</p>"),
+        ("Do you ghostwrite the content?", "<p>Yes. We ghostwrite in your voice — LinkedIn posts, newsletters, long-form articles and talk decks — after a deep positioning and voice-capture process, so it reads authentically like you, not like an agency.</p>"),
+        ("How much time does it need from me?", "<p>Typically two to three hours a week — a short interview or voice-note session for raw material, plus quick approvals. We handle strategy, writing, publishing and distribution around that.</p>"),
+        ("Which platforms do you focus on?", "<p>LinkedIn is the core for B2B founders and executives, supported by newsletters, podcasts and select PR. We expand to other platforms only where your audience and goals justify it.</p>"),
+        ("How long until personal branding shows results?", "<p>Engagement and profile signals move within weeks; meaningful inbound — DMs, discovery calls, speaking invites — typically compounds over three to six months of consistent publishing.</p>"),
+    ],
+    "odoo-implementation": [
+        ("What is Odoo and who is it for?", "<p>Odoo is a modular open-source ERP that unifies sales, CRM, inventory, accounting, HR, manufacturing and e-commerce in one system. It suits growing SMEs and mid-market businesses that have outgrown disconnected tools.</p>"),
+        ("What does Digitaltheory's Odoo implementation include?", "<p>Requirement analysis and process mapping, configuration and module setup, custom development, data migration, third-party integration, testing, go-live support, and user training plus ongoing support.</p>"),
+        ("Which Odoo modules do you implement?", "<p>Sales, CRM, Inventory &amp; Warehouse, Accounting &amp; Finance, HR &amp; Payroll, Manufacturing &amp; MRP, Purchasing, Project Management and Website &amp; eCommerce — configured to how your business actually runs.</p>"),
+        ("How long does an Odoo implementation take?", "<p>Well-scoped implementations phase in over weeks to a few months, module by module. Timelines depend on process complexity, data quality and the number of integrations and customisations.</p>"),
+        ("Can Odoo integrate with our existing tools?", "<p>Yes. We integrate Odoo with your e-commerce (Shopify, marketplaces), payment gateways, banks, shipping, BI dashboards and existing systems via APIs, so data stays in sync across the business.</p>"),
+    ],
+    "ai-automations": [
+        ("What does Digitaltheory's AI &amp; automation service do?", "<p>We identify where AI and automation actually pay back, then build it — AI agents, workflow automation across sales, marketing and operations, and system integrations — implemented securely with proper governance.</p>"),
+        ("Where should a business start with AI?", "<p>With an AI Readiness Assessment. We audit your processes, data and tools to find the highest-ROI automation opportunities first, so you invest where it returns rather than chasing hype.</p>"),
+        ("What can you automate?", "<p>Sales and marketing workflows, lead routing and enrichment, reporting, customer support, document processing, data entry and reconciliation, and cross-system handoffs — anything repetitive and rules-based, or now, reasoning-based via AI agents.</p>"),
+        ("What are custom AI agents?", "<p>AI agents are systems that can reason, use tools and complete multi-step tasks across your stack — for example qualifying leads, drafting responses, or updating records — with humans in the loop where it matters.</p>"),
+        ("How do you keep AI implementation secure?", "<p>We implement with governance first: access controls, data handling policies, audit logging and human oversight — so automation is reliable, compliant and safe to scale across the business.</p>"),
+    ],
 }
 
 # Related-services cross-links (2-3 siblings per service for topical authority)
@@ -611,8 +655,12 @@ RELATED_SERVICES = {
     "business-consulting": ["performance-marketing","crm-retention","sap-b1-implementation"],
     "seo": ["performance-marketing","web-development","branding"],
     "crm-retention": ["performance-marketing","sfmc-implementation","app-development"],
-    "sap-b1-implementation": ["business-consulting","sfmc-implementation","web-development"],
-    "sfmc-implementation": ["crm-retention","sap-b1-implementation","performance-marketing"],
+    "sap-b1-implementation": ["business-consulting","odoo-implementation","sfmc-implementation"],
+    "sfmc-implementation": ["crm-retention","sap-b1-implementation","ai-automations"],
+    "social-media-marketing": ["performance-marketing","branding","personal-branding"],
+    "personal-branding": ["social-media-marketing","branding","business-consulting"],
+    "odoo-implementation": ["sap-b1-implementation","ai-automations","business-consulting"],
+    "ai-automations": ["odoo-implementation","crm-retention","performance-marketing"],
 }
 SERVICE_TITLES = {s["slug"]: s["title"] for s in SERVICES}
 SERVICE_HEROES = {s["slug"]: s.get("hero","") for s in SERVICES}
@@ -890,6 +938,327 @@ def render_business_consulting_body():
 </script>
 """
 BC_FAQ_SCHEMA = None  # populated by render_business_consulting_body()
+
+# ---- shared icon set for the new bespoke service pages ----
+SVC_ICONS = {
+  "listen":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></svg>',
+  "plan":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  "rocket":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg>',
+  "optimise":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
+  "content":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
+  "paid":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 8l-5 5-2-2-4 4"/></svg>',
+  "influencer":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z"/></svg>',
+  "community":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>',
+  "video":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="15" height="16" rx="2"/><path d="M22 8l-5 4 5 4z"/></svg>',
+  "person":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 016-6h4a6 6 0 016 6v1"/></svg>',
+  "mic":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3"/></svg>',
+  "pen":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>',
+  "megaphone":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/></svg>',
+  "funnel":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg>',
+  "cart":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>',
+  "coins":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>',
+  "box":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></svg>',
+  "factory":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20V8l-6 4V8l-6 4V4H2z"/></svg>',
+  "users":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
+  "globe":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>',
+  "bot":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M8 2h8M9 14h.01M15 14h.01"/></svg>',
+  "gears":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
+  "link":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>',
+  "shield":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  "search":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
+}
+def svc_icon(n): return SVC_ICONS.get(n, SVC_ICONS["gears"])
+
+def _svc_hero(slug, title, hero, eyebrow, cta2_label, cta2_href):
+    return f'''
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <a href="../services.html" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--fg-muted);text-transform:uppercase">← All services</a>
+    <span class="eyebrow" style="margin-top:24px;display:inline-flex">{eyebrow}</span>
+    <h1>{title}</h1>
+    <p class="lead page-hero__lead">{hero}</p>
+    <div class="page-hero__cta">
+      <a href="../contact.html" class="btn btn--primary btn--lg">Talk to us <span class="btn__arrow">→</span></a>
+      <a href="{cta2_href}" class="btn btn--secondary btn--lg">{cta2_label}</a>
+    </div>
+  </div>
+</section>'''
+
+def _svc_rich_grid(items):
+    return '<div class="svc-rich">' + "".join(
+        f'<div class="svc-rich__card" style="cursor:default"><div class="svc-rich__cover"><div class="svc-rich__icon">{svc_icon(ic)}</div></div><div class="svc-rich__body"><span class="svc-rich__num">{n}</span><h3 class="svc-rich__title">{t}</h3><p class="svc-rich__desc">{d}</p></div></div>'
+        for n,t,d,ic in items) + '</div>'
+
+def _svc_method(steps):
+    return '<div class="bc-method">' + "".join(
+        f'<div class="bc-step"><div class="bc-step__num">{n}</div><h3>{t}</h3><p>{d}</p></div>' for n,t,d in steps) + '</div>'
+
+def _svc_deliverables(items):
+    return '<div class="solution__deliverables">' + "".join(
+        f'<div class="deliverable"><h3>{n}</h3><p>{d}</p></div>' for n,d in items) + '</div>'
+
+# ============ SOCIAL MEDIA MARKETING ============
+def render_social_media_marketing_body():
+    approach = [
+        ("01","Listen","We start with social listening and audience research — what your customers care about, which platforms they live on, and what the category conversation actually is."),
+        ("02","Plan","A platform-specific content and channel strategy tied to real objectives: brand awareness, community, demand or a blend — with a monthly calendar, not ad-hoc posting."),
+        ("03","Execute","In-house creative, copy and video ship on a reliable cadence. Paid social amplifies the best organic; influencer and community keep the brand human and responsive."),
+        ("04","Optimise","Weekly reporting on the metrics that matter — reach and engagement as leading signals, branded search, qualified traffic and revenue as the scoreboard."),
+    ]
+    services = [
+        ("01","Organic Content","Platform-native content, copy and design that builds a distinct brand voice and earns reach — Reels, carousels, stories and posts, shipped on cadence.","content"),
+        ("02","Paid Social","Full-funnel paid campaigns across Meta, LinkedIn, YouTube and more — amplifying winning organic and driving measurable conversions, not just impressions.","paid"),
+        ("03","Influencer Marketing","Creator sourcing, briefing and performance measurement — matched to your audience and scored on outcomes, not follower counts.","influencer"),
+        ("04","Community Management","Day-to-day comments, DMs and reputation across platforms, so your brand stays responsive, human and consistent.","community"),
+        ("05","Video & Reels","Short-form vertical video and Reels produced in-house at the cadence social demands — the format that carries reach today.","video"),
+        ("06","Social Listening &amp; Insights","Consumer and category listening that feeds strategy — surfacing what to say, where to say it and when.","search"),
+    ]
+    platforms = ["Instagram","LinkedIn","YouTube","Facebook","X (Twitter)","Pinterest","Reels &amp; Shorts","WhatsApp"]
+    deliverables = [
+        ("Monthly content calendar","A platform-specific calendar with themes, formats and hooks — planned, not improvised."),
+        ("Creative &amp; video production","In-house design, copy and short-form video shipped on a reliable cadence."),
+        ("Paid social management","Campaign build, creative testing and optimisation across Meta, LinkedIn and YouTube."),
+        ("Reporting &amp; insights","Monthly reporting tying social activity to reach, branded search, traffic and revenue."),
+    ]
+    body = _svc_hero("social-media-marketing","Social Media Marketing","Build a brand people follow, remember and buy from — organic content, paid social, influencer and community, run as one system across every platform.","Social Media Marketing","See case studies","#cases")
+    body += f'''
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Our approach</span><h2 style="max-width:20ch">Listen. Plan. Execute. Optimise.</h2></div><p class="lead">Social that compounds isn&rsquo;t random posting — it&rsquo;s a system that learns from every post and campaign.</p></div>
+    {_svc_method(approach)}
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">What we do</span><h2 style="max-width:20ch">A full social stack, under one roof.</h2></div><p class="lead">Organic and paid run as one system — organic builds the brand and feeds creative learnings into paid; paid amplifies what works.</p></div>
+    {_svc_rich_grid(services)}
+    <div class="chip-row" style="margin-top:32px">{"".join(f'<span class="bc-sector">{p}</span>' for p in platforms)}</div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div><p class="lead">A running content engine, not a one-off campaign.</p></div>
+    {_svc_deliverables(deliverables)}
+  </div>
+</section>
+<section class="section" id="cases" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Featured outcomes</span><h2>Brands we&rsquo;ve grown on social</h2></div><p class="lead">Social works when it&rsquo;s wired to the business, not run as a vanity channel.</p></div>
+    <div class="bc-cases">
+      <a class="case" href="../case-studies/celio.html"><div class="case__head"><div class="case__brand">Celio</div><span class="case__industry">D2C Menswear</span></div><p class="case__desc">Heritage French menswear brand. Full-funnel social and creative testing lifted brand search 17% alongside a 45% ROAS lift.</p><div class="case__metrics"><div class="stat case__metric"><div class="stat__num">45<span class="unit">%</span></div><div class="stat__label">ROAS lift</div></div><div class="stat case__metric"><div class="stat__num">17<span class="unit">%</span></div><div class="stat__label">Brand search</div></div><div class="stat case__metric"><div class="stat__num">23<span class="unit">%</span></div><div class="stat__label">CM3 lift</div></div></div><span class="case__link">Read case study →</span></a>
+      <div class="case"><div class="case__head"><div class="case__brand">Chumbak</div><span class="case__industry">Lifestyle D2C</span></div><p class="case__desc">Lifestyle D2C brand. We drove a 3x profit improvement through NPD, operations, website maintenance and performance-led social.</p><div class="case__budget" style="margin-top:auto;padding-top:14px;border-top:1px solid var(--line)">&ldquo;They helped us improve our profits by 3x.&rdquo; — Abhijeet, Marketing Head, Chumbak</div></div>
+    </div>
+  </div>
+</section>
+{render_related_services("social-media-marketing")}
+{{SERVICE_FAQ_HTML}}
+{CTA_BAND.format(base='../')}
+'''
+    return body
+
+# ============ PERSONAL BRANDING ============
+def render_personal_branding_body():
+    beliefs = [
+        "In a founder-led market, the company brand is downstream of the founder brand. People buy from, join and back people they trust.",
+        "A strong personal brand shortens sales cycles, warms hiring pipelines and makes fundraising conversations easier — it is a business asset, not vanity.",
+        "Consistency beats virality. A clear point of view published reliably compounds into authority; one viral post does not.",
+    ]
+    build = [
+        ("01","Positioning &amp; Narrative","The foundation — your category, your point of view, your signature themes and the story only you can tell. Everything else flows from this.","person"),
+        ("02","LinkedIn Ghostwriting","Posts, newsletters and carousels ghostwritten in your voice on a reliable cadence — the core engine of B2B personal branding.","pen"),
+        ("03","Long-Form &amp; Thought Leadership","Bylined articles, essays, frameworks and keynote decks that establish depth beyond the feed.","content"),
+        ("04","Podcast &amp; Panels","Shortlisting, outreach, prep and post-appearance distribution so the right rooms hear from you.","mic"),
+        ("05","Profile Optimisation","Headline, banner, About and featured strategy that converts a profile visit into a follow, a subscribe or a DM.","search"),
+        ("06","PR &amp; Media","Journalist and editor introductions, earned placements and interview prep that borrow third-party credibility.","megaphone"),
+        ("07","Inbound Funnel Design","Mapping the view → follow → newsletter → DM → call flow, so attention turns into pipeline you can measure.","funnel"),
+        ("08","Executive Coaching","Voice, confidence and public-speaking support — so you show up as sharp in person as you do on the page.","users"),
+    ]
+    process = [
+        ("01","Discovery","Deep interviews to capture your voice, beliefs and stories, plus an audit of where you stand today and where the opportunity is."),
+        ("02","Positioning","We lock your narrative, point of view and content pillars — the strategic spine everything is written against."),
+        ("03","Publishing","Ghostwritten content ships on cadence across LinkedIn, newsletter and long-form, with your quick approval in the loop."),
+        ("04","Compounding","Engagement, PR and podcast appearances stack on top of the content base — authority and inbound compound month over month."),
+    ]
+    bench = [
+        ("Follower growth","Steady, qualified growth"),
+        ("Post impressions","5–10× vs. corporate page"),
+        ("Profile views","Up week over week"),
+        ("Inbound DMs &amp; calls","A reliable, growing channel"),
+        ("Podcast &amp; panel invites","Regular, category-relevant"),
+        ("Bylined articles","Placed in credible outlets"),
+    ]
+    personas = ["SaaS &amp; startup founders","Consultants &amp; solo experts","Agency owners","VCs &amp; investors","Category specialists","C-suite executives"]
+    body = _svc_hero("personal-branding","Personal Branding","Turn founders and executives into the most trusted voice in their category — positioning, ghostwritten content and a compounding inbound engine.","Personal Branding","See what we build","#build")
+    body += f'''
+<section class="section">
+  <div class="container">
+    <div class="manifesto">
+      <div>
+        <span class="eyebrow">Why it matters</span>
+        <h2 style="margin-top:14px;max-width:18ch">The company brand is downstream of the founder brand.</h2>
+        <p class="lead" style="margin-top:20px;max-width:46ch">Buyers, candidates and investors follow people before they follow companies. A founder or executive with a clear, trusted voice is one of the highest-leverage growth assets a business has — and one of the most under-built.</p>
+      </div>
+      <ol class="manifesto__points">{"".join(f"<li>{b}</li>" for b in beliefs)}</ol>
+    </div>
+  </div>
+</section>
+<section class="section" id="build" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">What we build</span><h2 style="max-width:18ch">A complete personal-brand system.</h2></div><p class="lead">Strategy first, then a content engine that runs on a few hours of your time a week — ghostwritten in your voice.</p></div>
+    {_svc_rich_grid(build)}
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">How it runs</span><h2 style="max-width:20ch">Discovery to compounding.</h2></div><p class="lead">Two to three hours of your time a week; we handle strategy, writing, publishing and distribution.</p></div>
+    {_svc_method(process)}
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="solution__intro">
+      <div>
+        <span class="eyebrow">What good looks like</span>
+        <h2 style="margin-top:14px;max-width:18ch">Illustrative 12-month targets</h2>
+        <p class="lead" style="margin-top:16px">Directional goals for a consistently-run founder programme. Actual outcomes depend on starting point, cadence and category — we set specific targets with you up front.</p>
+      </div>
+      <div class="bench">
+        <div class="bench__row bench__row--head"><div class="bench__cell">Signal</div><div class="bench__cell" style="text-align:right">12-month target</div></div>
+        {"".join(f'<div class="bench__row"><div class="bench__cell bench__cell--metric">{m}</div><div class="bench__cell bench__cell--target">{t}</div></div>' for m,t in bench)}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Who it&rsquo;s for</span><h2>Built for leaders, not creators</h2></div><p class="lead">If your audience needs to trust you before they buy, hire or invest — this is for you.</p></div>
+    <div class="chip-row">{"".join(f'<span class="bc-sector">{p}</span>' for p in personas)}</div>
+  </div>
+</section>
+{render_related_services("personal-branding")}
+{{SERVICE_FAQ_HTML}}
+{CTA_BAND.format(base='../')}
+'''
+    return body
+
+# ============ ODOO IMPLEMENTATION ============
+def render_odoo_implementation_body():
+    phases = [
+        ("01","Requirement Analysis","We map your processes across finance, sales, inventory and operations, and translate them into a phased Odoo blueprint.","search"),
+        ("02","Configuration &amp; Setup","Modules configured to how you actually work — chart of accounts, workflows, approval rules, user roles and permissions.","gears"),
+        ("03","Custom Development","Where standard Odoo stops, we build — custom fields, reports, modules and features tailored to your business logic.","pen"),
+        ("04","Data Migration","Clean migration of master and transactional data — items, BOMs, customers, vendors and opening balances — with reconciliation.","box"),
+        ("05","Integration","Connect Odoo to your e-commerce, marketplaces, payment gateways, banks, shipping and BI tools via APIs, so data stays in sync.","link"),
+        ("06","Testing &amp; QA","End-to-end testing and user acceptance so go-live is smooth, not a surprise.","shield"),
+        ("07","Go-Live &amp; Training","Deployment support plus role-based training and SOPs so your team adopts the system, not just receives it.","users"),
+        ("08","Support &amp; Optimisation","Post-go-live support, upgrades and continuous improvement against your operating KPIs.","gears"),
+    ]
+    modules = ["Sales","CRM","Inventory &amp; Warehouse","Accounting &amp; Finance","HR &amp; Payroll","Manufacturing &amp; MRP","Purchasing","Project Management","Website &amp; eCommerce"]
+    benefits = [
+        ("Scalability","One system that grows with you — add modules and users as the business expands, without re-platforming.","box"),
+        ("One source of truth","Finance, sales, inventory and operations on one live database — no more reconciling spreadsheets across teams.","coins"),
+        ("Automation","Automate fill-in, invoicing, approvals and reporting — freeing the team from manual, error-prone work.","gears"),
+        ("Better decisions","Live dashboards across departments turn scattered data into decisions leadership can act on.","optimise"),
+        ("Cost efficiency","Open-source core plus targeted customisation delivers enterprise capability without enterprise licensing.","shield"),
+    ]
+    body = _svc_hero("odoo-implementation","Odoo Implementation","Deploy Odoo as the operating spine of your business — sales, CRM, inventory, accounting, HR, manufacturing and e-commerce, configured, migrated and live.","Odoo Implementation","See modules","#modules")
+    body += f'''
+<section class="section">
+  <div class="container">
+    <div class="bc-overview">
+      <div>
+        <span class="eyebrow">The opportunity</span>
+        <h2>From disconnected tools to one operating system.</h2>
+        <div class="bc-overview__body">
+          <p>Growing businesses accumulate tools — one for accounting, one for inventory, spreadsheets for the rest. Data stops matching, decisions slow down, and the team spends its time reconciling instead of running the business.</p>
+          <p>Odoo unifies it all in one modular ERP. We handle the full implementation — analysis, configuration, customisation, migration, integration and training — so you get a system that fits how you actually work, live in weeks rather than a year.</p>
+        </div>
+      </div>
+      <div class="bc-overview__visual">
+        <h4>What we bring</h4>
+        <ul class="case-detail__panel" style="border:0;padding:0;background:none;gap:14px;display:flex;flex-direction:column">
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> End-to-end delivery, not just licences</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Operators who understand the P&amp;L, not just the software</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Integrations with your commerce &amp; marketing stack</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Training and support so adoption sticks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">End-to-end services</span><h2 style="max-width:20ch">Requirement analysis to go-live and beyond.</h2></div><p class="lead">Every phase of an Odoo implementation, delivered by one team.</p></div>
+    {_svc_rich_grid(phases)}
+  </div>
+</section>
+<section class="section" id="modules">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Modules</span><h2 style="max-width:22ch">The Odoo modules we implement.</h2></div><p class="lead">Configured to how your business runs — start with what you need, add the rest as you grow.</p></div>
+    <div class="chip-row">{"".join(f'<span class="bc-sector">{m}</span>' for m in modules)}</div>
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Benefits</span><h2>Why businesses move to Odoo</h2></div><p class="lead">One system, live data, less manual work — and decisions the whole team can trust.</p></div>
+    {_svc_rich_grid([(str(i+1).zfill(2),t,d,ic) for i,(t,d,ic) in enumerate(benefits)])}
+  </div>
+</section>
+{render_related_services("odoo-implementation")}
+{{SERVICE_FAQ_HTML}}
+{CTA_BAND.format(base='../')}
+'''
+    return body
+
+# ============ AI & AUTOMATIONS ============
+def render_ai_automations_body():
+    caps = [
+        ("01","AI Readiness Assessment","Every engagement starts here — we audit your processes, data and tools to find the highest-ROI automation opportunities before building anything.","search"),
+        ("02","Sales &amp; Marketing Automation","Lead routing, enrichment, outreach, reporting and lifecycle workflows automated end-to-end, so the team sells instead of doing admin.","paid"),
+        ("03","Custom AI Agents","Agents that reason, use your tools and complete multi-step tasks across systems — qualifying leads, drafting responses, updating records — with humans in the loop.","bot"),
+        ("04","Operational Automation","Internal process automation — document processing, data entry, reconciliation, approvals and cross-team handoffs — that removes the repetitive work.","gears"),
+        ("05","Systems &amp; Data Integration","We connect and unify your CRM, data and tools so automation and AI have clean, joined-up information to act on.","link"),
+        ("06","Governed, Secure AI","Access controls, data-handling policies, audit logging and human oversight built in — so automation is safe to scale, not a liability.","shield"),
+    ]
+    functions = ["Sales","Marketing","Operations","Finance","HR","Customer Support","Data &amp; Reporting","Legal &amp; Compliance"]
+    process = [
+        ("01","Assess","An AI readiness assessment maps your processes, data and tools to the automation opportunities with the clearest payback."),
+        ("02","Prioritise","We rank opportunities by ROI and feasibility and start with the ones that return fastest — not the flashiest."),
+        ("03","Build","We build the agents, workflows and integrations, testing against real cases and keeping humans in the loop where it matters."),
+        ("04","Govern &amp; Scale","With governance, monitoring and documentation in place, we expand automation across the business safely.")
+    ]
+    body = _svc_hero("ai-automations","AI &amp; Automations","Put AI and automation to work where it pays back — an AI readiness assessment, custom agents, workflow automation and secure, governed implementation.","AI &amp; Automations","How we work","#process")
+    body += f'''
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Capabilities</span><h2 style="max-width:20ch">AI and automation that returns, not hype.</h2></div><p class="lead">Every engagement begins with an assessment, so you invest where automation actually pays back.</p></div>
+    {_svc_rich_grid(caps)}
+  </div>
+</section>
+<section class="section" id="process" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">How we work</span><h2 style="max-width:20ch">Assessment-first, ROI-led.</h2></div><p class="lead">We start with clarity on where AI pays back — then build, govern and scale.</p></div>
+    {_svc_method(process)}
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Use cases</span><h2 style="max-width:22ch">Where AI and automation pay back.</h2></div><p class="lead">Anything repetitive and rules-based — or now, reasoning-based via AI agents — across every function.</p></div>
+    <div class="chip-row">{"".join(f'<span class="bc-sector">{f}</span>' for f in functions)}</div>
+  </div>
+</section>
+{render_related_services("ai-automations")}
+{{SERVICE_FAQ_HTML}}
+{CTA_BAND.format(base='../')}
+'''
+    return body
+
+CUSTOM_SERVICE_RENDERERS = {
+    "social-media-marketing": render_social_media_marketing_body,
+    "personal-branding": render_personal_branding_body,
+    "odoo-implementation": render_odoo_implementation_body,
+    "ai-automations": render_ai_automations_body,
+}
 
 def build_services_hub():
     cards = ''
@@ -2261,7 +2630,10 @@ for s in SERVICES:
         if BC_FAQ_SCHEMA:
             schemas.append(BC_FAQ_SCHEMA)
     else:
-        body = render_service_body(s)
+        if s.get("custom") and s["slug"] in CUSTOM_SERVICE_RENDERERS:
+            body = CUSTOM_SERVICE_RENDERERS[s["slug"]]()
+        else:
+            body = render_service_body(s)
         faq_items = SERVICE_FAQS.get(s["slug"])
         if faq_items:
             faq_html, faq_schema = render_faq(faq_items, section_title=f"Frequently asked questions about {s['title'].lower()}")

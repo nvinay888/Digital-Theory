@@ -13,8 +13,12 @@
     ['business-consulting','Business Consulting'],
     ['seo','SEO'],
     ['crm-retention','CRM & Retention'],
+    ['social-media-marketing','Social Media Marketing'],
+    ['personal-branding','Personal Branding'],
     ['sap-b1-implementation','SAP B1 Implementation'],
     ['sfmc-implementation','SFMC Implementation'],
+    ['odoo-implementation','Odoo Implementation'],
+    ['ai-automations','AI & Automations'],
   ];
   const industries = [
     ['D2C & E-commerce','d2c-ecommerce'],
@@ -38,10 +42,10 @@
             <div class="nav__mega">
               <div class="nav__mega-inner">
                 <ul class="nav__mega-list">
-                  ${services.slice(0,5).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
+                  ${services.slice(0,7).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
                 </ul>
                 <ul class="nav__mega-list">
-                  ${services.slice(5).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
+                  ${services.slice(7).map(s=>`<li><a href="${base}services/${s[0]}.html">${s[1]}</a></li>`).join('')}
                   <li><a href="${base}services.html" style="color:var(--lime-400)">All services →</a></li>
                 </ul>
                 <div class="nav__mega-quote">
