@@ -620,3 +620,20 @@ p{margin:0}
 /* PLATFORM/USE-CASE CHIPS row (reuses bc-sectors styling) */
 .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--space-5)}
 .chip-row .bc-sector{cursor:default}
+/* CONCEPT ROWS (left pitch + right accordion) — SMM page */
+.concept-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start;padding-block:var(--space-8);border-top:1px solid var(--line)}
+.concept-row:first-of-type{border-top:0;padding-top:0}
+@media(max-width:880px){.concept-row{grid-template-columns:1fr;gap:24px;padding-block:var(--space-7)}}
+.concept-row__icon{width:52px;height:52px;border-radius:14px;background:rgba(140,198,63,.08);border:1px solid rgba(140,198,63,.25);display:flex;align-items:center;justify-content:center;color:var(--lime-400);margin-bottom:22px}
+.concept-row__icon svg{width:26px;height:26px}
+.concept-row h3{font-size:var(--fs-h3);max-width:16ch;line-height:1.15;letter-spacing:-.015em}
+.concept-row__desc{color:var(--fg-muted);font-size:16px;line-height:1.6;margin-top:16px;max-width:46ch}
+.concept-acc{display:flex;flex-direction:column;gap:8px}
+.concept-acc details{border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-card);overflow:hidden;transition:border-color var(--dur-base) var(--ease-out)}
+.concept-acc details[open],.concept-acc details:hover{border-color:var(--line-strong)}
+.concept-acc summary{padding:18px 20px;cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:15.5px;color:var(--fg-strong);letter-spacing:-.005em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.concept-acc summary::-webkit-details-marker{display:none}
+.concept-acc summary::after{content:"+";color:var(--lime-400);font-family:var(--font-mono);font-size:20px;font-weight:400;line-height:1;transition:transform var(--dur-base) var(--ease-out);flex:none}
+.concept-acc details[open] summary{color:var(--lime-400)}
+.concept-acc details[open] summary::after{content:"−"}
+.concept-acc__body{padding:0 20px 20px;color:var(--fg-muted);font-size:14.5px;line-height:1.6}

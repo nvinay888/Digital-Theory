@@ -619,9 +619,13 @@ SERVICE_FAQS = {
     "social-media-marketing": [
         ("What does a social media marketing agency do?", "<p>A social media marketing agency plans, produces and distributes content, runs paid social and influencer campaigns, and manages community across platforms — building both brand affinity and measurable demand, not just followers.</p>"),
         ("Which platforms does Digitaltheory manage?", "<p>Instagram, LinkedIn, YouTube, Facebook, X and Pinterest — plus emerging formats like Reels and Shorts. We pick the platform mix from where your audience actually is, not a fixed template.</p>"),
-        ("Do you handle both organic and paid social?", "<p>Yes. We run them as one system: organic content builds the brand and feeds creative learnings into paid social, while paid amplifies the best-performing organic and drives measurable conversions.</p>"),
-        ("Do you offer influencer and community management?", "<p>Yes. We handle influencer sourcing, briefing and performance measurement, plus day-to-day community management — comments, DMs and reputation — so your brand stays responsive and human.</p>"),
-        ("How do you measure social media success?", "<p>By outcomes, not vanity metrics. We track reach and engagement as leading indicators, but report on branded search lift, qualified traffic, leads and revenue attributable to social.</p>"),
+        ("Do you handle both organic and paid social?", "<p>Yes, and we run them as one system rather than two teams. Organic content builds the brand and generates creative learnings; paid social amplifies the best-performing organic and drives measurable conversions. Splitting them is where most brands leak both money and consistency.</p>"),
+        ("Do you offer influencer and community management?", "<p>Yes. We handle influencer and creator sourcing, briefing and performance measurement — matched to your audience and scored on outcomes, not follower counts. Alongside that, day-to-day community management covers comments, DMs, mentions and reputation so your brand stays responsive and human.</p>"),
+        ("How do you measure social media success?", "<p>By outcomes, not vanity metrics. Reach and engagement are leading indicators we watch weekly, but the scoreboard is branded search lift, qualified traffic, leads and revenue attributable to social. Every monthly report ties activity back to those business numbers.</p>"),
+        ("How much content do you produce each month?", "<p>It depends on your platform mix and goals, but a typical engagement ships a full monthly calendar — a blend of Reels and short-form video, carousels, static posts and stories, planned around themes rather than posted ad-hoc. We scope the exact volume on a discovery call.</p>"),
+        ("Do you produce the video and creative in-house?", "<p>Yes. Design, copy and short-form video are produced in-house at the cadence social demands — no outsourcing that slows the loop. That&rsquo;s what lets us test creative weekly and feed the winners into paid.</p>"),
+        ("How long before social media marketing shows results?", "<p>Engagement and reach signals move within the first few weeks as content quality and consistency improve. Community growth and paid-driven conversions compound over two to three months; branded search and brand-led demand build over a longer horizon as the audience deepens.</p>"),
+        ("Can you work alongside our in-house team?", "<p>Yes. We plug in wherever you need — running the whole function, or handling strategy, paid and video while your team owns community, or any split that fits. We integrate with your existing tools and reporting rather than forcing a new stack.</p>"),
     ],
     "personal-branding": [
         ("What is personal branding for founders and executives?", "<p>Personal branding turns a founder or executive into a recognised, trusted voice in their category — through clear positioning, consistent thought-leadership content and an inbound engine that drives sales, hiring and fundraising conversations.</p>"),
@@ -1020,12 +1024,42 @@ def render_social_media_marketing_body():
         ("Paid social management","Campaign build, creative testing and optimisation across Meta, LinkedIn and YouTube."),
         ("Reporting &amp; insights","Monthly reporting tying social activity to reach, branded search, traffic and revenue."),
     ]
+    concept = [
+        ("megaphone","Build a brand voice people actually follow",
+         "A loyal audience is the most durable growth asset a brand can own. We create, grow and sustain that audience with platform-native content and a voice that&rsquo;s unmistakably yours.",
+         [("Define your brand voice","The way your brand sounds should be as recognisable as how it looks. We define tone, themes and point of view, then hold every post consistent to it — so the account feels like one brand, not ten freelancers.", True),
+          ("Platform-native content","Content built for how each platform actually works — Reels for reach, carousels for depth, stories for intimacy — not one asset cross-posted everywhere and ignored.", False),
+          ("Content that compounds","A monthly calendar of themes, formats and hooks so the account builds on itself. Every post is a deposit into brand equity, not a one-off.", False)]),
+        ("funnel","Turn attention into pipeline",
+         "We don&rsquo;t stop at reach. We move followers along a journey — from a scroll-stopping post to a click, a lead and a sale — with paid social wired to the same creative learnings as organic.",
+         [("Full-funnel paid social","Prospecting, retargeting and brand-defence across Meta, LinkedIn and YouTube, amplifying the organic content that already earns attention — so paid scales what works instead of guessing.", True),
+          ("Creative testing framework","Weekly creative variants scored against clear hypotheses, so spend flows to the hooks, formats and angles that actually convert.", False),
+          ("Measured to revenue","We report on branded search lift, qualified traffic and revenue attributable to social — engagement is a leading signal, not the scoreboard.", False)]),
+        ("community","Keep the brand human and responsive",
+         "Social is a conversation, not a broadcast. We manage the day-to-day so your brand shows up responsive, on-tone and quick — turning comments, DMs and creators into real relationships.",
+         [("Community management","Comments, DMs, mentions and reviews handled on-brand and on-time, so followers feel heard and the brand stays trusted.", True),
+          ("Influencer &amp; creator programs","Sourcing, briefing and measuring creators matched to your audience — scored on outcomes and fit, not follower counts.", False),
+          ("Social listening","Category and consumer listening that surfaces what to say next, where the whitespace is, and where brand risk is building before it becomes a problem.", False)]),
+    ]
+    concept_html = ""
+    for ic,title,desc,items in concept:
+        acc = "".join(f'<details{" open" if op else ""}><summary>{q}</summary><div class="concept-acc__body">{a}</div></details>' for q,a,op in items)
+        concept_html += f'''<div class="concept-row">
+          <div><div class="concept-row__icon">{svc_icon(ic)}</div><h3>{title}</h3><p class="concept-row__desc">{desc}</p></div>
+          <div class="concept-acc">{acc}</div>
+        </div>'''
     body = _svc_hero("social-media-marketing","Social Media Marketing","Build a brand people follow, remember and buy from — organic content, paid social, influencer and community, run as one system across every platform.","Social Media Marketing","See case studies","#cases")
     body += f'''
 <section class="section">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">Our approach</span><h2 style="max-width:20ch">Listen. Plan. Execute. Optimise.</h2></div><p class="lead">Social that compounds isn&rsquo;t random posting — it&rsquo;s a system that learns from every post and campaign.</p></div>
     {_svc_method(approach)}
+  </div>
+</section>
+<section class="section" style="border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head" style="justify-content:center;text-align:center;margin-bottom:var(--space-8)"><div style="margin:0 auto"><span class="eyebrow" style="justify-content:center">How we help</span><h2 style="margin-top:12px;max-width:24ch">How we build your brand&rsquo;s message across every audience</h2></div></div>
+    {concept_html}
   </div>
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
