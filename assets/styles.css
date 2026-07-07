@@ -637,3 +637,9 @@ p{margin:0}
 .concept-acc details[open] summary{color:var(--lime-400)}
 .concept-acc details[open] summary::after{content:"−"}
 .concept-acc__body{padding:0 20px 20px;color:var(--fg-muted);font-size:14.5px;line-height:1.6}
+/* CALLOUT BOX (custom-modules CTA) */
+.callout{border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface-card);padding:clamp(2rem,4vw,3rem);text-align:center;position:relative;overflow:hidden}
+.callout::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 0%,rgba(140,198,63,.08),transparent 60%);pointer-events:none}
+.callout__inner{position:relative;max-width:640px;margin:0 auto}
+.callout h2{font-size:var(--fs-h3);max-width:24ch;margin:0 auto}
+.callout p{color:var(--fg-muted);margin:14px auto 24px;max-width:52ch;font-size:16px;line-height:1.6}

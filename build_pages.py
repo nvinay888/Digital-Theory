@@ -635,11 +635,15 @@ SERVICE_FAQS = {
         ("How long until personal branding shows results?", "<p>Engagement and profile signals move within weeks; meaningful inbound — DMs, discovery calls, speaking invites — typically compounds over three to six months of consistent publishing.</p>"),
     ],
     "odoo-implementation": [
-        ("What is Odoo and who is it for?", "<p>Odoo is a modular open-source ERP that unifies sales, CRM, inventory, accounting, HR, manufacturing and e-commerce in one system. It suits growing SMEs and mid-market businesses that have outgrown disconnected tools.</p>"),
-        ("What does Digitaltheory's Odoo implementation include?", "<p>Requirement analysis and process mapping, configuration and module setup, custom development, data migration, third-party integration, testing, go-live support, and user training plus ongoing support.</p>"),
-        ("Which Odoo modules do you implement?", "<p>Sales, CRM, Inventory &amp; Warehouse, Accounting &amp; Finance, HR &amp; Payroll, Manufacturing &amp; MRP, Purchasing, Project Management and Website &amp; eCommerce — configured to how your business actually runs.</p>"),
-        ("How long does an Odoo implementation take?", "<p>Well-scoped implementations phase in over weeks to a few months, module by module. Timelines depend on process complexity, data quality and the number of integrations and customisations.</p>"),
-        ("Can Odoo integrate with our existing tools?", "<p>Yes. We integrate Odoo with your e-commerce (Shopify, marketplaces), payment gateways, banks, shipping, BI dashboards and existing systems via APIs, so data stays in sync across the business.</p>"),
+        ("What is Odoo and who is it for?", "<p>Odoo is a modular open-source ERP that unifies sales, CRM, inventory, accounting, HR, manufacturing and e-commerce in one system. It suits growing SMEs and mid-market businesses that have outgrown disconnected tools and spreadsheets and need one live source of truth.</p>"),
+        ("What does Digitaltheory's Odoo implementation include?", "<p>The full lifecycle: requirement analysis and process mapping, configuration and module setup, custom development, data migration, third-party integration, testing, go-live support, role-based training and ongoing support. One team owns it end to end — no handoffs between vendors.</p>"),
+        ("Which Odoo modules do you implement?", "<p>Sales, CRM, Inventory &amp; Warehouse, Accounting &amp; Finance, HR &amp; Payroll, Manufacturing &amp; MRP, Purchasing, Project Management and Website &amp; eCommerce — configured to how your business actually runs, starting with what you need most and adding the rest as you grow.</p>"),
+        ("How long does an Odoo implementation take?", "<p>Well-scoped implementations phase in over weeks to a few months, module by module, so you see value early rather than waiting for a big-bang go-live. Timelines depend on process complexity, data quality and the number of integrations and customisations.</p>"),
+        ("Can Odoo integrate with our existing tools?", "<p>Yes. We integrate Odoo with your e-commerce (Shopify, marketplaces), payment gateways, banks, shipping providers, BI dashboards and existing systems via APIs and the service layer, so orders, inventory and finance stay in sync across the business.</p>"),
+        ("How much does an Odoo implementation cost?", "<p>Odoo's open-source core keeps licensing efficient; the investment is in implementation, customisation and integration. We scope on a discovery call and price around outcomes and phases, so you invest where it returns rather than paying for a monolithic project up front.</p>"),
+        ("Is our data safe during migration?", "<p>Yes. We clean and map master and transactional data — items, BOMs, customers, vendors and opening balances — migrate into a staging environment, reconcile against source records, and only cut over once numbers match. Nothing goes live unverified.</p>"),
+        ("Can you rescue a stalled or failed Odoo project?", "<p>Yes. Project rescue is one of our engagement models. We audit the current build, identify what's salvageable, fix configuration and data issues, and get the implementation back to a stable, adopted state.</p>"),
+        ("Do you provide support after go-live?", "<p>Yes. Our hyper-care and AMC covers post-go-live support, version upgrades, query resolution and continuous improvement against your operating KPIs — so adoption sticks and the system keeps earning its keep.</p>"),
     ],
     "ai-automations": [
         ("What does Digitaltheory's AI &amp; automation service do?", "<p>We identify where AI and automation actually pay back, then build it — AI agents, workflow automation across sales, marketing and operations, and system integrations — implemented securely with proper governance.</p>"),
@@ -1178,24 +1182,72 @@ def render_personal_branding_body():
 # ============ ODOO IMPLEMENTATION ============
 def render_odoo_implementation_body():
     phases = [
-        ("01","Requirement Analysis","We map your processes across finance, sales, inventory and operations, and translate them into a phased Odoo blueprint.","search"),
-        ("02","Configuration &amp; Setup","Modules configured to how you actually work — chart of accounts, workflows, approval rules, user roles and permissions.","gears"),
-        ("03","Custom Development","Where standard Odoo stops, we build — custom fields, reports, modules and features tailored to your business logic.","pen"),
-        ("04","Data Migration","Clean migration of master and transactional data — items, BOMs, customers, vendors and opening balances — with reconciliation.","box"),
-        ("05","Integration","Connect Odoo to your e-commerce, marketplaces, payment gateways, banks, shipping and BI tools via APIs, so data stays in sync.","link"),
-        ("06","Testing &amp; QA","End-to-end testing and user acceptance so go-live is smooth, not a surprise.","shield"),
-        ("07","Go-Live &amp; Training","Deployment support plus role-based training and SOPs so your team adopts the system, not just receives it.","users"),
-        ("08","Support &amp; Optimisation","Post-go-live support, upgrades and continuous improvement against your operating KPIs.","gears"),
+        ("01","Requirement Analysis","We map how you actually run — order-to-cash, procure-to-pay, plan-to-produce — across finance, sales, inventory and operations, and translate it into a phased Odoo blueprint.","search"),
+        ("02","Configuration &amp; Setup","Modules configured to your workflows, not a template — chart of accounts, document flow, approval rules, pricelists, user roles and permissions.","gears"),
+        ("03","Custom Development","Where standard Odoo stops, we build — custom fields, reports, modules and features tailored to your business logic, scoped deliberately rather than mid-project.","pen"),
+        ("04","Data Migration","Clean migration of master and transactional data — items, BOMs, customers, vendors and opening balances — staged, reconciled against source, and cut over only once numbers match.","box"),
+        ("05","Integration","Connect Odoo to your e-commerce, marketplaces, payment gateways, banks, shipping and BI tools via APIs and the service layer, so data flows without re-keying.","link"),
+        ("06","Testing &amp; QA","End-to-end and user-acceptance testing against real cases, so go-live is a non-event, not a scramble.","shield"),
+        ("07","Go-Live &amp; Training","Deployment support plus role-based training and written SOPs, so your team adopts the system on day one instead of drifting back to spreadsheets.","users"),
+        ("08","Support &amp; Optimisation","Hyper-care, version upgrades and continuous improvement against your operating KPIs — so the system keeps earning its keep.","gears"),
     ]
-    modules = ["Sales","CRM","Inventory &amp; Warehouse","Accounting &amp; Finance","HR &amp; Payroll","Manufacturing &amp; MRP","Purchasing","Project Management","Website &amp; eCommerce"]
+    modules = [
+        ("01","Sales","Quotation to order to invoice in one flow, with pricelists, discounts and upselling built in — so revenue operations run without gaps.","coins"),
+        ("02","CRM","A pipeline the team actually updates — lead scoring, activities and forecasting that reflect reality, not wishful thinking.","funnel"),
+        ("03","Inventory &amp; Warehouse","Real-time stock across locations with barcode, routes and replenishment rules — the end of stockouts and dead inventory.","box"),
+        ("04","Accounting &amp; Finance","Automated invoicing, reconciliation, tax and reporting — compliant, and closed on time instead of chased at month-end.","coins"),
+        ("05","HR &amp; Payroll","Employees, leave, attendance, appraisals and payroll unified — less admin, cleaner data, fewer errors.","users"),
+        ("06","Manufacturing &amp; MRP","BoMs, work orders, routing and scheduling that keep production and inventory in lockstep.","factory"),
+        ("07","Purchasing","Requisitions, RFQs, vendor pricelists and receipts — procurement that actually controls cost.","cart"),
+        ("08","Project Management","Tasks, timesheets, milestones and profitability by project, all in one view.","plan"),
+        ("09","Website &amp; eCommerce","A storefront wired directly to inventory, pricing and orders — no reconciliation between systems.","globe"),
+    ]
     benefits = [
         ("Scalability","One system that grows with you — add modules and users as the business expands, without re-platforming.","box"),
         ("One source of truth","Finance, sales, inventory and operations on one live database — no more reconciling spreadsheets across teams.","coins"),
         ("Automation","Automate fill-in, invoicing, approvals and reporting — freeing the team from manual, error-prone work.","gears"),
         ("Better decisions","Live dashboards across departments turn scattered data into decisions leadership can act on.","optimise"),
-        ("Cost efficiency","Open-source core plus targeted customisation delivers enterprise capability without enterprise licensing.","shield"),
+        ("Cost efficiency","An open-source core plus targeted customisation delivers enterprise capability without enterprise licensing.","shield"),
     ]
-    body = _svc_hero("odoo-implementation","Odoo Implementation","Deploy Odoo as the operating spine of your business — sales, CRM, inventory, accounting, HR, manufacturing and e-commerce, configured, migrated and live.","Odoo Implementation","See modules","#modules")
+    concept = [
+        ("search","We start with your process, not the software",
+         "Most failed ERP projects force the business to fit the tool. We do the opposite — map how you actually work, then configure Odoo around it, so the system serves the business rather than fighting it.",
+         [("Process mapping","We document your real workflows across finance, sales, inventory and operations before touching configuration — so the system fits the business, not the other way around.", True),
+          ("Phased blueprint","A module-by-module rollout sequenced by impact and dependency, so you see value early instead of waiting for a risky big-bang go-live.", False),
+          ("Fit-gap analysis","Where standard Odoo fits, we configure; where it doesn&rsquo;t, we scope custom development deliberately and up front — not by accident, mid-project.", False)]),
+        ("link","We connect Odoo to the rest of your stack",
+         "An ERP that&rsquo;s an island creates more manual work, not less. We integrate Odoo with your commerce, payments, logistics and marketing so data flows across the business without anyone re-keying it.",
+         [("E-commerce &amp; marketplace sync","Shopify, Amazon and other channels connected to Odoo inventory, pricing and orders — one source of truth across every channel.", True),
+          ("Payments, banking &amp; logistics","Payment gateways, bank feeds and shipping providers wired in, so reconciliation and fulfilment largely run themselves.", False),
+          ("Data &amp; BI","Clean data flowing into dashboards leadership actually uses — not reports nobody opens.", False)]),
+        ("users","We make sure the team actually adopts it",
+         "The best-configured ERP fails if people quietly go back to spreadsheets. We train around real workflows, write SOPs and stay on through hyper-care, so adoption sticks and the investment pays back.",
+         [("Role-based training","Training built around what each role does day to day — not a generic feature tour — so people are productive from week one.", True),
+          ("SOPs &amp; documentation","Written standard operating procedures for the workflows that matter, so knowledge lives in the business, not in one person&rsquo;s head.", False),
+          ("Hyper-care &amp; AMC","Post-go-live support, upgrades and continuous improvement against your KPIs, so the system keeps getting better.", False)]),
+    ]
+    engagements = [
+        ("New Implementation","A fresh Odoo rollout from blueprint to go-live, phased for early value.","rocket"),
+        ("Migration &amp; Upgrade","Move from legacy ERP or an older Odoo version — cleanly, with data intact.","box"),
+        ("Customisation &amp; Integration","Custom modules, reports and integrations built on top of an existing Odoo.","pen"),
+        ("Support &amp; AMC","Ongoing support, monitoring and improvement against your operating KPIs.","shield"),
+        ("Project Rescue","Audit and stabilise a stalled or failing Odoo project, then get it adopted.","gears"),
+        ("Dedicated Odoo Team","On-demand Odoo developers and functional consultants embedded with your team.","users"),
+    ]
+    industries = ["Retail &amp; D2C","Manufacturing","Wholesale &amp; Distribution","Services","Healthcare","Education","Construction","Food &amp; Beverage"]
+    why = [
+        ("Operators, not just implementers","We&rsquo;ve run the P&amp;L, not only the software. We configure Odoo around business outcomes — margin, sell-through, cash flow — not a feature checklist."),
+        ("End-to-end, in one team","Analysis, configuration, custom development, migration, integration and training under one roof. No handoffs between vendors that drop the ball."),
+        ("Adoption is the deliverable","We measure success by whether your team is still running the business on Odoo six months later — not by whether we ticked a go-live box."),
+    ]
+    concept_html = ""
+    for ic,title,desc,items in concept:
+        acc = "".join(f'<details{" open" if op else ""}><summary>{q}</summary><div class="concept-acc__body">{a}</div></details>' for q,a,op in items)
+        concept_html += f'''<div class="concept-row">
+          <div><div class="concept-row__icon">{svc_icon(ic)}</div><h3>{title}</h3><p class="concept-row__desc">{desc}</p></div>
+          <div class="concept-acc">{acc}</div>
+        </div>'''
+    body = _svc_hero("odoo-implementation","Odoo Implementation","Deploy Odoo as the operating spine of your business — sales, CRM, inventory, accounting, HR, manufacturing and e-commerce, configured, migrated and live.","Odoo Implementation Partner","See modules","#modules")
     body += f'''
 <section class="section">
   <div class="container">
@@ -1210,11 +1262,11 @@ def render_odoo_implementation_body():
       </div>
       <div class="bc-overview__visual">
         <h4>What we bring</h4>
-        <ul class="case-detail__panel" style="border:0;padding:0;background:none;gap:14px;display:flex;flex-direction:column">
-          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> End-to-end delivery, not just licences</li>
-          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Operators who understand the P&amp;L, not just the software</li>
-          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Integrations with your commerce &amp; marketing stack</li>
-          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Training and support so adoption sticks</li>
+        <ul style="border:0;padding:0;margin:0;list-style:none;gap:14px;display:flex;flex-direction:column">
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> End-to-end delivery, not just licences</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Operators who understand the P&amp;L, not just the software</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Integrations with your commerce &amp; marketing stack</li>
+          <li style="padding-left:24px;position:relative;color:var(--fg);font-size:15px;line-height:1.5"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> Training and support so adoption sticks</li>
         </ul>
       </div>
     </div>
@@ -1222,20 +1274,45 @@ def render_odoo_implementation_body():
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">End-to-end services</span><h2 style="max-width:20ch">Requirement analysis to go-live and beyond.</h2></div><p class="lead">Every phase of an Odoo implementation, delivered by one team.</p></div>
+    <div class="sec-head"><div><span class="eyebrow">End-to-end services</span><h2 style="max-width:20ch">Requirement analysis to go-live and beyond.</h2></div><p class="lead">Every phase of an Odoo implementation, delivered by one team — no handoffs.</p></div>
     {_svc_rich_grid(phases)}
   </div>
 </section>
 <section class="section" id="modules">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">Modules</span><h2 style="max-width:22ch">The Odoo modules we implement.</h2></div><p class="lead">Configured to how your business runs — start with what you need, add the rest as you grow.</p></div>
-    <div class="chip-row">{"".join(f'<span class="bc-sector">{m}</span>' for m in modules)}</div>
+    {_svc_rich_grid(modules)}
+    <div class="callout" style="margin-top:40px"><div class="callout__inner"><h2>Need a module Odoo doesn&rsquo;t ship out of the box?</h2><p>If your business logic needs something bespoke, we build custom Odoo modules and apps that fit exactly how you work.</p><a href="../contact.html" class="btn btn--primary btn--lg">Talk to our Odoo team <span class="btn__arrow">→</span></a></div></div>
   </div>
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
+    <div class="sec-head" style="justify-content:center;text-align:center;margin-bottom:var(--space-8)"><div style="margin:0 auto"><span class="eyebrow" style="justify-content:center">How we deliver</span><h2 style="margin-top:12px;max-width:24ch">How an Odoo rollout with us actually works</h2></div></div>
+    {concept_html}
+  </div>
+</section>
+<section class="section">
+  <div class="container">
     <div class="sec-head"><div><span class="eyebrow">Benefits</span><h2>Why businesses move to Odoo</h2></div><p class="lead">One system, live data, less manual work — and decisions the whole team can trust.</p></div>
     {_svc_rich_grid([(str(i+1).zfill(2),t,d,ic) for i,(t,d,ic) in enumerate(benefits)])}
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Engagement models</span><h2 style="max-width:20ch">However you need to work with us.</h2></div><p class="lead">From a first implementation to rescuing a stalled one — pick the model that fits your stage.</p></div>
+    {_svc_rich_grid([(str(i+1).zfill(2),t,d,ic) for i,(t,d,ic) in enumerate(engagements)])}
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Why Digitaltheory</span><h2>Why teams choose us for Odoo</h2></div><p class="lead">We&rsquo;re operators who implement ERP — not an ERP shop that&rsquo;s never run a business.</p></div>
+    <div class="bc-principles">{"".join(f'<div class="bc-principle"><h3>{t}</h3><p>{d}</p></div>' for t,d in why)}</div>
+  </div>
+</section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">Industries</span><h2 style="max-width:22ch">Odoo, tuned to your industry.</h2></div><p class="lead">The modules and workflows differ by sector — we configure for yours.</p></div>
+    <div class="chip-row">{"".join(f'<span class="bc-sector">{i}</span>' for i in industries)}</div>
   </div>
 </section>
 {render_related_services("odoo-implementation")}
