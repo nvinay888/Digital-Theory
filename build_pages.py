@@ -1299,7 +1299,7 @@ def render_odoo_implementation_body():
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">Engagement models</span><h2 style="max-width:20ch">However you need to work with us.</h2></div><p class="lead">From a first implementation to rescuing a stalled one — pick the model that fits your stage.</p></div>
+    <div class="sec-head"><div><span class="eyebrow">Engagement models</span><h2 style="max-width:20ch">Implementation tailored to your needs.</h2></div><p class="lead">From a first implementation to rescuing a stalled one — pick the model that fits your stage.</p></div>
     {_svc_rich_grid([(str(i+1).zfill(2),t,d,ic) for i,(t,d,ic) in enumerate(engagements)])}
   </div>
 </section>
