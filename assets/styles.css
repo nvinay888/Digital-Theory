@@ -685,3 +685,9 @@ p{margin:0}
 .dt-table td .accent,.dt-table td strong{color:var(--lime-400);font-weight:700}
 .dt-table-wrap{overflow-x:auto}
 .dt-table-wrap .dt-table{min-width:560px}
+/* Responsive column utilities (replace inline grid overrides) */
+.fact-rows.cols-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:960px){.fact-rows.cols-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.fact-rows.cols-3{grid-template-columns:1fr}}
+.svc-rich.cols-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:600px){.svc-rich.cols-2{grid-template-columns:1fr}}

@@ -280,7 +280,7 @@ def build_strategy():
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2>Four ways in.</h2></div></div>
-    <div class="svc-rich" style="grid-template-columns:repeat(2,1fr)">{offerings}</div>
+    <div class="svc-rich cols-2">{offerings}</div>
   </div>
 </section>
 <section class="section">
@@ -360,7 +360,7 @@ def build_brand():
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">Fit</span><h2 style="max-width:24ch">Where we&rsquo;ll recommend against ourselves.</h2></div></div>
-    <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">
+    <div class="fact-rows cols-3">
       <div class="fact"><h3>AI influencers</h3><p>Right for gaming, electronics and fashion-forward. Wrong for health, financial services and anything where trust is the product — human creators outperform virtual by up to 2.7× in authenticity-driven categories.</p></div>
       <div class="fact"><h3>In-house social</h3><p>If your team runs social well, keep it in-house. We supply the system, standard and measurement layer rather than taking the job.</p></div>
       <div class="fact"><h3>Timeframes</h3><p>Citation share moves in months, not weeks. We show leading indicators monthly and will not pretend a quarter is a verdict.</p></div>
@@ -518,7 +518,7 @@ def build_labs():
 <section class="section">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">The portfolio</span><h2>Three products in build.</h2></div></div>
-    <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">{prods_html}</div>
+    <div class="fact-rows cols-3">{prods_html}</div>
   </div>
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
@@ -527,7 +527,7 @@ def build_labs():
       <div><span class="eyebrow">Why a services firm builds products</span><h2 style="max-width:22ch">The services business is the research lab.</h2></div>
       <p class="lead">Most AI products are built by people guessing at a workflow. Ours are built by people who have already run that workflow inside a real business, under a contract where getting it wrong cost us money.</p>
     </div>
-    <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">
+    <div class="fact-rows cols-3">
       <div class="fact"><h3>Rule one</h3><p>Nothing enters Labs until it has produced a measured outcome on a client engagement.</p></div>
       <div class="fact"><h3>Rule two</h3><p>Every product ships with the eval suite it was built against. If we can&rsquo;t measure it, we can&rsquo;t sell it.</p></div>
       <div class="fact"><h3>Rule three</h3><p>Clients who helped prove a product get it at cost for the life of their engagement.</p></div>
@@ -736,7 +736,7 @@ def build_company():
 <section class="section">
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">Who we work with</span><h2 style="max-width:22ch">Mid-market companies with a number to move.</h2></div></div>
-    <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">
+    <div class="fact-rows cols-3">
       <div class="fact"><h3>Size</h3><p>₹100 Cr – ₹1,000 Cr in India. $50M – $1B in the US and GCC. Big enough to have systems worth connecting, small enough that a decision doesn&rsquo;t take three quarters.</p></div>
       <div class="fact"><h3>Sectors</h3><p>D2C and retail, BFSI and fintech, healthcare, education, SaaS, travel, and manufacturing with a distribution motion.</p></div>
       <div class="fact"><h3>Who signs</h3><p>The CEO who owns growth, the COO who owns cost, the CMO or CRO who owns pipeline. Usually all three in the room for the audit — that is rather the point of it.</p></div>
