@@ -107,6 +107,45 @@ SERVICES_META = {
     "implementation": ("Implementation & Systems","AI agent implementation plus SAP Business One, Odoo, Salesforce and SFMC — fixed fee, with fee at risk."),
     "engineering": ("Product & Platform Engineering","Web, mobile and AI-native product builds with a publicly auditable Core Web Vitals SLA and conversion-linked pricing."),
 }
+SUB_SERVICES = {
+    "revenue-services": [
+        ("services/performance-marketing","Performance Marketing","Full-funnel paid acquisition across Meta, Google, Amazon and affiliates — with a creative testing framework engineered for compounding ROAS."),
+        ("services/seo","SEO","Technical SEO, content engines and link strategy that lifts organic share-of-search and drives down blended CAC."),
+        ("services/crm-retention","CRM & Retention","RFM segmentation, lifecycle journeys and loyalty programs that lift LTV — push, WhatsApp, email and in-app, in one playbook."),
+    ],
+    "strategy": [
+        ("services/business-consulting","Business Consulting","Pricing, unit economics, market entry, NPD and channel-mix counsel grounded in your P&L — strategy that ships, not slide decks."),
+    ],
+    "brand": [
+        ("services/branding","Branding","Identity, positioning and creative systems that travel — from packaging to performance ads to founder LinkedIn."),
+        ("services/social-media-marketing","Social Media Marketing","Organic content, paid social, influencer and community — run as one system across Instagram, LinkedIn, YouTube and more."),
+        ("services/personal-branding","Personal Branding","Founders and executives turned into the most trusted voice in their category — positioning, ghostwritten content, inbound engine."),
+    ],
+    "implementation": [
+        ("services/sap-b1-implementation","SAP B1 Implementation","SAP Business One as the operating spine — finance, sales, inventory, MRP and analytics — scoped, configured, migrated and live."),
+        ("services/sfmc-implementation","SFMC Implementation","Salesforce Marketing Cloud as your engagement engine — data model, journeys, channels and AI personalisation wired end-to-end."),
+        ("services/odoo-implementation","Odoo Implementation","Odoo as one operating system — sales, CRM, inventory, accounting, HR, manufacturing and e-commerce, configured and live."),
+        ("services/ai-automations","AI & Automations","AI readiness assessment, custom agents and workflow automation — implemented securely where it actually pays back."),
+    ],
+    "engineering": [
+        ("services/web-development","Web Development","High-converting D2C storefronts, landing pages and marketing sites built on Shopify, Next.js and headless stacks."),
+        ("services/app-development","App Development","Native and cross-platform consumer apps with ASO, in-app analytics and event-driven CRM baked in from day one."),
+    ],
+}
+def sub_services_html(slug):
+    subs = SUB_SERVICES.get(slug, [])
+    if not subs: return ""
+    cards = "".join(
+        f'<a class="service" href="/{u}"><span class="service__index">{str(i+1).zfill(2)}</span><h3 class="service__title">{t}</h3><p class="service__body">{d}</p></a>'
+        for i,(u,t,d) in enumerate(subs))
+    return f'''
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">The services</span><h2 style="max-width:22ch">What sits under this practice.</h2></div><p class="lead">Each service has its own page with scope, deliverables, process and FAQs.</p></div>
+    <div class="services-grid">{cards}</div>
+  </div>
+</section>'''
+
 RELATED = {
     "revenue-services": ["strategy","brand","implementation"],
     "strategy": ["revenue-services","implementation","brand"],
@@ -215,6 +254,7 @@ def build_revenue():
     body = service_hero("Services · Revenue Services",
         'AI growth agents, <span class="accent">priced on the number they move.</span>',
         "We build and run AI agents inside your revenue engine — demand generation, AI SEO/GEO, creator-led acquisition, lifecycle, service and RevOps — reading your CRM and margin data, with our fee tied to outcomes.")
+    body += sub_services_html("revenue-services")
     body += what_we_do("A complete revenue-agent stack, under one roof.",
         "Six agent lines, deployed in the order your payback ranks them — each one reading and writing to your systems of record.",
         ["Demand generation &amp; pipeline agents","AI SEO &amp; GEO (generative engine optimisation)","Creator-led acquisition","Lifecycle &amp; retention agents","Support resolution agents","RevOps &amp; operating agents"],
@@ -273,6 +313,7 @@ def build_strategy():
     body = service_hero("Services · Strategy &amp; Intelligence",
         'Decision-grade answers in <span class="accent">five business days.</span>',
         "Growth strategy, AI transformation roadmaps and Market Research as a Service — the rigour of a tier-one firm at a fraction of the clock, with part of the fee tied to the recommendation landing.")
+    body += sub_services_html("strategy")
     body += what_we_do("Strategy that ships, research that answers.",
         "Four offerings, all measured, all fast — built for leadership teams that need an answer this quarter, not next year.",
         ["AI &amp; growth strategy","Market Research as a Service","Pricing &amp; unit-economics studies","Win/loss &amp; competitive intelligence","India Mid-Market Benchmark Index","Transformation roadmaps"],
@@ -341,6 +382,7 @@ def build_brand():
     body = service_hero("Services · Brand &amp; Influence",
         'Brand, influence and content — <span class="accent">run as one instrumented system.</span>',
         "Brand strategy, AI influencer marketing, social, founder-led branding, content and entity engineering — measured on citation share, the number machines now read when they decide who gets recommended.")
+    body += sub_services_html("brand")
     body += what_we_do("Six services, one system.",
         "Everything a brand team buys — strategy, creators, social, founder content, editorial and entity work — wired together and measured where it now counts.",
         ["Brand strategy &amp; positioning","AI influencer marketing","Social media marketing","Personal &amp; founder-led branding","Content strategy &amp; editorial","Entity &amp; mention engineering"],
@@ -407,6 +449,7 @@ def build_implementation():
     body = service_hero("Services · Implementation &amp; Systems",
         'Agents and systems of record, <span class="accent">delivered by one team.</span>',
         "AI agent implementation plus SAP Business One, Odoo, Salesforce and SFMC — scored before we quote, contracted to delivery standards, fixed fee with fee at risk.")
+    body += sub_services_html("implementation")
     body += what_we_do("From ERP to agents, one accountable team.",
         "The systems of record and the intelligence on top — because an agent that cannot see inventory, margin, credit or service history is guessing.",
         ["AI agent implementation","SAP Business One — implementation, migration, AMC","Odoo — implementation, customisation, integration","Salesforce &amp; SFMC — implementation and consolidation","Data warehouse &amp; systems integration","Evals, observability &amp; governance (DPDP-ready)"],
@@ -463,6 +506,7 @@ def build_engineering():
     body = service_hero("Services · Product &amp; Platform Engineering",
         'Web, mobile and AI-native builds — <span class="accent">with a performance SLA you can audit.</span>',
         "D2C storefronts, mobile apps, AI-native products and landing systems. Every site ships passing all three Core Web Vitals at p75 or we fix it free — verifiable on public data.")
+    body += sub_services_html("engineering")
     body += what_we_do("Everything above the boilerplate line.",
         "Builds where speed, conversion and measurement are the point — engineered, instrumented and priced against the lift they produce.",
         ["D2C storefronts &amp; web platforms","Mobile app development (iOS, Android, React Native)","AI-native product builds","Landing-page systems &amp; CRO","Analytics &amp; tracking (GA4, server-side, CAPI)","Accessibility &amp; WCAG conformance"],
@@ -859,6 +903,7 @@ write("audit.html", build_audit())
 keep = ["", "revenue-services.html","strategy.html","brand.html","implementation.html","engineering.html",
         "labs.html","pricing.html","company.html","audit.html",
         "case-studies.html","our-work.html","blog.html","careers.html"]
+keep += [f"services/{f[:-5]}.html" if False else f"services/{f}" for f in sorted(os.listdir(os.path.join(ROOT,"services"))) if f.endswith(".html")]
 for d in ("case-studies","blog"):
     full = os.path.join(ROOT,d)
     if os.path.isdir(full):
@@ -874,18 +919,8 @@ write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="htt
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
 
 redir = []
-svc_map = {
-    "performance-marketing":"revenue-services.html","seo":"revenue-services.html","crm-retention":"revenue-services.html",
-    "branding":"brand.html","social-media-marketing":"brand.html","personal-branding":"brand.html",
-    "business-consulting":"strategy.html",
-    "sap-b1-implementation":"implementation.html","sfmc-implementation":"implementation.html",
-    "odoo-implementation":"implementation.html","ai-automations":"implementation.html",
-    "web-development":"engineering.html","app-development":"engineering.html",
-}
-for slug,dest in svc_map.items():
-    redir.append({"source":f"/services/{slug}.html","destination":f"/{dest[:-5]}","permanent":True})
 redir.append({"source":"/services.html","destination":"/","permanent":True})
-redir.append({"source":"/services/:slug*","destination":"/","permanent":True})
+redir.append({"source":"/services","destination":"/","permanent":True})
 redir.append({"source":"/industries.html","destination":"/company","permanent":True})
 redir.append({"source":"/industries/:slug*","destination":"/company","permanent":True})
 redir.append({"source":"/about.html","destination":"/company","permanent":True})

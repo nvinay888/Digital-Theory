@@ -691,3 +691,13 @@ p{margin:0}
 @media(max-width:600px){.fact-rows.cols-3{grid-template-columns:1fr}}
 .svc-rich.cols-2{grid-template-columns:repeat(2,1fr)}
 @media(max-width:600px){.svc-rich.cols-2{grid-template-columns:1fr}}
+/* Mega menu — grouped services tree */
+.nav__mega-inner--tree{grid-template-columns:repeat(3,1fr);gap:40px 48px;align-items:start}
+.nav__mega-group{display:flex;flex-direction:column;gap:2px}
+.nav__mega-group__head{font-family:var(--font-display);font-weight:700;font-size:16px;color:#0A0B0D;letter-spacing:-.01em;padding:6px 0 10px;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,0,0,.08);margin-bottom:6px}
+.nav__mega-group__head::after{content:"→";font-size:13px;color:var(--lime-600);opacity:.85}
+.nav__mega-group__head:hover{color:var(--lime-600)}
+.nav__mega-group__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.nav__mega-group__list a{display:block;padding:7px 0;font-size:14px;color:#4A4A4A;font-weight:500;transition:color var(--dur-fast) var(--ease-out)}
+.nav__mega-group__list a:hover{color:var(--lime-600)}
+@media(max-width:1100px){.nav__mega-inner--tree{grid-template-columns:repeat(2,1fr)}}

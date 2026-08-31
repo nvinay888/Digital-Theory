@@ -3,77 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/services/performance-marketing.html",
-      "destination": "/revenue-services",
-      "permanent": true
-    },
-    {
-      "source": "/services/seo.html",
-      "destination": "/revenue-services",
-      "permanent": true
-    },
-    {
-      "source": "/services/crm-retention.html",
-      "destination": "/revenue-services",
-      "permanent": true
-    },
-    {
-      "source": "/services/branding.html",
-      "destination": "/brand",
-      "permanent": true
-    },
-    {
-      "source": "/services/social-media-marketing.html",
-      "destination": "/brand",
-      "permanent": true
-    },
-    {
-      "source": "/services/personal-branding.html",
-      "destination": "/brand",
-      "permanent": true
-    },
-    {
-      "source": "/services/business-consulting.html",
-      "destination": "/strategy",
-      "permanent": true
-    },
-    {
-      "source": "/services/sap-b1-implementation.html",
-      "destination": "/implementation",
-      "permanent": true
-    },
-    {
-      "source": "/services/sfmc-implementation.html",
-      "destination": "/implementation",
-      "permanent": true
-    },
-    {
-      "source": "/services/odoo-implementation.html",
-      "destination": "/implementation",
-      "permanent": true
-    },
-    {
-      "source": "/services/ai-automations.html",
-      "destination": "/implementation",
-      "permanent": true
-    },
-    {
-      "source": "/services/web-development.html",
-      "destination": "/engineering",
-      "permanent": true
-    },
-    {
-      "source": "/services/app-development.html",
-      "destination": "/engineering",
-      "permanent": true
-    },
-    {
       "source": "/services.html",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/services/:slug*",
+      "source": "/services",
       "destination": "/",
       "permanent": true
     },

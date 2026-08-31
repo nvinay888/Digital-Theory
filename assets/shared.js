@@ -12,6 +12,31 @@
     ['implementation','Implementation & Systems','Agents + SAP B1, Odoo, Salesforce, SFMC'],
     ['engineering','Product & Platform Engineering','Measured conversion lift, published numbers'],
   ];
+  const serviceTree = [
+    ['revenue-services','Revenue Services',[
+      ['services/performance-marketing','Performance Marketing'],
+      ['services/seo','SEO'],
+      ['services/crm-retention','CRM & Retention'],
+    ]],
+    ['strategy','Strategy & Intelligence',[
+      ['services/business-consulting','Business Consulting'],
+    ]],
+    ['brand','Brand & Influence',[
+      ['services/branding','Branding'],
+      ['services/social-media-marketing','Social Media Marketing'],
+      ['services/personal-branding','Personal Branding'],
+    ]],
+    ['implementation','Implementation & Systems',[
+      ['services/sap-b1-implementation','SAP B1 Implementation'],
+      ['services/sfmc-implementation','SFMC Implementation'],
+      ['services/odoo-implementation','Odoo Implementation'],
+      ['services/ai-automations','AI & Automations'],
+    ]],
+    ['engineering','Product & Platform Engineering',[
+      ['services/web-development','Web Development'],
+      ['services/app-development','App Development'],
+    ]],
+  ];
   const proof = [
     ['case-studies','Case Studies'],
     ['our-work','Our Work'],
@@ -25,22 +50,15 @@
       <nav>
         <ul class="nav__links">
           <li class="has-mega">
-            <button class="nav__item ${page==='practices'?'is-active':''}" type="button">Services <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
+            <button class="nav__item ${(page==='practices'||page==='services')?'is-active':''}" type="button">Services <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
             <div class="nav__mega">
-              <div class="nav__mega-inner">
-                <ul class="nav__mega-list">
-                  ${practices.slice(0,3).map(p=>`<li><a href="/${p[0]}">${p[1]}</a></li>`).join('')}
-                </ul>
-                <ul class="nav__mega-list">
-                  ${practices.slice(3).map(p=>`<li><a href="/${p[0]}">${p[1]}</a></li>`).join('')}
-                  <li><a href="/labs" style="color:var(--lime-400)">Digital Theory Labs →</a></li>
-                </ul>
-                <div class="nav__mega-quote">
-                  <div class="nav__mega-quote__mark">"</div>
-                  <p>Five services, one operating model — AI agents built into your business, priced on the number they move.</p>
-                  <span class="nav__mega-quote__name">The Growth Engine</span>
-                  <span class="nav__mega-quote__role">2-hour audit · 5-day blueprint · 30-day deploy</span>
-                </div>
+              <div class="nav__mega-inner nav__mega-inner--tree">
+                ${serviceTree.map(t=>`<div class="nav__mega-group">
+                  <a class="nav__mega-group__head" href="/${t[0]}">${t[1]}</a>
+                  <ul class="nav__mega-group__list">
+                    ${t[2].map(c=>`<li><a href="/${c[0]}">${c[1]}</a></li>`).join('')}
+                  </ul>
+                </div>`).join('')}
               </div>
             </div>
           </li>
@@ -66,7 +84,7 @@
   <div class="nav__mobile-panel" id="navMobilePanel">
     <ul>
       <li><details><summary>Services</summary><ul>
-        ${practices.map(p=>`<li><a href="/${p[0]}">${p[1]}</a></li>`).join('')}
+        ${serviceTree.map(t=>`<li><a href="/${t[0]}" style="color:var(--lime-400)">${t[1]}</a></li>${t[2].map(c=>`<li><a href="/${c[0]}" style="padding-left:16px;font-size:14px;color:var(--fg-muted)">${c[1]}</a></li>`).join('')}`).join('')}
       </ul></details></li>
       <li><a href="/labs">Digital Theory Labs</a></li>
       <li><a href="/pricing">Pricing</a></li>
