@@ -1,0 +1,99 @@
+{
+  "redirects": [
+    {
+      "source": "/services/performance-marketing.html",
+      "destination": "/revenue-services.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/seo.html",
+      "destination": "/revenue-services.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/crm-retention.html",
+      "destination": "/revenue-services.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/branding.html",
+      "destination": "/brand.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/social-media-marketing.html",
+      "destination": "/brand.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/personal-branding.html",
+      "destination": "/brand.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/business-consulting.html",
+      "destination": "/strategy.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/sap-b1-implementation.html",
+      "destination": "/implementation.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/sfmc-implementation.html",
+      "destination": "/implementation.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/odoo-implementation.html",
+      "destination": "/implementation.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/ai-automations.html",
+      "destination": "/implementation.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/web-development.html",
+      "destination": "/engineering.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/app-development.html",
+      "destination": "/engineering.html",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/:slug*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/industries.html",
+      "destination": "/company.html",
+      "permanent": true
+    },
+    {
+      "source": "/industries/:slug*",
+      "destination": "/company.html",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/company.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/audit.html",
+      "permanent": true
+    }
+  ]
+}

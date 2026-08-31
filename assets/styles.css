@@ -643,3 +643,45 @@ p{margin:0}
 .callout__inner{position:relative;max-width:640px;margin:0 auto}
 .callout h2{font-size:var(--fs-h3);max-width:24ch;margin:0 auto}
 .callout p{color:var(--fg-muted);margin:14px auto 24px;max-width:52ch;font-size:16px;line-height:1.6}
+/* ===== V2 repositioning components ===== */
+/* Evidence stat card: big number + claim + source line */
+.ev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4)}
+@media(max-width:960px){.ev-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.ev-grid{grid-template-columns:1fr}}
+.ev{padding:var(--space-6);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);display:flex;flex-direction:column;gap:10px}
+.ev .stat__num{font-size:clamp(2rem,1.4rem+2vw,3rem)}
+.ev__claim{color:var(--fg);font-size:14.5px;line-height:1.5}
+.src{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--fg-faint);line-height:1.5;margin-top:auto;padding-top:8px}
+/* Pricing tier card */
+.tier{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-card);padding:var(--space-7);display:flex;flex-direction:column;gap:var(--space-4);transition:border-color var(--dur-base) var(--ease-out)}
+.tier:hover{border-color:var(--line-strong)}
+.tier--hero{border-color:var(--lime-400);background:linear-gradient(180deg,rgba(140,198,63,.05),transparent 55%)}
+.tier__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime-400);font-weight:500}
+.tier__price{font-family:var(--font-display);font-weight:800;font-size:clamp(1.25rem,1rem+1vw,1.7rem);color:var(--fg-strong);letter-spacing:-.015em;line-height:1.25}
+.tier__desc{color:var(--fg-muted);font-size:14.5px;line-height:1.6}
+.tier__rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.tier__row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.tier__row span:first-child{color:var(--fg-muted)}
+.tier__row span:last-child{color:var(--fg-strong);font-weight:600;text-align:right;white-space:nowrap}
+.tier__note{font-family:var(--font-mono);font-size:11px;color:var(--fg-faint);line-height:1.55;letter-spacing:.02em}
+/* Flagship practice card on home */
+.flagship{border:1px solid var(--lime-400);border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(140,198,63,.07),transparent 60%);padding:clamp(1.8rem,3.5vw,3rem);display:block;transition:transform var(--dur-base) var(--ease-out)}
+.flagship:hover{transform:translateY(-2px)}
+.flagship__tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime-400);font-weight:500}
+/* Simple 2-col fact list rows */
+.fact-rows{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+@media(max-width:760px){.fact-rows{grid-template-columns:1fr}}
+.fact{padding:var(--space-6);border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-card)}
+.fact h3{font-size:1.05rem;margin-bottom:8px}
+.fact p{color:var(--fg-muted);font-size:14.5px;line-height:1.6}
+/* Mini banner strip under hero */
+.geo-strip{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--fg-faint);margin-top:var(--space-6)}
+/* Generic data table */
+.dt-table{width:100%;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;border-collapse:separate;border-spacing:0;background:var(--surface-card)}
+.dt-table th{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);font-weight:500;text-align:left;padding:14px 20px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--line-strong)}
+.dt-table td{padding:14px 20px;font-size:14.5px;color:var(--fg-muted);border-bottom:1px solid var(--line);line-height:1.5;vertical-align:top}
+.dt-table tr:last-child td{border-bottom:0}
+.dt-table td:first-child{color:var(--fg-strong);font-weight:600}
+.dt-table td .accent,.dt-table td strong{color:var(--lime-400);font-weight:700}
+.dt-table-wrap{overflow-x:auto}
+.dt-table-wrap .dt-table{min-width:560px}
