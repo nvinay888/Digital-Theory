@@ -1,68 +1,70 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/services/performance-marketing.html",
-      "destination": "/revenue-services.html",
+      "destination": "/revenue-services",
       "permanent": true
     },
     {
       "source": "/services/seo.html",
-      "destination": "/revenue-services.html",
+      "destination": "/revenue-services",
       "permanent": true
     },
     {
       "source": "/services/crm-retention.html",
-      "destination": "/revenue-services.html",
+      "destination": "/revenue-services",
       "permanent": true
     },
     {
       "source": "/services/branding.html",
-      "destination": "/brand.html",
+      "destination": "/brand",
       "permanent": true
     },
     {
       "source": "/services/social-media-marketing.html",
-      "destination": "/brand.html",
+      "destination": "/brand",
       "permanent": true
     },
     {
       "source": "/services/personal-branding.html",
-      "destination": "/brand.html",
+      "destination": "/brand",
       "permanent": true
     },
     {
       "source": "/services/business-consulting.html",
-      "destination": "/strategy.html",
+      "destination": "/strategy",
       "permanent": true
     },
     {
       "source": "/services/sap-b1-implementation.html",
-      "destination": "/implementation.html",
+      "destination": "/implementation",
       "permanent": true
     },
     {
       "source": "/services/sfmc-implementation.html",
-      "destination": "/implementation.html",
+      "destination": "/implementation",
       "permanent": true
     },
     {
       "source": "/services/odoo-implementation.html",
-      "destination": "/implementation.html",
+      "destination": "/implementation",
       "permanent": true
     },
     {
       "source": "/services/ai-automations.html",
-      "destination": "/implementation.html",
+      "destination": "/implementation",
       "permanent": true
     },
     {
       "source": "/services/web-development.html",
-      "destination": "/engineering.html",
+      "destination": "/engineering",
       "permanent": true
     },
     {
       "source": "/services/app-development.html",
-      "destination": "/engineering.html",
+      "destination": "/engineering",
       "permanent": true
     },
     {
@@ -77,22 +79,22 @@
     },
     {
       "source": "/industries.html",
-      "destination": "/company.html",
+      "destination": "/company",
       "permanent": true
     },
     {
       "source": "/industries/:slug*",
-      "destination": "/company.html",
+      "destination": "/company",
       "permanent": true
     },
     {
       "source": "/about.html",
-      "destination": "/company.html",
+      "destination": "/company",
       "permanent": true
     },
     {
       "source": "/contact.html",
-      "destination": "/audit.html",
+      "destination": "/audit",
       "permanent": true
     }
   ]

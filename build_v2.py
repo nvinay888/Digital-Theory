@@ -12,7 +12,8 @@ SITE_URL = "https://digitaltheory.co.in"
 # ---------------------------------------------------------------- helpers
 def page(title, desc, body, active="", path="", seo_title=None, extra_schema=None, breadcrumbs=None):
     full_title = seo_title if seo_title else f"{title} — Digital Theory"
-    canonical = f"{SITE_URL}/{path.lstrip('/')}" if path else SITE_URL + "/"
+    public = path[:-5] if path.endswith(".html") else path
+    canonical = f"{SITE_URL}/{public.lstrip('/')}" if public else SITE_URL + "/"
     og_image = f"{SITE_URL}/assets/og-image.png"
     if breadcrumbs is None:
         crumbs = [("Home", "")]
@@ -21,7 +22,8 @@ def page(title, desc, body, active="", path="", seo_title=None, extra_schema=Non
         breadcrumbs = crumbs
     bc_items = []
     for i, (name, p) in enumerate(breadcrumbs, 1):
-        item_url = SITE_URL + "/" if p == "" else f"{SITE_URL}/{p.lstrip('/')}"
+        pp = p[:-5] if p.endswith(".html") else p
+        item_url = SITE_URL + "/" if pp == "" else f"{SITE_URL}/{pp.lstrip('/')}"
         bc_items.append({"@type":"ListItem","position":i,"name":name,"item":item_url})
     schema_blocks = [json.dumps({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":bc_items}, ensure_ascii=False)]
     if extra_schema:
@@ -91,8 +93,8 @@ CTA = '''
     <h2>Two hours will tell you more than <span class="accent">a quarter of pilots.</span></h2>
     <p class="lead">Bring the people who own revenue, operations and data. Leave with a written baseline and three costed agents, ranked by payback — whatever you decide next.</p>
     <div class="cta-final__row">
-      <a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Growth Audit <span class="btn__arrow">→</span></a>
-      <a href="pricing.html" class="btn btn--secondary btn--lg">See how we charge</a>
+      <a href="/audit" class="btn btn--primary btn--lg">Book the 2-hour Growth Audit <span class="btn__arrow">→</span></a>
+      <a href="/pricing" class="btn btn--secondary btn--lg">See how we charge</a>
     </div>
     <p class="geo-strip" style="text-align:center">₹75,000 · credited in full against any engagement signed within 30 days</p>
   </div>
@@ -114,7 +116,7 @@ RELATED = {
 }
 def related_html(slug):
     cards = "".join(
-        f'<a class="service" href="{r}.html"><span class="service__index">→</span><h3 class="service__title">{SERVICES_META[r][0]}</h3><p class="service__body">{SERVICES_META[r][1]}</p></a>'
+        f'<a class="service" href="/{r}"><span class="service__index">→</span><h3 class="service__title">{SERVICES_META[r][0]}</h3><p class="service__body">{SERVICES_META[r][1]}</p></a>'
         for r in RELATED[slug])
     return f'''
 <section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)">
@@ -128,7 +130,7 @@ def svc_schema(name, desc, path):
     return {"@context":"https://schema.org","@type":"Service","name":name,"description":desc,
             "provider":{"@type":"Organization","name":"Digital Theory","url":SITE_URL+"/"},
             "areaServed":[{"@type":"Country","name":"India"},{"@type":"Country","name":"United States"},{"@type":"Country","name":"United Arab Emirates"}],
-            "serviceType":name,"url":f"{SITE_URL}/{path}"}
+            "serviceType":name,"url":f"{SITE_URL}/{path[:-5] if path.endswith(chr(46)+chr(104)+chr(116)+chr(109)+chr(108)) else path}"}
 
 def offering_card(tag, title, desc, note=None):
     n = f'<div class="src">{note}</div>' if note else ''
@@ -145,8 +147,8 @@ def service_hero(eyebrow, h1, lead):
     <h1>{h1}</h1>
     <p class="lead page-hero__lead">{lead}</p>
     <div class="page-hero__cta">
-      <a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Growth Audit <span class="btn__arrow">→</span></a>
-      <a href="pricing.html" class="btn btn--secondary btn--lg">How we charge</a>
+      <a href="/audit" class="btn btn--primary btn--lg">Book the 2-hour Growth Audit <span class="btn__arrow">→</span></a>
+      <a href="/pricing" class="btn btn--secondary btn--lg">How we charge</a>
     </div>
   </div>
 </section>'''
@@ -510,8 +512,8 @@ def build_labs():
     <h1>We don&rsquo;t only deliver AI. <span class="accent">We build it.</span></h1>
     <p class="lead page-hero__lead">A productised AI portfolio for B2B and B2C. Every product in Labs started as a system we built for a client, proved on their P&amp;L, and then generalised. Nothing here is a concept deck.</p>
     <div class="page-hero__cta">
-      <a href="audit.html" class="btn btn--primary btn--lg">Request early access <span class="btn__arrow">→</span></a>
-      <a href="revenue-services.html" class="btn btn--secondary btn--lg">See the services side</a>
+      <a href="/audit" class="btn btn--primary btn--lg">Request early access <span class="btn__arrow">→</span></a>
+      <a href="/revenue-services" class="btn btn--secondary btn--lg">See the services side</a>
     </div>
   </div>
 </section>
@@ -571,7 +573,7 @@ def build_pricing():
     <span class="eyebrow">Outcome Contracts</span>
     <h1>Five ways to buy. <span class="accent">All of them published.</span></h1>
     <p class="lead page-hero__lead">Every tier has a floor so we can staff you properly, a cap so your CFO can budget, and a baseline locked at signature so nobody argues about attribution six months in. All figures exclude GST.</p>
-    <div class="page-hero__cta"><a href="audit.html" class="btn btn--primary btn--lg">Start at Tier 0 <span class="btn__arrow">→</span></a></div>
+    <div class="page-hero__cta"><a href="/audit" class="btn btn--primary btn--lg">Start at Tier 0 <span class="btn__arrow">→</span></a></div>
   </div>
 </section>
 <section class="section">
@@ -586,7 +588,7 @@ def build_pricing():
         <div class="tier__row"><span>Fixed price, paid upfront, no scoping call required</span><span>—</span></div>
       </div>
       <p class="tier__note">Extended version — two weeks, five stakeholder interviews, prioritised roadmap: ₹2,50,000 (≈$2,630). We price the audit because free diagnostics select for people who will never buy.</p>
-      <div><a href="audit.html" class="btn btn--primary">Book the audit <span class="btn__arrow">→</span></a></div>
+      <div><a href="/audit" class="btn btn--primary">Book the audit <span class="btn__arrow">→</span></a></div>
     </div>
     <div class="fact-rows">
       <div class="tier">
@@ -864,7 +866,8 @@ for d in ("case-studies","blog"):
 today = "2026-08-30"
 entries = []
 for u in keep:
-    loc = f"{SITE_URL}/" if u=="" else f"{SITE_URL}/{u}"
+    cu = u[:-5] if u.endswith(".html") else u
+    loc = f"{SITE_URL}/" if cu=="" else f"{SITE_URL}/{cu}"
     pr = "1.0" if u=="" else ("0.9" if u in ("revenue-services.html","pricing.html","audit.html") else "0.7")
     entries.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>{pr}</priority>\n  </url>")
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(entries) + "\n</urlset>\n")
@@ -880,14 +883,14 @@ svc_map = {
     "web-development":"engineering.html","app-development":"engineering.html",
 }
 for slug,dest in svc_map.items():
-    redir.append({"source":f"/services/{slug}.html","destination":f"/{dest}","permanent":True})
+    redir.append({"source":f"/services/{slug}.html","destination":f"/{dest[:-5]}","permanent":True})
 redir.append({"source":"/services.html","destination":"/","permanent":True})
 redir.append({"source":"/services/:slug*","destination":"/","permanent":True})
-redir.append({"source":"/industries.html","destination":"/company.html","permanent":True})
-redir.append({"source":"/industries/:slug*","destination":"/company.html","permanent":True})
-redir.append({"source":"/about.html","destination":"/company.html","permanent":True})
-redir.append({"source":"/contact.html","destination":"/audit.html","permanent":True})
+redir.append({"source":"/industries.html","destination":"/company","permanent":True})
+redir.append({"source":"/industries/:slug*","destination":"/company","permanent":True})
+redir.append({"source":"/about.html","destination":"/company","permanent":True})
+redir.append({"source":"/contact.html","destination":"/audit","permanent":True})
 with open(os.path.join(ROOT,"vercel.json"),"w") as f:
-    json.dump({"redirects":redir}, f, indent=2)
+    json.dump({"cleanUrls": True, "trailingSlash": False, "redirects":redir}, f, indent=2)
 print("wrote vercel.json")
 print("\nDone — V2 catalog-format pages built.")
