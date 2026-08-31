@@ -25,7 +25,7 @@
       <nav>
         <ul class="nav__links">
           <li class="has-mega">
-            <button class="nav__item ${page==='practices'?'is-active':''}" type="button">Practices <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
+            <button class="nav__item ${page==='practices'?'is-active':''}" type="button">Services <svg class="nav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg></button>
             <div class="nav__mega">
               <div class="nav__mega-inner">
                 <ul class="nav__mega-list">
@@ -37,7 +37,7 @@
                 </ul>
                 <div class="nav__mega-quote">
                   <div class="nav__mega-quote__mark">"</div>
-                  <p>Five practices, one operating model — AI agents built into your business, priced on the number they move.</p>
+                  <p>Five services, one operating model — AI agents built into your business, priced on the number they move.</p>
                   <span class="nav__mega-quote__name">The Growth Engine</span>
                   <span class="nav__mega-quote__role">2-hour audit · 5-day blueprint · 30-day deploy</span>
                 </div>
@@ -65,7 +65,7 @@
   </header>
   <div class="nav__mobile-panel" id="navMobilePanel">
     <ul>
-      <li><details><summary>Practices</summary><ul>
+      <li><details><summary>Services</summary><ul>
         ${practices.map(p=>`<li><a href="${base}${p[0]}.html">${p[1]}</a></li>`).join('')}
       </ul></details></li>
       <li><a href="${base}labs.html">Digital Theory Labs</a></li>
@@ -88,7 +88,7 @@
           <p class="footer__cities">Bengaluru · Mumbai · India</p>
         </div>
         <div class="footer__col">
-          <h4>Practices</h4>
+          <h4>Services</h4>
           <ul>${practices.map(p=>`<li><a href="${base}${p[0]}.html">${p[1]}</a></li>`).join('')}</ul>
         </div>
         <div class="footer__col">

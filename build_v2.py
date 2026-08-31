@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Digital Theory V2 — repositioning site generator.
-Generates the 9 inner pages of the new architecture + sitemap + vercel.json redirects.
-Design system unchanged (assets/styles.css, dark + lime). Nav/footer injected by assets/shared.js.
+Service pages follow the classic catalog format: what we offer, offerings grid,
+deliverables, process, FAQ, related services, CTA. Market-argument content lives
+on the homepage and pricing page, not on service pages.
 """
 import os, json
 
@@ -80,15 +81,8 @@ def render_faq(items, section_title="Frequently asked questions", eyebrow="FAQ")
   </div>
 </section>'''
     schema = {"@context":"https://schema.org","@type":"FAQPage",
-              "mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":to_text(a)}} for q,a in items]}
+              "mainEntity":[{"@type":"Question","name":to_text(q),"acceptedAnswer":{"@type":"Answer","text":to_text(a)}} for q,a in items]}
     return html, schema
-
-def ev(num, unit, claim, src):
-    u = f'<span class="unit">{unit}</span>' if unit else ''
-    return f'<div class="ev"><div class="stat__num">{num}{u}</div><p class="ev__claim">{claim}</p><div class="src">{src}</div></div>'
-
-def step(n, clock, title, body, out):
-    return f'<div class="bc-step"><div class="bc-step__num">{n}</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--lime-400);margin-bottom:10px">{clock}</div><h3>{title}</h3><p>{body}</p><p style="margin-top:12px;color:var(--fg);font-size:13.5px"><strong style="color:var(--lime-400)">You get:</strong> {out}</p></div>'
 
 CTA = '''
 <section class="section cta-final">
@@ -104,20 +98,29 @@ CTA = '''
   </div>
 </section>'''
 
-ENGINE = f'''
-<section class="section" id="engine">
+SERVICES_META = {
+    "revenue-services": ("Revenue Services","AI growth agents deployed into your revenue engine — demand, GEO, lifecycle, service and RevOps — priced on the number they move."),
+    "strategy": ("Strategy & Intelligence","Growth strategy, AI transformation roadmaps and Market Research as a Service — decision-grade insight in five business days."),
+    "brand": ("Brand & Influence","Brand strategy, AI influencer marketing, social, founder branding, content and entity engineering — instrumented and priced on citation share."),
+    "implementation": ("Implementation & Systems","AI agent implementation plus SAP Business One, Odoo, Salesforce and SFMC — fixed fee, with fee at risk."),
+    "engineering": ("Product & Platform Engineering","Web, mobile and AI-native product builds with a publicly auditable Core Web Vitals SLA and conversion-linked pricing."),
+}
+RELATED = {
+    "revenue-services": ["strategy","brand","implementation"],
+    "strategy": ["revenue-services","implementation","brand"],
+    "brand": ["revenue-services","strategy","engineering"],
+    "implementation": ["revenue-services","engineering","strategy"],
+    "engineering": ["implementation","revenue-services","brand"],
+}
+def related_html(slug):
+    cards = "".join(
+        f'<a class="service" href="{r}.html"><span class="service__index">→</span><h3 class="service__title">{SERVICES_META[r][0]}</h3><p class="service__body">{SERVICES_META[r][1]}</p></a>'
+        for r in RELATED[slug])
+    return f'''
+<section class="section" style="background:var(--surface-section);border-top:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">The Growth Engine</span><h2 style="max-width:24ch">Two hours to a baseline. Thirty days to production.</h2></div>
-      <p class="lead">A four-stage operating loop, with a clock on every stage. The first three get an agent live. The fourth is why month twelve costs us less and returns you more.</p>
-    </div>
-    <div class="bc-method">
-      {step("01","2 HOURS","Audit","A working session across revenue, operations and data. We map where money leaks, which decisions are waiting on a human, and what your systems already emit.","a Value Baseline Memo — the agreed numbers every future outcome is measured against.")}
-      {step("02","5 DAYS","Blueprint","Agent architecture, integration map, evaluation criteria, a costed sequence — and the commercial model with baseline, floor and cap written down before anyone builds.","a Growth Engine Blueprint and a signed outcome contract.")}
-      {step("03","30 DAYS","Deploy","Forward-deployed engineers build inside your stack — ERP, CRM, warehouse, ticketing. One workflow, binary success criteria, a named owner. First agent live in production.","agents in production and an OpenTelemetry-instrumented eval suite in your stack.")}
-      {step("04","∞ EVERY DAY AFTER","Compound","Every outcome, correction and edge case is written back to your Growth Graph. Agents get more accurate, cheaper per outcome, and broader in scope.","a growth system that appreciates instead of one you re-buy annually.")}
-    </div>
-    <p style="margin-top:28px;color:var(--fg-muted);font-size:14.5px;max-width:72ch;line-height:1.6">Deploy is deliberately narrow: one workflow, binary success criteria, a named owner on your side, automated evaluations on every change — written into the statement of work as delivery standards rather than good intentions. <strong style="color:var(--fg)">Scope, not model capability, is what kills these projects.</strong></p>
+    <div class="sec-head"><div><span class="eyebrow">Related services</span><h2>Pairs well with</h2></div><p class="lead">Most engagements combine two or three of these into one operating system.</p></div>
+    <div class="services-grid">{cards}</div>
   </div>
 </section>'''
 
@@ -127,165 +130,162 @@ def svc_schema(name, desc, path):
             "areaServed":[{"@type":"Country","name":"India"},{"@type":"Country","name":"United States"},{"@type":"Country","name":"United Arab Emirates"}],
             "serviceType":name,"url":f"{SITE_URL}/{path}"}
 
+def offering_card(tag, title, desc, note=None):
+    n = f'<div class="src">{note}</div>' if note else ''
+    return f'<div class="svc-rich__card" style="cursor:default"><div class="svc-rich__body" style="padding-top:28px"><span class="svc-rich__num">{tag}</span><h3 class="svc-rich__title">{title}</h3><p class="svc-rich__desc">{desc}</p>{n}</div></div>'
+
+def deliverables_html(items):
+    return '<div class="solution__deliverables">' + "".join(f'<div class="deliverable"><h3>{n}</h3><p>{d}</p></div>' for n,d in items) + '</div>'
+
+def service_hero(eyebrow, h1, lead):
+    return f'''
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{h1}</h1>
+    <p class="lead page-hero__lead">{lead}</p>
+    <div class="page-hero__cta">
+      <a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Growth Audit <span class="btn__arrow">→</span></a>
+      <a href="pricing.html" class="btn btn--secondary btn--lg">How we charge</a>
+    </div>
+  </div>
+</section>'''
+
+def what_we_do(h2, intro, scope, panel_title, panel_items):
+    scope_html = "".join(f"<li>{s}</li>" for s in scope)
+    panel_html = "".join(f'<li style="padding-left:24px;position:relative;color:var(--fg);font-size:14.5px;line-height:1.55;list-style:none"><span style="position:absolute;left:0;color:var(--lime-400);font-weight:700">→</span> {p}</li>' for p in panel_items)
+    return f'''
+<section class="section">
+  <div class="container">
+    <div class="solution__intro">
+      <div class="solution__what">
+        <span class="eyebrow">What we do</span>
+        <h2 style="margin-top:12px;max-width:20ch">{h2}</h2>
+        <p class="lead" style="margin-top:16px">{intro}</p>
+        <ul>{scope_html}</ul>
+      </div>
+      <div>
+        <div class="case-detail__panel">
+          <h3>{panel_title}</h3>
+          <ul style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:12px">{panel_html}</ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>'''
+
 def write(path, content):
-    full = os.path.join(ROOT, path)
-    with open(full,"w") as f: f.write(content)
+    with open(os.path.join(ROOT, path),"w") as f: f.write(content)
     print("wrote", path)
 
 # ================================================================ REVENUE SERVICES
 def build_revenue():
-    agents = [
-        ("Demand","Pipeline agents","ICP scoring against your closed-won data, signal-triggered outbound, meeting qualification and routing — writing to your CRM, not a spreadsheet.","Priced per qualified meeting held. McKinsey documented a US homebuilder tripling its conversion-to-appointment rate with AI sales agents."),
-        ("Search","AI SEO &amp; GEO agents","Getting your brand cited by ChatGPT, Perplexity, Gemini and Google AI Overviews — a different discipline from ranking, with different mechanics.","Five of six AI citations come from pages not in the top 10. ChatGPT referrals convert at 15.9% vs 1.76% for organic."),
-        ("Creators","Creator-led acquisition","Influencer run as an acquisition channel rather than an awareness one — matched on conversion history, priced per customer. Built with Brand &amp; Influence.","65.9% of brands now expect payback within one month. Fake followers are 56.5% of reported fraud concerns."),
-        ("Lifecycle","Retention agents","Churn prediction on behaviour, not RFM alone. Next-best-action per segment, triggered against your billing and support systems.","Personalisation lifts revenue 5–15% (McKinsey). One airline cut high-value churn 59%."),
-        ("Service","Resolution agents","Support deflection grounded in your knowledge base and order system. Escalation is free; you only pay for a clean resolution.","₹95–₹190 per resolution vs ₹500–₹1,100 human-handled. 40–60% resolution at launch, 60%+ within a year."),
-        ("RevOps","Operating agents","Quote-to-cash, collections follow-up, margin-leakage detection and forecast hygiene — the back-office work where ROI is highest and nobody looks.","50%+ of AI budgets go to front-office despite better back-office ROI."),
-    ]
-    agents_html = "".join(
-        f'<div class="svc-rich__card" style="cursor:default"><div class="svc-rich__body" style="padding-top:28px"><span class="svc-rich__num">{tag}</span><h3 class="svc-rich__title">{t}</h3><p class="svc-rich__desc">{d}</p><div class="src">{src}</div></div></div>'
-        for tag,t,d,src in agents)
-
-    mech = [
-        ("1 · Baseline","Trailing 12 months of your data, normalised for seasonality, volume and mix. Locked at signature. Exogenous factors named in a schedule so neither side can argue them later."),
-        ("2 · Holdout","A randomised 10% holdout wherever you can give us one. Where you can&rsquo;t, a pre-agreed proxy metric. Never last-touch attribution — it is how these deals die."),
-        ("3 · Floor &amp; cap","A minimum so we can staff you properly. A ceiling so your CFO can put a number in the plan. Both in the contract on day one."),
-        ("4 · Clawback","If the verified value reverses in the following quarter, we repay pro-rata — capped at 100% of that quarter&rsquo;s outcome fee."),
-    ]
-    mech_html = "".join(f'<div class="fact"><h3>{t}</h3><p>{d}</p></div>' for t,d in mech)
-
-    cmp1_rows = [
-        ("Reaches your systems","Reads and writes to SAP Business One, Odoo, Salesforce, your warehouse and your ticketing system.","No access to ERP, CRM, warehouse or ticketing. Every answer is ungrounded in what is true today."),
-        ("Memory","Persistent, governed, org-level memory — the Growth Graph.","Session-scoped, per-user, non-transferable. Nothing the organisation learns is retained."),
-        ("Accuracy on business tasks","Grounded retrieval cuts hallucination 30–70%; under 2% on grounded summarisation.","Legal-query hallucination measured at 58–88% (Stanford RegLab)."),
-        ("Evaluation","Offline evals pre-deploy, online LLM-as-judge in production, every failure converted into a regression test.","None. No ground truth, no regression tests, no quality gate."),
-        ("Observability","OpenTelemetry gen_ai.* spans — model calls, tokens, agent steps, tool executions.","No traces, no token accounting, no audit trail."),
-        ("Ownership","A named agent owner, evals on every change, one workflow with binary success criteria — contracted.","Nobody owns it. MIT: 60% of firms evaluated custom AI; only 20% reached pilot."),
-        ("Governance","Policy, role-based access, audit log, human-in-the-loop and a model allow-list from day one.","52% of organisations have no formal policy on external AI tools."),
-        ("Data exposure","Data stays inside the governed boundary — DLP, redaction and retention controls.","27% of employees have entered confidential company data into public AI tools."),
-        ("DPDP readiness","Purpose-limited, consent-manager compatible, auditable — ahead of May 2027 enforcement, penalties to ₹250 Cr.","Consumer accounts sit outside consent management, retention limits and audit obligations."),
-        ("Payback","Agreed in the blueprint before we build, then measured against the locked baseline every quarter.","Unmeasured — that is rather the point. There is no instrumentation to measure it with."),
-    ]
-    cmp1 = "".join(f'<div class="compare-row" data-row><div class="compare-cell compare-cell--param">{p}</div><div class="compare-cell compare-cell--us">{us}</div><div class="compare-cell compare-cell--other">{o}</div></div>' for p,us,o in cmp1_rows)
-
-    cmp2_rows = [
-        ("What you buy","A growth system that runs inside your business.","Hours, headcount, decks and campaigns."),
-        ("Pricing","Outcome contracts with a locked baseline, a floor and a cap. Minimum retainer — or none.","A monthly retainer regardless of result."),
-        ("Time to first value","2-hour audit · 5-day blueprint · 30-day deployment.","6–12 months to deployment, against an 8-month expectation."),
-        ("What gets measured","The number in your P&amp;L, against a randomised holdout.","Impressions, ROAS, deliverables shipped."),
-        ("Where the work lives","In your ERP, CRM and warehouse — with an eval suite you own.","In the agency&rsquo;s tools and the agency&rsquo;s heads."),
-        ("What you own at the end","Agents, evals and a Growth Graph that appreciate.","A body of work you have to re-buy every year."),
-        ("Role of AI","The operating system of the engagement.","A tool the team uses to make deliverables faster."),
-        ("Accountability","Fees at risk, in writing, with a clawback clause.","&ldquo;Market conditions changed.&rdquo;"),
-        ("Who does the work","Forward-deployed engineers inside your systems.","A pyramid, with juniors on your account."),
-        ("When you stop paying","The agents keep running.","Everything stops."),
-    ]
-    cmp2 = "".join(f'<div class="compare-row" data-row><div class="compare-cell compare-cell--param">{p}</div><div class="compare-cell compare-cell--us">{us}</div><div class="compare-cell compare-cell--other">{o}</div></div>' for p,us,o in cmp2_rows)
-
-    body = f'''
-<section class="page-hero">
-  <div class="container page-hero__inner">
-    <span class="eyebrow">Revenue Services · The flagship</span>
-    <h1>We engineer your growth by building AI agents <span class="accent">customised for your business.</span></h1>
-    <p class="lead page-hero__lead">Not a chatbot. Not a workflow tool. A growth system that reads your margin data, decides what to do next, executes it, and learns from what happened — with our fee tied to the number it moves.</p>
-    <div class="page-hero__cta">
-      <a href="audit.html" class="btn btn--primary btn--lg">Start with the 2-hour Audit <span class="btn__arrow">→</span></a>
-      <a href="#pricing" class="btn btn--secondary btn--lg">How outcome pricing works</a>
-    </div>
-  </div>
-</section>
-{ENGINE}
+    offerings = "".join([
+        offering_card("Demand","Pipeline agents","ICP scoring against your closed-won data, signal-triggered outbound, meeting qualification and routing — writing to your CRM, not a spreadsheet.","Priced per qualified meeting held"),
+        offering_card("Search","AI SEO &amp; GEO","Getting your brand cited by ChatGPT, Perplexity, Gemini and Google AI Overviews — schema, entity work, citation-optimised content and earned-media placement.","Guarantee: citation share moves by month four, or month four is free"),
+        offering_card("Creators","Creator-led acquisition","Influencer run as an acquisition channel — creators matched on conversion history, fraud-screened before signing, priced per customer produced.","Run with the Brand &amp; Influence practice"),
+        offering_card("Lifecycle","Retention agents","Churn prediction on behaviour, next-best-action per segment, triggered against your billing and support systems across email, WhatsApp, push and in-app.","Priced against retained revenue"),
+        offering_card("Service","Resolution agents","Support deflection grounded in your knowledge base and order system. Escalation is free; you only pay for a clean resolution.","₹95–₹190 per resolution vs ₹500–₹1,100 human-handled"),
+        offering_card("RevOps","Operating agents","Quote-to-cash, collections follow-up, margin-leakage detection and forecast hygiene — the back-office work where ROI is highest and nobody looks.","Priced per recovered rupee or fixed + kicker"),
+    ])
+    delivs = deliverables_html([
+        ("Value Baseline Memo","Your current-state numbers — agreed, signed and locked before anything is built. Every outcome fee is measured against it."),
+        ("Growth Engine Blueprint","Which agents, reading which systems, producing which measurable outcome, in what order — with the commercial terms attached to each."),
+        ("Agents in production","Built inside your stack — ERP, CRM, warehouse, ticketing — with a named owner and binary success criteria. First agent live in 30 days."),
+        ("Eval suite you own","An OpenTelemetry-instrumented evaluation suite that lives in your stack and stays with you whether or not we do."),
+        ("The Growth Graph","Your org-level context layer — every outcome, correction and edge case written back, so agents get cheaper per outcome each quarter."),
+        ("Quarterly certification","A shared dashboard, holdout-based measurement and finance sign-off before any outcome invoice is raised."),
+    ])
+    steps = '''
+    <div class="bc-method">
+      <div class="bc-step"><div class="bc-step__num">01</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--lime-400);margin-bottom:10px">2 HOURS</div><h3>Audit</h3><p>Your leadership in the room. We trace the revenue path end to end and agree the baseline.</p></div>
+      <div class="bc-step"><div class="bc-step__num">02</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--lime-400);margin-bottom:10px">5 DAYS</div><h3>Blueprint</h3><p>Agent architecture, integration map, eval criteria and the costed outcome contract.</p></div>
+      <div class="bc-step"><div class="bc-step__num">03</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--lime-400);margin-bottom:10px">30 DAYS</div><h3>Deploy</h3><p>Forward-deployed engineers build inside your stack. One workflow, binary success criteria, a named owner.</p></div>
+      <div class="bc-step"><div class="bc-step__num">04</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--lime-400);margin-bottom:10px">∞ ONGOING</div><h3>Compound</h3><p>Every result feeds the Growth Graph. Cost per outcome falls quarter over quarter; our fee tracks the curve.</p></div>
+    </div>'''
+    faq_html, faq_schema = render_faq([
+        ("What kinds of agents do you deploy?","<p>Six lines: pipeline agents (demand), AI SEO/GEO, creator-led acquisition, lifecycle and retention agents, support resolution agents, and RevOps operating agents — each reading and writing to your actual systems, not a spreadsheet.</p>"),
+        ("How are Revenue Services priced?","<p>On outcomes. Depending on the line: per qualified meeting held, per clean resolution, per recovered rupee, or a base fee with a quarterly kicker against the agreed KPI — always with a floor, a cap and a baseline locked at signature. The five contract tiers are published on our pricing page.</p>"),
+        ("How fast is the first agent live?","<p>Thirty days from blueprint sign-off. Deploy is deliberately narrow — one workflow, binary success criteria, a named owner on your side — because scope, not model capability, is what kills these projects.</p>"),
+        ("Which systems do the agents connect to?","<p>SAP Business One, Odoo, Salesforce and SFMC natively — plus your warehouse, ticketing, billing and analytics stack through APIs. Systems-of-record access is the difference between an agent and a chatbot.</p>"),
+        ("What do we keep if we stop working with you?","<p>Everything: the agents, the eval suite, the Growth Graph and the documentation. Built in your cloud, governed under your policy, portable if you leave.</p>"),
+    ], section_title="Questions about Revenue Services")
+    body = service_hero("Services · Revenue Services",
+        'AI growth agents, <span class="accent">priced on the number they move.</span>',
+        "We build and run AI agents inside your revenue engine — demand generation, AI SEO/GEO, creator-led acquisition, lifecycle, service and RevOps — reading your CRM and margin data, with our fee tied to outcomes.")
+    body += what_we_do("A complete revenue-agent stack, under one roof.",
+        "Six agent lines, deployed in the order your payback ranks them — each one reading and writing to your systems of record.",
+        ["Demand generation &amp; pipeline agents","AI SEO &amp; GEO (generative engine optimisation)","Creator-led acquisition","Lifecycle &amp; retention agents","Support resolution agents","RevOps &amp; operating agents"],
+        "How it&rsquo;s priced",
+        ["Outcome contracts with a locked baseline, floor and cap","Per meeting, per resolution, per recovered rupee — or base + kicker","Randomised 10% holdout, never last-touch attribution","Quarterly certification with your finance team&rsquo;s sign-off"])
+    body += f'''
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">What we deploy</span><h2 style="max-width:22ch">Agents that touch revenue, not slideware.</h2></div></div>
-    <div class="svc-rich">{agents_html}</div>
-  </div>
-</section>
-<section class="section" id="pricing">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">Outcome-based pricing</span><h2 style="max-width:24ch">No retainer. Or a very small one. If you grow, we grow.</h2></div>
-      <p class="lead">Outcome pricing collapsed in advertising once because attribution fights killed it. It works when the machinery is built before the contract is signed — so we build the machinery first, in the 2-hour audit.</p>
-    </div>
-    <div class="fact-rows">{mech_html}</div>
-    <div style="margin-top:28px"><a href="pricing.html" class="btn btn--secondary btn--lg">See the five contract tiers and the numbers <span class="btn__arrow">→</span></a></div>
-  </div>
-</section>
-<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">Comparison one</span><h2 style="max-width:26ch">A chat window is where your team thinks. This is where your business runs.</h2></div>
-      <p class="lead">We are not going to tell you generic AI is worthless — your team uses it every day and it is making them faster. The problem is that it is ungoverned, unmeasured and un-auditable. All three are fixable.</p>
-    </div>
-    <div class="compare-table" id="compareTable">
-      <div class="compare-row compare-row--header">
-        <div class="compare-cell compare-cell--header compare-cell--param"></div>
-        <div class="compare-cell compare-cell--header compare-cell--us-header">A Digital Theory agent system</div>
-        <div class="compare-cell compare-cell--header">Generic AI chat in a browser</div>
-      </div>
-      {cmp1}
-    </div>
-    <p class="src" style="margin-top:16px;max-width:90ch">Sources: MIT NANDA The GenAI Divide (2025, preprint) · Chroma Context Rot · Stanford RegLab · Gartner (June 2025) · IBM · Cyberhaven · India DPDP compliance timeline. A note on the &ldquo;95%&rdquo; figure we quote elsewhere: it describes organisations getting zero return, not projects that failed outright, and it comes from a non-peer-reviewed preprint. We will explain that distinction before you have to ask.</p>
+    <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2 style="max-width:22ch">Agents that touch revenue, not slideware.</h2></div></div>
+    <div class="svc-rich">{offerings}</div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">Comparison two</span><h2>A typical agency versus us.</h2></div>
-      <p class="lead">Eighty-five percent of agencies prefer retainers, and that preference went up last year. There is nothing wrong with a retainer — but you should know what you are buying and who carries the risk.</p>
-    </div>
-    <div class="compare-table">
-      <div class="compare-row compare-row--header">
-        <div class="compare-cell compare-cell--header compare-cell--param"></div>
-        <div class="compare-cell compare-cell--header compare-cell--us-header">Digital Theory</div>
-        <div class="compare-cell compare-cell--header">A typical agency or consultancy</div>
-      </div>
-      {cmp2}
-    </div>
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div><p class="lead">Working systems and signed baselines — not decks.</p></div>
+    {delivs}
   </div>
 </section>
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">How it runs</span><h2>Audit. Blueprint. Deploy. Compound.</h2></div><p class="lead">A clock on every stage — 2 hours, 5 days, 30 days, then compounding.</p></div>
+    {steps}
+  </div>
+</section>
+{related_html("revenue-services")}
+{faq_html}
 {CTA}'''
-    schema = svc_schema("Revenue Services","AI agents deployed into the revenue engine — demand generation, AI SEO/GEO, lifecycle, service and RevOps — priced against the number they move.","revenue-services.html")
+    schema = svc_schema("Revenue Services", SERVICES_META["revenue-services"][1], "revenue-services.html")
     return page("Revenue Services",
-        "AI growth agents deployed into your revenue engine — demand gen, AI SEO/GEO, lifecycle, service and RevOps — priced on outcomes with a locked baseline, floor and cap.",
+        "AI growth agents deployed into your revenue engine — demand gen, AI SEO/GEO, creator-led acquisition, lifecycle, service and RevOps — priced on outcomes.",
         body, active="practices", path="revenue-services.html",
         seo_title="Revenue Services — Outcome-Priced AI Agents | Digital Theory",
-        extra_schema=[schema])
+        extra_schema=[schema, faq_schema])
 
 # ================================================================ STRATEGY
 def build_strategy():
-    offers = [
-        ("AI &amp; Growth Strategy","From ₹2.5L","Where AI actually changes your P&amp;L, sequenced by payback rather than by fashion. Which functions, which agents, which order, and what each is worth — delivered against your own baseline, not a benchmark deck."),
-        ("Market Research as a Service","Subscription or per study","Category sizing, buyer research, pricing studies, concept tests, win/loss and competitive intelligence — AI-moderated at scale, human-validated on a stratified subsample, with the error band published in the report."),
-        ("India Mid-Market Benchmark Index","Proprietary","Longitudinal norms for mid-market operating metrics that no tool vendor owns — because tools own respondents and nobody owns the norms. &ldquo;Your repeat-purchase rate is 0.6× the median for your category&rdquo; is a sentence that starts a project."),
-        ("Transformation Roadmap","6–8 weeks","The operating model, the org design, the data foundations and the sequencing — with 25% of the fee contingent on the recommendation being live within two quarters."),
-    ]
-    offers_html = "".join(f'<div class="tier"><span class="tier__label">{p}</span><div class="tier__price">{t}</div><p class="tier__desc">{d}</p></div>' for t,p,d in offers)
-    body = f'''
-<section class="page-hero">
-  <div class="container page-hero__inner">
-    <span class="eyebrow">Strategy &amp; Intelligence</span>
-    <h1>Decision-grade answers in <span class="accent">five business days.</span></h1>
-    <p class="lead page-hero__lead">Growth strategy, AI transformation roadmaps, and Market Research as a Service. Same rigour as a tier-one firm, at a fraction of the clock — because we never had a billable-hour model to protect.</p>
-    <div class="page-hero__cta"><a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Audit <span class="btn__arrow">→</span></a></div>
+    offerings = "".join([
+        offering_card("01","AI &amp; Growth Strategy","Where AI actually changes your P&amp;L, sequenced by payback rather than by fashion. Which functions, which agents, which order, and what each is worth — against your own baseline.","From ₹2.5L"),
+        offering_card("02","Market Research as a Service","Category sizing, buyer research, pricing studies, concept tests, win/loss and competitive intelligence — AI-moderated at scale, human-validated on a stratified subsample.","Subscription or per study · 5-day turnaround"),
+        offering_card("03","India Mid-Market Benchmark Index","Longitudinal norms for mid-market operating metrics. &ldquo;Your repeat-purchase rate is 0.6× the median for your category&rdquo; is a sentence that starts a project.","Proprietary"),
+        offering_card("04","Transformation Roadmap","The operating model, the org design, the data foundations and the sequencing — with 25% of the fee contingent on the recommendation being live within two quarters.","6–8 weeks"),
+    ])
+    delivs = deliverables_html([
+        ("Strategy memo &amp; model","A short, sharp memo with the decisions and the reasoning — plus a working financial model that is yours to keep and edit."),
+        ("Research report with error bands","Every synthetic finding validated against a stratified human subsample, with the observed error band disclosed in the deliverable — contractually."),
+        ("Prioritised agent roadmap","Use cases ranked by payback, each with the data it needs and the number it should move."),
+        ("Quarterly operating rhythm","Reviews tied to the model, so decisions update with reality instead of lagging it."),
+    ])
+    faq_html, faq_schema = render_faq([
+        ("What does Strategy &amp; Intelligence cover?","<p>Four offerings: AI &amp; growth strategy, Market Research as a Service, the India Mid-Market Benchmark Index, and full transformation roadmaps — all delivered against your own baseline rather than a benchmark deck.</p>"),
+        ("How fast is Market Research as a Service?","<p>Decision-grade insight in five business days, or the fee is waived — written into the engagement letter. Interviews are AI-moderated at scale in 50+ languages, then human-validated on a stratified subsample.</p>"),
+        ("How is consulting priced?","<p>AI &amp; growth strategy starts at ₹2.5L. Research runs on subscription or per study. On roadmaps, 25% of the fee is tied to the recommendation actually being live within two quarters.</p>"),
+        ("How do you handle synthetic research accuracy?","<p>We publish where the method breaks: safe for ranking and prioritisation, unsafe for magnitude, significance and segment variance. Every synthetic finding is human-validated and the error band is disclosed in the report.</p>"),
+        ("What makes this different from a big consultancy?","<p>Cost structure, not IQ. We have no $700-an-hour blended rate or associate pyramid to protect — so the same rigour lands in days, at a fraction of the price, with fee tied to the outcome.</p>"),
+    ], section_title="Questions about Strategy &amp; Intelligence")
+    body = service_hero("Services · Strategy &amp; Intelligence",
+        'Decision-grade answers in <span class="accent">five business days.</span>',
+        "Growth strategy, AI transformation roadmaps and Market Research as a Service — the rigour of a tier-one firm at a fraction of the clock, with part of the fee tied to the recommendation landing.")
+    body += what_we_do("Strategy that ships, research that answers.",
+        "Four offerings, all measured, all fast — built for leadership teams that need an answer this quarter, not next year.",
+        ["AI &amp; growth strategy","Market Research as a Service","Pricing &amp; unit-economics studies","Win/loss &amp; competitive intelligence","India Mid-Market Benchmark Index","Transformation roadmaps"],
+        "Standards we work to",
+        ["5-day decision-grade turnaround, or the fee is waived","25% of roadmap fees tied to the recommendation landing","Synthetic findings human-validated, error bands disclosed","Delivered against your baseline, not a benchmark deck"])
+    body += f'''
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2>Four ways in.</h2></div></div>
+    <div class="svc-rich" style="grid-template-columns:repeat(2,1fr)">{offerings}</div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">The opening</span><h2 style="max-width:24ch">The incumbents already conceded the argument.</h2></div>
-      <p class="lead">Strategy advice is now under 20% of McKinsey&rsquo;s work, and roughly 25% of its global fees are tied to outcomes rather than hours. They are right — and they are trapped, because they have a $700-an-hour blended rate and an associate pyramid to protect. We don&rsquo;t. That is a claim about cost structure, and cost structure is checkable.</p>
-    </div>
-    <div class="ev-grid" style="grid-template-columns:repeat(3,1fr)">
-      {ev("5","days","Decision-grade insight, or the fee is waived. Written into the engagement letter.","Digital Theory delivery standard")}
-      {ev("25","%","Of our consulting fee tied to the recommendation actually landing — matching McKinsey&rsquo;s outcome share at a fraction of the price.","McKinsey outcome-share benchmark, 2026")}
-      {ev("~$25","","All-in cost of an AI-moderated interview, against $500–$1,500 for a traditional in-depth interview.","Published AI-research platform pricing, 2026")}
-    </div>
-  </div>
-</section>
-<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
-  <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">Market Research as a Service</span><h2 style="max-width:24ch">The softest target in professional services.</h2></div></div>
+    <div class="sec-head"><div><span class="eyebrow">Market Research as a Service</span><h2 style="max-width:22ch">Traditional timelines, collapsed.</h2></div></div>
     <div class="dt-table-wrap"><table class="dt-table">
       <tr><th>Method</th><th>Traditional cost</th><th>Traditional timeline</th><th>With us</th></tr>
       <tr><td>20 in-depth interviews</td><td>$15,000 – $30,000</td><td>4–8 weeks</td><td><strong>Days, at a fraction of the cost</strong></td></tr>
@@ -293,257 +293,201 @@ def build_strategy():
       <tr><td>Five-market study</td><td>$75,000 – $225,000</td><td>8–12 weeks</td><td><strong>50+ languages, one cost base</strong></td></tr>
       <tr><td>Analysis phase alone</td><td>Included</td><td>~4 weeks</td><td><strong>Hours</strong></td></tr>
     </table></div>
-    <p class="src" style="margin-top:16px;max-width:90ch">Traditional market research grows 4.8% a year while research software grows 11.5%; in India, analytics grows 14% against syndicated research at 6% (ESOMAR 2025 · MRSI 2026). Microsoft cut research timelines from 4–6 weeks to hours and ran 100+ interviews at one-third of traditional cost.</p>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">Our unfair advantage</span><h2 style="max-width:22ch">We publish where our own method breaks.</h2></div>
-      <p class="lead">Synthetic respondents fail in specific, characterisable ways the peer-reviewed literature has documented. Every firm selling AI research knows this. We are the ones who put it in writing.</p>
-    </div>
-    <div class="fact-rows">
-      <div class="fact"><h3>Where it is safe</h3><p>Ranking and prioritisation. One reproduction of a 3,600-person survey achieved a median Spearman ρ of 0.90 across 53 matched questions.</p></div>
-      <div class="fact"><h3>Where it breaks</h3><p>Magnitude. Models systematically overestimate effect sizes (<em>Nature</em>, 2026), and one study measured a 14.5 percentage-point mean absolute error — worst on exactly the consumer and market questions you would commission.</p></div>
-      <div class="fact"><h3>Where it breaks badly</h3><p>Significance and segment variance. Across 156 experiments, when the human study found no significant effect, models produced one in 68–83% of cases (<em>Nature Computational Science</em>, 2025).</p></div>
-      <div class="fact"><h3>The protocol</h3><p>Every synthetic finding is validated against a stratified human subsample, and the observed error band is disclosed in the deliverable — contractually. No tool vendor will do this; it costs them sales.</p></div>
-    </div>
   </div>
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">What you can buy</span><h2>Four ways in.</h2></div></div>
-    <div class="fact-rows">{offers_html}</div>
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div></div>
+    {delivs}
   </div>
 </section>
+{related_html("strategy")}
+{faq_html}
 {CTA}'''
-    schema = svc_schema("Strategy & Intelligence","Growth strategy, AI transformation roadmaps, and Market Research as a Service — decision-grade insight in five business days.","strategy.html")
+    schema = svc_schema("Strategy & Intelligence", SERVICES_META["strategy"][1], "strategy.html")
     return page("Strategy & Intelligence",
         "Growth strategy, AI roadmaps and Market Research as a Service — decision-grade insight in 5 business days, with 25% of the fee tied to the outcome.",
         body, active="practices", path="strategy.html",
         seo_title="Strategy & Intelligence — Research in 5 Days | Digital Theory",
-        extra_schema=[schema])
+        extra_schema=[schema, faq_schema])
 
 # ================================================================ BRAND
 def build_brand():
-    six = [
-        ("01","Brand strategy &amp; positioning","The category you intend to own, the buyer you intend to move, and the words that do it. Written to be repeated by a salesperson, a journalist and a language model — three audiences that used to be one."),
-        ("02","AI Influencer Marketing","Creator matching on conversion history rather than follower count, fraud screening before you sign, and disclosure compliance generated into every brief. The gap in this market is measurement, not execution."),
-        ("03","Social media marketing","Always-on social run by agents against a brief you approve — planning, production, community response and reporting — with a human editor on every post that carries a claim."),
-        ("04","Personal &amp; founder-led branding","Founders are the highest-trust distribution most mid-market companies own, and the most under-used. A governed voice model built from your own writing — never a generic ghostwriter — with you signing off on everything."),
-        ("05","Content strategy &amp; editorial","Built to be cited, not just read. Source citations lift AI visibility ~115%, statistics +41%, direct quotations +28% — and adding words alone does nothing at all. We write to that as a scored standard."),
-        ("06","Entity &amp; mention engineering","The connective layer: schema, knowledge panels, review profiles and consistent naming — making every machine that reads about you resolve it to the same entity. Feeds directly into the GEO work in Revenue Services."),
-    ]
-    six_html = "".join(f'<div class="svc-rich__card" style="cursor:default"><div class="svc-rich__body" style="padding-top:28px"><span class="svc-rich__num">{n}</span><h3 class="svc-rich__title">{t}</h3><p class="svc-rich__desc">{d}</p></div></div>' for n,t,d in six)
-    mechs = [
-        ("We make brand measurable — then price it on outcomes","Share of citation in your category, tracked across ChatGPT, Perplexity, Gemini and Google AI Overviews, against a baseline agreed before we start. Brand has never been outcome-priced because it has never been countable. Now it is."),
-        ("The earned-media citation map","We maintain, per vertical, the list of publications and creators each generative engine actually cites — the 98% of the problem that pitch lists miss. Proprietary, empirical, and it compounds every month we run it."),
-        ("Creator selection on outcome data, not reach","Every platform sells follower counts. Nobody has which creator, in which category, in which format, actually produced a customer — at what cost. After a few campaigns, we do, and that data is not for sale anywhere."),
-        ("Compliance we indemnify","ASCI&rsquo;s 2026 guidelines impose a dual disclosure mandate on AI influencers, with the brand treated as the advertiser and penalties to ₹50 lakh. We take that on in writing."),
-        ("Owned brand IP instead of rented audience","Everything else in influencer marketing is rent. A brand character you own is an appreciating asset — the market&rsquo;s best-known example earns around $34,000 a post — and the audience never renegotiates."),
-    ]
-    mechs_html = "".join(f'<div class="bc-principle"><h3>{t}</h3><p>{d}</p></div>' for t,d in mechs)
-    body = f'''
-<section class="page-hero">
-  <div class="container page-hero__inner">
-    <span class="eyebrow">Brand &amp; Influence</span>
-    <h1>Being known is now <span class="accent">a ranking factor.</span></h1>
-    <p class="lead page-hero__lead">Brand used to be the line item nobody could measure and everybody cut first. That changed the moment machines started deciding who gets recommended — because what they read is your brand mentions. We build brand, influence and content as an instrumented system, and measure it where it now counts.</p>
-    <div class="page-hero__cta">
-      <a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Audit <span class="btn__arrow">→</span></a>
-      <a href="revenue-services.html" class="btn btn--secondary btn--lg">See how it connects to revenue</a>
-    </div>
+    offerings = "".join([
+        offering_card("01","Brand strategy &amp; positioning","The category you intend to own, the buyer you intend to move, and the words that do it — written to be repeated by a salesperson, a journalist and a language model."),
+        offering_card("02","AI Influencer Marketing","Creator matching on conversion history rather than follower count, fraud screening before you sign, and ASCI-compliant disclosure generated into every brief — indemnified in writing."),
+        offering_card("03","Social media marketing","Always-on social run by agents against a brief you approve — planning, production, community response and reporting — with a human editor on every post that carries a claim."),
+        offering_card("04","Personal &amp; founder-led branding","A governed voice model built from your own writing — never a generic ghostwriter — with you signing off on everything. Point of view, cadence, platform strategy, podcast and press placement."),
+        offering_card("05","Content strategy &amp; editorial","Built to be cited, not just read — written to a scored standard derived from peer-reviewed research on what earns AI citations: sources, statistics, quotations."),
+        offering_card("06","Entity &amp; mention engineering","Schema, knowledge panels, review profiles and consistent naming — making every machine that reads about you resolve it to the same entity. Feeds the GEO work in Revenue Services."),
+    ])
+    delivs = deliverables_html([
+        ("Positioning &amp; messaging house","Category narrative, messaging pillars and tone of voice — usable by sales, PR and content from day one."),
+        ("Citation baseline &amp; tracking","Your share of citation in your category across ChatGPT, Perplexity, Gemini and Google AI Overviews — measured before we start, tracked monthly."),
+        ("Creator program with compliance","Matched creators, fraud-screened, with ASCI dual-disclosure compliance generated into every brief and indemnified."),
+        ("Founder voice model","Trained on your actual writing, governed by your sign-off — with a publishing cadence across LinkedIn, newsletter and press."),
+        ("Content standard &amp; calendar","A scored editorial standard plus the monthly calendar that ships against it."),
+        ("Entity layer","Schema, profiles and naming consistency across the surfaces machines actually read."),
+    ])
+    faq_html, faq_schema = render_faq([
+        ("What does Brand &amp; Influence include?","<p>Six services run as one system: brand strategy and positioning, AI influencer marketing, social media marketing, personal and founder-led branding, content strategy and editorial, and entity and mention engineering.</p>"),
+        ("How can brand work be priced on outcomes?","<p>Because citation share is countable. We measure your share of citation in your category across ChatGPT, Perplexity, Gemini and Google AI Overviews against a baseline agreed before we start — with a guarantee that it moves by month four, or month four is free.</p>"),
+        ("How does the influencer offering work?","<p>Creators are matched on conversion history rather than reach, fraud-screened before contract, and every brief ships with ASCI-compliant dual disclosure that we indemnify. Work is priced per qualified customer, with a monthly floor and cap.</p>"),
+        ("Do you replace our in-house social team?","<p>No. Two-thirds of brands run social in-house and are right to. We provide the system, the standard and the measurement layer — your team keeps the wheel wherever that works better.</p>"),
+        ("Is a founder&rsquo;s content ghostwritten?","<p>It is written from a governed voice model built on your own writing — never a generic ghostwriter — and nothing publishes without your sign-off.</p>"),
+    ], section_title="Questions about Brand &amp; Influence")
+    body = service_hero("Services · Brand &amp; Influence",
+        'Brand, influence and content — <span class="accent">run as one instrumented system.</span>',
+        "Brand strategy, AI influencer marketing, social, founder-led branding, content and entity engineering — measured on citation share, the number machines now read when they decide who gets recommended.")
+    body += what_we_do("Six services, one system.",
+        "Everything a brand team buys — strategy, creators, social, founder content, editorial and entity work — wired together and measured where it now counts.",
+        ["Brand strategy &amp; positioning","AI influencer marketing","Social media marketing","Personal &amp; founder-led branding","Content strategy &amp; editorial","Entity &amp; mention engineering"],
+        "How it&rsquo;s priced",
+        ["Citation share as the outcome, baseline agreed up front","Guarantee: citation share moves by month four, or month four is free","Influencer priced per qualified customer, with floor and cap","Verifiable with tools you can buy yourself — never just our word"])
+    body += f'''
+<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2>What&rsquo;s in the system.</h2></div></div>
+    <div class="svc-rich">{offerings}</div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">The reframe</span><h2>Your brand is training data now.</h2></div>
-      <p class="lead">When a buyer asks ChatGPT or Perplexity who they should use, the model isn&rsquo;t reading your website. It is reading what the rest of the internet says about you — press, reviews, podcasts, creator posts, forum threads. The soft spend became the hard input, and almost nobody has noticed yet.</p>
-    </div>
-    <div class="ev-grid">
-      {ev("r=0.66","","Correlation between brand mentions and AI visibility — against 0.22 for backlinks. Roughly 3× stronger.","Ahrefs, 75,000-brand study, 2025")}
-      {ev("82","%","of AI citations come from earned media. Owned and paid together account for 6%.","Muck Rack, 1M+ citations, Dec 2025")}
-      {ev("2","%","overlap between the journalists PR teams pitch and the journalists AI actually cites.","Muck Rack, Dec 2025")}
-      {ev("₹5,000","Cr","Projected size of India&rsquo;s influencer market by 2027, from ₹3,000–3,500 Cr in 2025.","Kofluence, 2026")}
-    </div>
-    <p style="margin-top:24px;color:var(--fg-muted);font-size:15px;max-width:76ch;line-height:1.65"><strong style="color:var(--lime-400)">Read the 2% carefully — it is the whole opportunity.</strong> Almost every PR and content programme in the country is pitching a list of publications that generative engines do not cite. The work isn&rsquo;t harder than what agencies already do. It is aimed at the wrong targets, and nobody is checking.</p>
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div></div>
+    {delivs}
   </div>
 </section>
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">What we do</span><h2>Six things, run as one system.</h2></div></div>
-    <div class="svc-rich">{six_html}</div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">How we build advantage</span><h2 style="max-width:26ch">Five things a creative agency structurally cannot do.</h2></div></div>
-    <div class="bc-principles" style="grid-template-columns:1fr;gap:16px">{mechs_html}</div>
-  </div>
-</section>
-<section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">What we will tell you not to do</span><h2 style="max-width:26ch">AI influencers are wrong for most of your categories.</h2></div>
-      <p class="lead">Virtual influencers average roughly 5.67% engagement against 1.89% for human creators. But in authenticity-driven categories, humans outperform virtual by up to 2.7×, and 43.8% of consumers hold active ethical concerns. We recommend virtual for gaming, electronics and fashion-forward work — and against it for health, financial services and anything where trust is the product.</p>
-    </div>
+    <div class="sec-head"><div><span class="eyebrow">Fit</span><h2 style="max-width:24ch">Where we&rsquo;ll recommend against ourselves.</h2></div></div>
     <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">
-      <div class="fact"><h3>Reach is not the metric</h3><p>65.9% of brands now expect payback from influencer spend within a month. If your programme cannot attribute, it cannot survive that expectation — and attribution is the part we build first.</p></div>
-      <div class="fact"><h3>Keep social in-house if it works</h3><p>Two-thirds of brands already run influencer in-house, and they are right to. We are not here to take the team&rsquo;s job — we give them a system, a standard and a measurement layer.</p></div>
-      <div class="fact"><h3>Brand is slower than performance</h3><p>Citation share moves in months, not weeks. We will show you the leading indicators, and we will not pretend a quarter is a verdict.</p></div>
+      <div class="fact"><h3>AI influencers</h3><p>Right for gaming, electronics and fashion-forward. Wrong for health, financial services and anything where trust is the product — human creators outperform virtual by up to 2.7× in authenticity-driven categories.</p></div>
+      <div class="fact"><h3>In-house social</h3><p>If your team runs social well, keep it in-house. We supply the system, standard and measurement layer rather than taking the job.</p></div>
+      <div class="fact"><h3>Timeframes</h3><p>Citation share moves in months, not weeks. We show leading indicators monthly and will not pretend a quarter is a verdict.</p></div>
     </div>
   </div>
 </section>
-<section class="section">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">How this is priced</span><h2>Brand, on an outcome contract.</h2></div>
-      <p class="lead">Because citation share is countable, brand work can sit on the same commercial terms as everything else we do. That is new — and as far as we know, nobody else in this market offers it.</p>
-    </div>
-    <div class="fact-rows" style="grid-template-columns:repeat(3,1fr)">
-      <div class="fact"><h3>The outcome</h3><p>Share of citation in your category across the engines your buyers actually use — measured with tools you can buy yourself for a few hundred dollars a month, so you never have to take our word for the number.</p></div>
-      <div class="fact"><h3>The guarantee</h3><p>Category citation share moving by month four, or month four is free.</p></div>
-      <div class="fact"><h3>Influencer work</h3><p>Priced per qualified outcome — a customer, not a post — with a monthly floor so we can staff the programme and a cap so you can budget it.</p></div>
-    </div>
-    <div style="margin-top:28px"><a href="pricing.html" class="btn btn--secondary btn--lg">See the contract tiers <span class="btn__arrow">→</span></a></div>
-  </div>
-</section>
+{related_html("brand")}
+{faq_html}
 {CTA}'''
-    schema = svc_schema("Brand & Influence","Brand strategy, AI influencer marketing, social, founder-led branding, content and entity engineering — instrumented and priced on citation share.","brand.html")
+    schema = svc_schema("Brand & Influence", SERVICES_META["brand"][1], "brand.html")
     return page("Brand & Influence",
-        "Brand mentions predict AI visibility 3× better than backlinks. We build brand, influencer, social and content as an instrumented system — priced on citation share.",
+        "Brand strategy, AI influencer marketing, social, founder branding, content and entity engineering — one instrumented system, priced on citation share.",
         body, active="practices", path="brand.html",
         seo_title="Brand & Influence — Brand, Priced on Outcomes | Digital Theory",
-        extra_schema=[schema])
+        extra_schema=[schema, faq_schema])
 
 # ================================================================ IMPLEMENTATION
 def build_implementation():
-    mech = [
-        ("01","The Pre-Mortem Scorecard","Before we quote, we score you on the things that actually sink these projects — executive sponsorship, data readiness, change capacity, and whether the value is defined well enough to measure. Below threshold, we tell you what to fix first and decline the project. Refusing work is the most credible thing a services firm can do."),
-        ("02","The eval harness is a deliverable","An OpenTelemetry-instrumented evaluation suite that lives in your stack — offline evals pre-deploy, online judging in production, and every real-world failure converted into a regression test. You keep it whether or not you keep us."),
-        ("03","Three standards, contracted","A named agent owner on your side. Automated evaluations on every change. One workflow with binary success criteria. Most firms treat these as good practice. We write all three into the statement of work as delivery standards you can hold us to."),
-        ("04","A countable agent library","Not &ldquo;hundreds of pre-built agents.&rdquo; A specific, versioned, evaluated set across order-to-cash, support triage and finance operations, each with a published eval suite and a coverage score you can inspect."),
-        ("05","Forward-deployed engineers","Our engineers sit inside your systems and your standups, not behind a ticket queue. There are roughly 2,000 genuinely elite forward-deployed engineers in the world and demand is rising faster than supply. We are building that bench in India."),
-        ("06","Fixed fee, with fee at risk","A fixed price with a defined portion clawed back on miss. Gartner names escalating cost and unclear value as the top reasons agentic projects get cancelled — both are scope problems. Fixed scope with binary criteria is the countermeasure, and putting our fee behind it is how you know we mean it."),
-    ]
-    mech_html = "".join(f'<div class="svc-rich__card" style="cursor:default"><div class="svc-rich__body" style="padding-top:28px"><span class="svc-rich__num">{n}</span><h3 class="svc-rich__title">{t}</h3><p class="svc-rich__desc">{d}</p></div></div>' for n,t,d in mech)
-    systems = [
-        ("ERP","SAP Business One · Odoo","Implementation, migration, localisation and AMC — plus the agent layer on top. In mid-market ERP, systems-integration fees are 40–60% of the total. Services are the product."),
-        ("CRM &amp; marketing","Salesforce · SFMC","Implementation, migration and consolidation, with agents wired into the objects that matter rather than a chatbot on the homepage."),
-        ("Data","Warehouse &amp; integration","The unglamorous layer: pipelines, identity resolution, and the semantic model that makes agent answers correct instead of plausible."),
-        ("Governance","Evals, observability, DPDP","Traces, token accounting, failure clustering, audit logs, RBAC and consent-compatible processing — designed for enforcement in May 2027, built now."),
-    ]
-    systems_html = "".join(f'<div class="fact"><span class="tier__label">{tag}</span><h3 style="margin-top:8px">{t}</h3><p>{d}</p></div>' for tag,t,d in systems)
-    body = f'''
-<section class="page-hero">
-  <div class="container page-hero__inner">
-    <span class="eyebrow">Implementation &amp; Systems</span>
-    <h1>Gartner expects 40% of agentic projects to be cancelled. <span class="accent">Almost none of it will be the technology.</span></h1>
-    <p class="lead page-hero__lead">AI agents, SAP Business One, Odoo, Salesforce and SFMC — delivered against the failure modes that actually kill these projects: unclear value, weak change management, bad data, and scope that grows. We score you against them before we quote, and we walk away from projects that won&rsquo;t work.</p>
-    <div class="page-hero__cta"><a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Audit <span class="btn__arrow">→</span></a></div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">The evidence</span><h2>The failure rate is the business case.</h2></div></div>
-    <div class="ev-grid">
-      {ev("40","%+","of agentic AI projects forecast to be cancelled by end-2027.","Gartner prediction, June 2025")}
-      {ev("5","%","of integrated GenAI pilots are extracting real value; the rest show no measurable P&amp;L impact.","MIT NANDA, 2025 · preprint")}
-      {ev("40–60","%","of mid-market ERP implementation cost is systems-integration fees. Services are the product.","ERP Research, 2026")}
-      {ev("2","×","Pilots built through a strategic partnership reached full deployment twice as often as internal builds.","MIT NANDA, 2025")}
-    </div>
-    <p style="margin-top:24px;color:var(--fg-muted);font-size:15px;max-width:76ch;line-height:1.65">Read Gartner&rsquo;s reasons carefully: escalating costs, unclear business value, inadequate risk controls. <strong style="color:var(--fg)">Not model quality.</strong> Every one is a delivery-method failure — which means every one is preventable by method. Method is the thing we sell.</p>
-  </div>
-</section>
+    offerings = "".join([
+        offering_card("Agents","AI agent implementation","Custom agents built into your workflows — order-to-cash, support triage, finance ops — from a countable, versioned, evaluated library, each with a published eval suite."),
+        offering_card("ERP","SAP Business One &amp; Odoo","Implementation, migration, localisation and AMC — plus the agent layer on top. Configured to how you actually run, phased by module so value lands early."),
+        offering_card("CRM","Salesforce &amp; SFMC","Implementation, migration and consolidation, with agents wired into the objects that matter rather than a chatbot on the homepage."),
+        offering_card("Data","Warehouse &amp; integration","Pipelines, identity resolution and the semantic model that makes agent answers correct instead of plausible."),
+        offering_card("Governance","Evals, observability &amp; DPDP","Traces, token accounting, failure clustering, audit logs, RBAC and consent-compatible processing — designed for May 2027 enforcement, built now."),
+        offering_card("Rescue","Project rescue","A stalled or failing implementation audited, stabilised and brought to an adopted state — with the same contracted delivery standards as a fresh build."),
+    ])
+    delivs = deliverables_html([
+        ("Pre-Mortem Scorecard","Before we quote, a scored diagnostic on the things that sink these projects — sponsorship, data readiness, change capacity, measurable value. Below threshold, we tell you what to fix first."),
+        ("Implementation blueprint","Architecture, integration map, migration plan and a phased sequence with binary success criteria per phase."),
+        ("Working systems","ERP, CRM or agents live in production — one workflow at a time, each with a named owner on your side."),
+        ("Eval harness you own","OpenTelemetry-instrumented evaluations living in your stack — offline pre-deploy, online in production, every failure converted to a regression test."),
+        ("Training &amp; SOPs","Role-based training and written procedures so adoption sticks after we leave."),
+        ("Hyper-care &amp; AMC","Post-go-live support, upgrades and continuous improvement against your operating KPIs."),
+    ])
+    faq_html, faq_schema = render_faq([
+        ("What do you implement?","<p>Custom AI agents, SAP Business One, Odoo, Salesforce and SFMC — plus the data and governance layer underneath: warehouse, integration, evals, observability and DPDP-ready processing.</p>"),
+        ("How is implementation priced?","<p>Fixed fee, with a defined portion at risk against binary success criteria. Fixed scope is the direct countermeasure to the cost-and-scope failure modes that kill most agentic projects.</p>"),
+        ("What is the Pre-Mortem Scorecard?","<p>A paid diagnostic that scores your project on executive sponsorship, data readiness, change capacity and measurable value before we quote. Below threshold, we decline the project and tell you what to fix first.</p>"),
+        ("What are the three contracted delivery standards?","<p>A named agent owner on your side, automated evaluations on every change, and one workflow with binary success criteria — written into the statement of work as standards you can hold us to.</p>"),
+        ("Do you take over projects other vendors started?","<p>Yes — project rescue is a standing offering. We audit the current build, identify what is salvageable, fix configuration and data issues, and bring the implementation to a stable, adopted state.</p>"),
+    ], section_title="Questions about Implementation &amp; Systems")
+    body = service_hero("Services · Implementation &amp; Systems",
+        'Agents and systems of record, <span class="accent">delivered by one team.</span>',
+        "AI agent implementation plus SAP Business One, Odoo, Salesforce and SFMC — scored before we quote, contracted to delivery standards, fixed fee with fee at risk.")
+    body += what_we_do("From ERP to agents, one accountable team.",
+        "The systems of record and the intelligence on top — because an agent that cannot see inventory, margin, credit or service history is guessing.",
+        ["AI agent implementation","SAP Business One — implementation, migration, AMC","Odoo — implementation, customisation, integration","Salesforce &amp; SFMC — implementation and consolidation","Data warehouse &amp; systems integration","Evals, observability &amp; governance (DPDP-ready)"],
+        "How we deliver",
+        ["Pre-Mortem Scorecard before any quote","Fixed fee, with a defined portion at risk on miss","Three delivery standards written into the SOW","Forward-deployed engineers inside your systems"])
+    body += f'''
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">How we deliver</span><h2 style="max-width:24ch">Six things we do that almost nobody does.</h2></div></div>
-    <div class="svc-rich">{mech_html}</div>
+    <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2>What we implement.</h2></div></div>
+    <div class="svc-rich">{offerings}</div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">The systems we know</span><h2 style="max-width:24ch">Agents without the system of record are toys.</h2></div>
-      <p class="lead">This is the part of our business that looks least glamorous and matters most. An agent that cannot see inventory, margin, credit terms or service history is guessing. We have implemented these platforms for years — which is why our agents can read them.</p>
-    </div>
-    <div class="fact-rows">{systems_html}</div>
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div></div>
+    {delivs}
   </div>
 </section>
+{related_html("implementation")}
+{faq_html}
 {CTA}'''
-    schema = svc_schema("Implementation & Systems","Agent implementation plus SAP Business One, Odoo, Salesforce and SFMC — fixed fee with fee at risk, delivered against the failure modes that kill agentic projects.","implementation.html")
+    schema = svc_schema("Implementation & Systems", SERVICES_META["implementation"][1], "implementation.html")
     return page("Implementation & Systems",
-        "AI agents, SAP B1, Odoo, Salesforce & SFMC — delivered with a Pre-Mortem Scorecard, contracted delivery standards, an eval harness you keep, and fee at risk.",
+        "AI agents, SAP B1, Odoo, Salesforce & SFMC — a Pre-Mortem diagnostic, contracted delivery standards, an eval harness you keep, fixed fee with fee at risk.",
         body, active="practices", path="implementation.html",
         seo_title="Implementation & Systems — Agents + ERP/CRM | Digital Theory",
-        extra_schema=[schema])
+        extra_schema=[schema, faq_schema])
 
 # ================================================================ ENGINEERING
 def build_engineering():
-    receipts = [
-        ("Vodafone","31% LCP improvement","+8% sales"),
-        ("Redbus","Core Web Vitals optimisation","+80–100% mobile conversion rate"),
-        ("T-Mobile","Core Web Vitals focus","+60% visit-to-order, −20% in-site issues"),
-        ("Swappie","23% load-time reduction","+42% mobile revenue"),
-        ("Renault","1-second LCP improvement","+13% conversion, −14% bounce"),
-        ("Nykaa","40% LCP improvement","+28% organic traffic from Tier 2/3 cities"),
-    ]
-    receipts_html = "".join(f'<tr><td>{c}</td><td>{w}</td><td><strong>{r}</strong></td></tr>' for c,w,r in receipts)
-    commitments = [
-        ("SLA","Passing all three Core Web Vitals at p75 on launch, or we fix it free. Fewer than half of sites pass on mobile, and the top 1,000 barely do better. The Chrome UX Report is public data — you can audit our claim without trusting us, which is the strongest form of proof there is."),
-        ("Pricing","A base build fee plus a share of measured conversion lift — underwritten by a published elasticity, not by optimism."),
-        ("Search","Built to be cited, not just ranked. Schema, entity markup, strict heading hierarchy and citation-optimised structure ship by default — because roughly five of every six AI Overview citations come from pages outside the top 10."),
-        ("Code","Human review and a static-analysis gate on every line of AI-generated code. The published research on AI-generated code quality is not reassuring, and a vulnerability that ships is cheaper to catch here than in production."),
-        ("Access","WCAG conformance as a deliverable, not a preference. Under the European Accessibility Act it is a legal requirement — and it is the one thing that cannot be vibe-coded."),
-    ]
-    commitments_html = "".join(f'<div class="bc-principle"><h3>{t}</h3><p>{d}</p></div>' for t,d in commitments)
-    body = f'''
-<section class="page-hero">
-  <div class="container page-hero__inner">
-    <span class="eyebrow">Product &amp; Platform Engineering</span>
-    <h1>We don&rsquo;t sell websites. We sell <span class="accent">measured conversion lift</span> — and publish the numbers.</h1>
-    <p class="lead page-hero__lead">Web, mobile and AI-native product builds. Every site we ship passes all three Core Web Vitals at p75, or we fix it free — and you can verify that on public data without taking our word for anything.</p>
-    <div class="page-hero__cta"><a href="audit.html" class="btn btn--primary btn--lg">Book the 2-hour Audit <span class="btn__arrow">→</span></a></div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="sec-head">
-      <div><span class="eyebrow">The honest read</span><h2 style="max-width:26ch">AI made boilerplate cheap and everything above it harder.</h2></div>
-      <p class="lead">A randomised trial found experienced developers 19% slower with AI tools while believing they were 20% faster. McKinsey measured 46% time savings on routine tasks and under 10% on complex work. Brochure sites are genuinely collapsing to $20-a-month tools. Let them. Everything above that line now commands more, not less.</p>
-    </div>
-    <div class="ev-grid">
-      {ev("48","%","of origins pass all three Core Web Vitals on mobile — 56% on desktop.","HTTP Archive Web Almanac 2025, on CrUX data")}
-      {ev("51","%","of the top 1,000 origins pass on mobile. Scale does not fix this.","Web Almanac 2025")}
-      {ev("19","%","slower — experienced developers using AI tools, while believing they were 20% faster.","METR randomised trial, 2025")}
-      {ev("+8.4","%","Retail conversion associated with a 0.1-second improvement, with AOV up 9.2%.","Deloitte &amp; Google · data 2019, published 2020")}
-    </div>
-  </div>
-</section>
+    offerings = "".join([
+        offering_card("Web","D2C storefronts &amp; web platforms","Shopify, Shopify Plus, Next.js headless and marketing sites — engineered around your AOV, attach-rate and repeat-rate goals, shipping fast by default."),
+        offering_card("Mobile","Mobile app development","Native iOS/Android and React Native consumer apps — with ASO, in-app analytics and event-driven CRM designed in from day one."),
+        offering_card("AI-native","AI-native product builds","Products with agents, retrieval and evals in the architecture from the start — not an AI feature bolted onto a CRUD app."),
+        offering_card("CRO","Landing systems &amp; CRO","Reusable landing-page modules your marketing team can spin up per campaign in hours, plus a hypothesis-driven A/B testing cadence with documented uplift."),
+        offering_card("Analytics","Analytics &amp; tracking","GA4, server-side events, CAPI and product analytics — wired so every channel sees the same number."),
+        offering_card("Access","Accessibility &amp; compliance","WCAG conformance as a deliverable, not a preference — a legal requirement under the European Accessibility Act, and the one thing that cannot be vibe-coded."),
+    ])
+    delivs = deliverables_html([
+        ("A site that passes, provably","All three Core Web Vitals at p75 on launch, or we fix it free — auditable by you on public Chrome UX Report data."),
+        ("Citation-ready structure","Schema, entity markup, strict heading hierarchy and citation-optimised content structure ship by default. Built to be cited, not just ranked."),
+        ("Reviewed, gated code","Human review and a static-analysis gate on every line of AI-generated code before it ships."),
+        ("Analytics wired end-to-end","One measurement layer across web, ads and CRM, so conversion lift is measurable — and priceable."),
+        ("Landing-page system","Reusable modules with a testing cadence, not one-off pages."),
+        ("Documentation &amp; handover","Your repo, your cloud, your documentation — portable from day one."),
+    ])
+    faq_html, faq_schema = render_faq([
+        ("What do you build?","<p>D2C storefronts and web platforms (Shopify, Next.js headless), native and cross-platform mobile apps, AI-native products, landing-page systems with CRO, and the analytics layer underneath.</p>"),
+        ("What is the Core Web Vitals SLA?","<p>Every site we ship passes all three Core Web Vitals at p75 on launch, or we fix it free. The Chrome UX Report is public data, so you can verify the claim without trusting us.</p>"),
+        ("How is engineering priced?","<p>A base build fee plus a share of measured conversion lift where the analytics support it — underwritten by published elasticities, not optimism. Fixed-fee builds are available where a lift share doesn&rsquo;t fit.</p>"),
+        ("Do you use AI to write code?","<p>Yes, where it is faster — with human review and a static-analysis security gate on every line before it ships, because the published research on AI-generated code quality is not reassuring.</p>"),
+        ("Do you handle small brochure sites?","<p>Honestly, no. That tier is collapsing to $20-a-month website builders, and we will tell you to use one. Our work starts where measured conversion and performance matter to revenue.</p>"),
+    ], section_title="Questions about Product &amp; Platform Engineering")
+    body = service_hero("Services · Product &amp; Platform Engineering",
+        'Web, mobile and AI-native builds — <span class="accent">with a performance SLA you can audit.</span>',
+        "D2C storefronts, mobile apps, AI-native products and landing systems. Every site ships passing all three Core Web Vitals at p75 or we fix it free — verifiable on public data.")
+    body += what_we_do("Everything above the boilerplate line.",
+        "Builds where speed, conversion and measurement are the point — engineered, instrumented and priced against the lift they produce.",
+        ["D2C storefronts &amp; web platforms","Mobile app development (iOS, Android, React Native)","AI-native product builds","Landing-page systems &amp; CRO","Analytics &amp; tracking (GA4, server-side, CAPI)","Accessibility &amp; WCAG conformance"],
+        "What we put in the contract",
+        ["Core Web Vitals SLA at p75 — or we fix it free","Base fee + share of measured conversion lift","Human review + SAST gate on all AI-generated code","Citation-ready structure ships by default"])
+    body += f'''
 <section class="section" style="background:var(--surface-section);border-block:1px solid var(--line)">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">The receipts</span><h2 style="max-width:26ch">Speed is not a technical metric. It is a revenue metric.</h2></div></div>
-    <div class="dt-table-wrap"><table class="dt-table">
-      <tr><th>Company</th><th>What changed</th><th>What happened to the business</th></tr>
-      {receipts_html}
-    </table></div>
-    <p class="src" style="margin-top:16px;max-width:90ch">Published case studies from Google&rsquo;s web.dev library. We cite them because you can check them. These are observational correlations rather than controlled experiments — worth knowing before you build a business case on any single one.</p>
+    <div class="sec-head"><div><span class="eyebrow">The offerings</span><h2>What we build.</h2></div></div>
+    <div class="svc-rich">{offerings}</div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="sec-head"><div><span class="eyebrow">What we put in the contract</span><h2>Five commitments, all of them checkable.</h2></div></div>
-    <div class="bc-principles" style="grid-template-columns:1fr;gap:16px">{commitments_html}</div>
+    <div class="sec-head"><div><span class="eyebrow">Deliverables</span><h2>What you walk away with</h2></div></div>
+    {delivs}
   </div>
 </section>
+{related_html("engineering")}
+{faq_html}
 {CTA}'''
-    schema = svc_schema("Product & Platform Engineering","Web, mobile and AI-native product builds sold on measured conversion lift, with a publicly auditable Core Web Vitals SLA.","engineering.html")
+    schema = svc_schema("Product & Platform Engineering", SERVICES_META["engineering"][1], "engineering.html")
     return page("Product & Platform Engineering",
-        "Web, mobile and AI-native builds sold on measured conversion lift. Every site passes all three Core Web Vitals at p75 or we fix it free — verifiable on public CrUX data.",
+        "Web, mobile and AI-native builds with a Core Web Vitals SLA verifiable on public CrUX data, and pricing linked to measured conversion lift.",
         body, active="practices", path="engineering.html",
         seo_title="Product & Platform Engineering | Digital Theory",
-        extra_schema=[schema])
+        extra_schema=[schema, faq_schema])
 
 # ================================================================ LABS
 def build_labs():
@@ -598,6 +542,29 @@ def build_labs():
 
 # ================================================================ PRICING
 def build_pricing():
+    cmp1_rows = [
+        ("Reaches your systems","Reads and writes to SAP Business One, Odoo, Salesforce, your warehouse and your ticketing system.","No access to ERP, CRM, warehouse or ticketing. Every answer is ungrounded in what is true today."),
+        ("Memory","Persistent, governed, org-level memory — the Growth Graph.","Session-scoped, per-user, non-transferable. Nothing the organisation learns is retained."),
+        ("Accuracy on business tasks","Grounded retrieval cuts hallucination 30–70%; under 2% on grounded summarisation.","Legal-query hallucination measured at 58–88% (Stanford RegLab)."),
+        ("Evaluation","Offline evals pre-deploy, online LLM-as-judge in production, every failure converted into a regression test.","None. No ground truth, no regression tests, no quality gate."),
+        ("Observability","OpenTelemetry gen_ai.* spans — model calls, tokens, agent steps, tool executions.","No traces, no token accounting, no audit trail."),
+        ("Governance","Policy, role-based access, audit log, human-in-the-loop and a model allow-list from day one.","52% of organisations have no formal policy on external AI tools."),
+        ("Data exposure","Data stays inside the governed boundary — DLP, redaction and retention controls.","27% of employees have entered confidential company data into public AI tools."),
+        ("DPDP readiness","Purpose-limited, consent-manager compatible, auditable — ahead of May 2027 enforcement, penalties to ₹250 Cr.","Consumer accounts sit outside consent management, retention limits and audit obligations."),
+        ("Payback","Agreed in the blueprint before we build, then measured against the locked baseline every quarter.","Unmeasured — that is rather the point. There is no instrumentation to measure it with."),
+    ]
+    cmp1 = "".join(f'<div class="compare-row" data-row><div class="compare-cell compare-cell--param">{p}</div><div class="compare-cell compare-cell--us">{us}</div><div class="compare-cell compare-cell--other">{o}</div></div>' for p,us,o in cmp1_rows)
+    cmp2_rows = [
+        ("What you buy","A growth system that runs inside your business.","Hours, headcount, decks and campaigns."),
+        ("Pricing","Outcome contracts with a locked baseline, a floor and a cap. Minimum retainer — or none.","A monthly retainer regardless of result."),
+        ("Time to first value","2-hour audit · 5-day blueprint · 30-day deployment.","6–12 months to deployment, against an 8-month expectation."),
+        ("What gets measured","The number in your P&amp;L, against a randomised holdout.","Impressions, ROAS, deliverables shipped."),
+        ("Where the work lives","In your ERP, CRM and warehouse — with an eval suite you own.","In the agency&rsquo;s tools and the agency&rsquo;s heads."),
+        ("What you own at the end","Agents, evals and a Growth Graph that appreciate.","A body of work you have to re-buy every year."),
+        ("Accountability","Fees at risk, in writing, with a clawback clause.","&ldquo;Market conditions changed.&rdquo;"),
+        ("When you stop paying","The agents keep running.","Everything stops."),
+    ]
+    cmp2 = "".join(f'<div class="compare-row" data-row><div class="compare-cell compare-cell--param">{p}</div><div class="compare-cell compare-cell--us">{us}</div><div class="compare-cell compare-cell--other">{o}</div></div>' for p,us,o in cmp2_rows)
     body = f'''
 <section class="page-hero">
   <div class="container page-hero__inner">
@@ -609,7 +576,6 @@ def build_pricing():
 </section>
 <section class="section">
   <div class="container" style="display:flex;flex-direction:column;gap:24px">
-
     <div class="tier tier--hero">
       <span class="tier__label">Tier 0 · Growth Audit — the front door</span>
       <div class="tier__price">₹75,000 ≈ $790 · 2 hours · 100% credited</div>
@@ -622,7 +588,6 @@ def build_pricing():
       <p class="tier__note">Extended version — two weeks, five stakeholder interviews, prioritised roadmap: ₹2,50,000 (≈$2,630). We price the audit because free diagnostics select for people who will never buy.</p>
       <div><a href="audit.html" class="btn btn--primary">Book the audit <span class="btn__arrow">→</span></a></div>
     </div>
-
     <div class="fact-rows">
       <div class="tier">
         <span class="tier__label">Tier 1 · Sprint + Kicker — default first engagement</span>
@@ -676,8 +641,8 @@ def build_pricing():
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow">The machinery</span><h2 style="max-width:26ch">What makes an outcome contract survive contact with reality.</h2></div></div>
     <div class="fact-rows">
-      <div class="fact"><h3>Baseline</h3><p>Trailing twelve months of your data, normalised for seasonality, volume and mix. Locked at signature, changed only by formal change control. Exogenous factors — macro shifts, regulatory change, your own pricing moves — named in a schedule so neither side can argue them later.</p></div>
-      <div class="fact"><h3>Attribution</h3><p>A randomised 10% holdout wherever you can give us one. Where you can&rsquo;t, a pre-agreed proxy metric decided upfront. Never last-touch. Performance pricing died in advertising once because of attribution fights, and we are not repeating that.</p></div>
+      <div class="fact"><h3>Baseline</h3><p>Trailing twelve months of your data, normalised for seasonality, volume and mix. Locked at signature, changed only by formal change control. Exogenous factors named in a schedule so neither side can argue them later.</p></div>
+      <div class="fact"><h3>Attribution</h3><p>A randomised 10% holdout wherever you can give us one. Where you can&rsquo;t, a pre-agreed proxy metric decided upfront. Never last-touch.</p></div>
       <div class="fact"><h3>Verification</h3><p>Quarterly certification by a joint steering committee, with your finance team&rsquo;s sign-off required before we raise an invoice. Shared dashboard, buyer audit rights, fifteen-day dispute window.</p></div>
       <div class="fact"><h3>Clawback</h3><p>If the verified value reverses in the following quarter, we repay pro-rata — capped at 100% of that quarter&rsquo;s outcome fee. We have not met anyone else who will write this down.</p></div>
     </div>
@@ -694,6 +659,39 @@ def build_pricing():
       <tr><td>A countable unit your system already emits</td><td><strong>Tier 3</strong></td><td>Tickets, meetings, recoveries. Nothing to argue about — the system counts it.</td></tr>
       <tr><td>₹1 Cr+ P&amp;L line, CFO-sponsored, holdout available</td><td><strong>Tier 4</strong></td><td>The largest upside for both of us, and the only tier where we underwrite the whole number.</td></tr>
     </table></div>
+  </div>
+</section>
+<section class="section" id="compare" style="background:var(--surface-section);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">Comparison one</span><h2 style="max-width:26ch">A chat window is where your team thinks. This is where your business runs.</h2></div>
+      <p class="lead">Generic AI is not worthless — your team uses it every day and it is making them faster. But it is ungoverned, unmeasured and un-auditable. All three are fixable, and the fix is what you are paying for.</p>
+    </div>
+    <div class="compare-table" id="compareTable">
+      <div class="compare-row compare-row--header">
+        <div class="compare-cell compare-cell--header compare-cell--param"></div>
+        <div class="compare-cell compare-cell--header compare-cell--us-header">A Digital Theory agent system</div>
+        <div class="compare-cell compare-cell--header">Generic AI chat in a browser</div>
+      </div>
+      {cmp1}
+    </div>
+    <p class="src" style="margin-top:16px;max-width:90ch">Sources: MIT NANDA The GenAI Divide (2025, preprint) · Chroma Context Rot · Stanford RegLab · Gartner (June 2025) · IBM · Cyberhaven · India DPDP compliance timeline.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="eyebrow">Comparison two</span><h2>A typical agency versus us.</h2></div>
+      <p class="lead">Eighty-five percent of agencies prefer retainers. There is nothing wrong with a retainer — but you should know what you are buying and who carries the risk.</p>
+    </div>
+    <div class="compare-table">
+      <div class="compare-row compare-row--header">
+        <div class="compare-cell compare-cell--header compare-cell--param"></div>
+        <div class="compare-cell compare-cell--header compare-cell--us-header">Digital Theory</div>
+        <div class="compare-cell compare-cell--header">A typical agency or consultancy</div>
+      </div>
+      {cmp2}
+    </div>
   </div>
 </section>
 {CTA}'''
@@ -726,7 +724,7 @@ def build_company():
   <div class="container">
     <div class="sec-head">
       <div><span class="eyebrow">Why we changed</span><h2 style="max-width:26ch">Most firms added AI to a menu. We rebuilt the business around it.</h2></div>
-      <p class="lead">The uncomfortable truth about our old model is that we were paid for effort. A retainer is a bet that activity produces outcomes, and the client carries that bet alone. We had the outcome data to know when it worked and when it didn&rsquo;t — so we stopped pretending the risk should sit only on one side of the table. Everything on this site follows from that one decision.</p>
+      <p class="lead">The uncomfortable truth about our old model is that we were paid for effort. A retainer is a bet that activity produces outcomes, and the client carries that bet alone. We had the outcome data to know when it worked and when it didn&rsquo;t — so we stopped pretending the risk should sit only on one side of the table.</p>
     </div>
     <div class="bc-principles">
       <div class="bc-principle"><h3>Numbers before adjectives</h3><p>Never &ldquo;significant growth.&rdquo; Always a number, a period, and the method used to measure it. If we can&rsquo;t state it that way, we don&rsquo;t claim it.</p></div>
@@ -856,7 +854,6 @@ write("pricing.html", build_pricing())
 write("company.html", build_company())
 write("audit.html", build_audit())
 
-# Sitemap: enumerate actual html files we keep
 keep = ["", "revenue-services.html","strategy.html","brand.html","implementation.html","engineering.html",
         "labs.html","pricing.html","company.html","audit.html",
         "case-studies.html","our-work.html","blog.html","careers.html"]
@@ -873,7 +870,6 @@ for u in keep:
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(entries) + "\n</urlset>\n")
 write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
 
-# vercel.json 301 redirects for retired URLs
 redir = []
 svc_map = {
     "performance-marketing":"revenue-services.html","seo":"revenue-services.html","crm-retention":"revenue-services.html",
@@ -894,4 +890,4 @@ redir.append({"source":"/contact.html","destination":"/audit.html","permanent":T
 with open(os.path.join(ROOT,"vercel.json"),"w") as f:
     json.dump({"redirects":redir}, f, indent=2)
 print("wrote vercel.json")
-print("\nDone — V2 pages built.")
+print("\nDone — V2 catalog-format pages built.")
